@@ -4,18 +4,27 @@
  * and open the template in the editor.
  */
 package Ventanas;
+import static java.awt.image.ImageObserver.WIDTH;
 import java.io.File;
+import javax.swing.JOptionPane;
 /**
  *
  * @author User_Len
  */
 public class Log_In extends javax.swing.JFrame {
 
+    //ATRIBUTES
+    static String pathC = "c:\\MEIA\\";
+    static String userPath = "c:\\MEIA\\Usuarios.txt";
+    FileMethods methods = new FileMethods();
+    User actualUser = new User();
     /**
      * Creates new form Log_In
      */
     public Log_In() {
         initComponents();
+        methods.createFolderC(pathC);
+        methods.createFile(userPath);
     }
     File hola = new File("C:\\hola");
     /**
@@ -28,7 +37,6 @@ public class Log_In extends javax.swing.JFrame {
     private void initComponents() {
 
         tfUsuario = new javax.swing.JTextField();
-        tfContraseña = new javax.swing.JTextField();
         tfNUsuario = new javax.swing.JTextField();
         tfNContraseña = new javax.swing.JTextField();
         tfNNombre = new javax.swing.JTextField();
@@ -49,6 +57,7 @@ public class Log_In extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         lbContraseña = new javax.swing.JLabel();
         lbEslogan = new javax.swing.JLabel();
+        pfPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,19 +122,18 @@ public class Log_In extends javax.swing.JFrame {
                                         .addComponent(cbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(cbAño, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 26, Short.MAX_VALUE))
+                                        .addGap(0, 138, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lbLogin)
-                                            .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(tfContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnLogin))
-                                    .addComponent(lbContraseña)))))
+                                            .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(29, 29, 29)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbContraseña)
+                                            .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(9, 9, 9)))
+                                .addComponent(btnLogin))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,8 +165,8 @@ public class Log_In extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogin))
+                    .addComponent(btnLogin)
+                    .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbEslogan)
                 .addGap(4, 4, 4)
@@ -205,8 +213,27 @@ public class Log_In extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfUsuarioActionPerformed
 
+    //BOTON INICIAR SESION
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
+        if (methods.fileSizeNotZero(userPath)) { //quiere decir que ya hay usuarios en el documento Usuarios.txt
+            
+            String user = tfUsuario.getText();
+            
+            char[] pass = pfPassword.getPassword();
+            if(!methods.loginMethod(user, pass, userPath, actualUser)){ //el usuario si existe y pudo hacer login se abre la nueva ventana con este método asumo que ya hay usuarios en la base de datos
+                  //Mandar mensaje que no se pudo logear porque la contraseña es incorrecta o porque no existe el usuario 
+                  JOptionPane.showMessageDialog(null,"Comprueba el nombre de usuario y tu contraseña y vuelve a intentarlo.", "Usuario o contraseña incorrecta", WIDTH);
+                  
+            }else{
+                //se manda al siguiente form que sería la parte de kevin
+                //RECORDATORIO: el siguiente jFrame debe recibir por parámetros el objeto "actualUser" 
+            }
+            
+        }else{//no hay ningun usuario en el documento
+            
+            JOptionPane.showMessageDialog(null,"¡Lo sentimos! Registrate para poder iniciar sesión", "Crear registro", WIDTH);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
@@ -259,7 +286,7 @@ public class Log_In extends javax.swing.JFrame {
     private javax.swing.JLabel lbNUsuario;
     private javax.swing.JLabel lbNombre;
     private javax.swing.JLabel lbTeléfono;
-    private javax.swing.JTextField tfContraseña;
+    private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfNApellido;
     private javax.swing.JTextField tfNContraseña;
     private javax.swing.JTextField tfNCorreo;

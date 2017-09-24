@@ -41,25 +41,23 @@
                                       <Component id="cbMes" min="-2" pref="57" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="cbAño" min="-2" pref="73" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="138" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lbLogin" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tfUsuario" min="-2" pref="86" max="-2" attributes="0"/>
+                                          <Component id="tfUsuario" min="-2" pref="130" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbContraseña" min="-2" max="-2" attributes="0"/>
+                                          <Component id="pfPassword" min="-2" pref="113" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="tfContraseña" min="-2" pref="86" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="lbContraseña" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -105,8 +103,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="tfUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLogin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="pfPassword" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lbEslogan" min="-2" max="-2" attributes="0"/>
@@ -162,8 +160,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfUsuarioActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfContrase&#xf1;a">
     </Component>
     <Component class="javax.swing.JTextField" name="tfNUsuario">
     </Component>
@@ -378,6 +374,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xbf;Eres nuevo? &#xa1;Registrate!"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="pfPassword">
     </Component>
   </SubComponents>
 </Form>
