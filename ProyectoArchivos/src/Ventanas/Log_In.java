@@ -88,6 +88,11 @@ public class Log_In extends javax.swing.JFrame {
         lbLogin.setText("Usuario:");
 
         btnRegistrar.setText("Registarse");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         btnLogin.setText("Iniciar Sesión");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -235,6 +240,10 @@ public class Log_In extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"¡Lo sentimos! Registrate para poder iniciar sesión", "Crear registro", WIDTH);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
      * @param args the command line arguments
