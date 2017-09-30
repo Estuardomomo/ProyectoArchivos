@@ -4,20 +4,36 @@
  * and open the template in the editor.
  */
 package Ventanas;
-import java.io.File;
+import java.awt.Color;
+import static java.awt.image.ImageObserver.WIDTH;
+import javax.swing.JOptionPane;
 /**
  *
  * @author User_Len
  */
 public class Log_In extends javax.swing.JFrame {
 
+    //ATRIBUTOS
+    User objUsuario = new User();
+    FileMethods archivos = new FileMethods();
+    String rutaUsuarios = "c:\\MEIA\\Usuarios.txt";
+    String fotografía;
+    String descripción = "Añade una breve descripción";
+    Boolean usuario;
+    Boolean contraseña;
+    Boolean nuevoUsuario;
+    Boolean nuevaContraseña;
+    Boolean nombre;
+    Boolean apellido;
+    Boolean fecha;
+    Boolean correo;
+    Boolean teléfono;
     /**
      * Creates new form Log_In
      */
     public Log_In() {
         initComponents();
     }
-    File hola = new File("C:\\hola");
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,9 +44,7 @@ public class Log_In extends javax.swing.JFrame {
     private void initComponents() {
 
         tfUsuario = new javax.swing.JTextField();
-        tfContraseña = new javax.swing.JTextField();
         tfNUsuario = new javax.swing.JTextField();
-        tfNContraseña = new javax.swing.JTextField();
         tfNNombre = new javax.swing.JTextField();
         tfNApellido = new javax.swing.JTextField();
         cbDía = new javax.swing.JComboBox<>();
@@ -49,6 +63,9 @@ public class Log_In extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         lbContraseña = new javax.swing.JLabel();
         lbEslogan = new javax.swing.JLabel();
+        pfPassword = new javax.swing.JPasswordField();
+        btnImagen = new javax.swing.JButton();
+        tfNContraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +96,11 @@ public class Log_In extends javax.swing.JFrame {
         lbLogin.setText("Usuario:");
 
         btnRegistrar.setText("Registarse");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         btnLogin.setText("Iniciar Sesión");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -91,6 +113,13 @@ public class Log_In extends javax.swing.JFrame {
 
         lbEslogan.setText("¿Eres nuevo? ¡Registrate!");
 
+        btnImagen.setText("Foto Perfil");
+        btnImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImagenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,11 +129,6 @@ public class Log_In extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbApellido)
-                            .addComponent(lbEslogan)
-                            .addComponent(lbNUsuario)
-                            .addComponent(lbNombre)
-                            .addComponent(lbNContraseña)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
@@ -113,27 +137,29 @@ public class Log_In extends javax.swing.JFrame {
                                         .addComponent(cbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(cbAño, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 26, Short.MAX_VALUE))
+                                        .addGap(0, 138, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lbLogin)
-                                            .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                            .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(29, 29, 29)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbContraseña)
+                                            .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(9, 9, 9)))
+                                .addComponent(btnLogin))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(tfContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnLogin))
-                                    .addComponent(lbContraseña)))))
+                                    .addComponent(lbApellido)
+                                    .addComponent(lbEslogan)
+                                    .addComponent(lbNUsuario)
+                                    .addComponent(lbNombre)
+                                    .addComponent(lbNContraseña))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfNContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                                .addComponent(tfNApellido, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(tfNNombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(tfNUsuario, javax.swing.GroupLayout.Alignment.TRAILING))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbCorreo)
@@ -141,11 +167,20 @@ public class Log_In extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfNTeléfono, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                                    .addComponent(tfNCorreo)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(btnRegistrar)))
+                                    .addComponent(tfNCorreo)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tfNContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfNApellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                                    .addComponent(tfNNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfNUsuario, javax.swing.GroupLayout.Alignment.TRAILING))))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(btnImagen)
+                .addGap(18, 18, 18)
+                .addComponent(btnRegistrar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,8 +192,8 @@ public class Log_In extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogin))
+                    .addComponent(btnLogin)
+                    .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbEslogan)
                 .addGap(4, 4, 4)
@@ -175,8 +210,8 @@ public class Log_In extends javax.swing.JFrame {
                     .addComponent(lbApellido))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbNContraseña))
+                    .addComponent(lbNContraseña)
+                    .addComponent(tfNContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbDía, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,8 +226,10 @@ public class Log_In extends javax.swing.JFrame {
                     .addComponent(tfNTeléfono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbTeléfono))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRegistrar)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistrar)
+                    .addComponent(btnImagen))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         tfUsuario.getAccessibleContext().setAccessibleName("");
@@ -205,10 +242,215 @@ public class Log_In extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfUsuarioActionPerformed
 
+    //BOTON INICIAR SESION
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
+        if (archivos.fileSizeNotZero(rutaUsuarios)) { //quiere decir que ya hay usuarios en el documento Usuarios.txt
+            
+            String user = tfUsuario.getText();
+            
+            char[] pass = pfPassword.getPassword();
+            if(!archivos.loginMethod(user, pass, rutaUsuarios, objUsuario)){ //el usuario si existe y pudo hacer login se abre la nueva ventana con este método asumo que ya hay usuarios en la base de datos
+                  //Mandar mensaje que no se pudo logear porque la contraseña es incorrecta o porque no existe el usuario 
+                  JOptionPane.showMessageDialog(null,"Comprueba el nombre de usuario y tu contraseña y vuelve a intentarlo.", "Usuario o contraseña incorrecta", WIDTH);
+                  
+            }else{
+                //se manda al siguiente form que sería la parte de kevin
+                //RECORDATORIO: el siguiente jFrame debe recibir por parámetros el objeto "actualUser" 
+            }
+            
+        }else{//no hay ningun usuario en el documento
+            
+            JOptionPane.showMessageDialog(null,"¡Lo sentimos! Registrate para poder iniciar sesión", "Crear registro", WIDTH);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
+        
+        //Seleccionar una foto de perfil.
+        fotografía = archivos.fotoPerfil(this);
+    }//GEN-LAST:event_btnImagenActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+    //Verificar nuevo Usuario
+    if(tfNUsuario.getText().equals(""))
+    {
+        nuevoUsuario = false;
+        tfNUsuario.setBackground(Color.pink);
+    }
+    else
+    {
+        nuevoUsuario = true;
+        tfNUsuario.setBackground(Color.green);
+    }
+    //Verificar Nombre
+    if(tfNNombre.getText().equals(""))
+    {
+        nombre = false;
+        tfNNombre.setBackground(Color.pink);
+    }
+    else
+    {
+        nombre = true;
+        tfNNombre.setBackground(Color.green);
+    }
+    //Verificar Apellido
+    if(tfNApellido.getText().equals(""))
+    {
+        apellido = false;
+        tfNApellido.setBackground(Color.pink);
+    }
+    else
+    {
+        apellido = true;
+        tfNApellido.setBackground(Color.green);
+    }
+    //Verificar Contraseña
+    if(tfNContraseña.getText().equals("") || !contraseñaSegura(tfNContraseña.getText()))
+    {
+        nuevaContraseña = false;
+        tfNContraseña.setBackground(Color.pink);
+    }
+    else
+    {
+        nuevaContraseña = true;
+        tfNContraseña.setBackground(Color.green);
+    }
+    //Verificar fecha de nacimiento
+    if(cbDía.getSelectedItem() == " " || cbMes.getSelectedItem() == " " || cbAño.getSelectedItem() == " ")
+    {
+        fecha = false;
+        cbDía.setBackground(Color.red);
+        cbMes.setBackground(Color.red);
+        cbAño.setBackground(Color.red);
+    }
+    else
+    {
+        fecha = true;
+        cbDía.setBackground(Color.green);
+        cbMes.setBackground(Color.green);
+        cbAño.setBackground(Color.green);
+    }
+    //Verificar correo electónico
+    if(tfNCorreo.getText().equals(""))
+    {
+        correo = false;
+        tfNCorreo.setBackground(Color.pink);
+    }
+    else
+    {
+        correo = true;
+        tfNCorreo.setBackground(Color.green);
+    }
+    //Verificar télefono
+    try
+    {
+        Integer.parseInt(tfNTeléfono.getText());
+        teléfono = true;
+        tfNTeléfono.setBackground(Color.green);
+    }
+    catch(Exception ex)
+    {
+        teléfono = false;
+        tfNTeléfono.setBackground(Color.pink);
+    }
+    //Si todo es correcto, ingresar los registros.
+    if(nuevoUsuario && nombre && apellido && nuevaContraseña && fecha && correo && teléfono)
+    {
+        //Crear folder
+        archivos.createFolder("c:\\MEIA\\");
+        //Crear archivo maestro
+        archivos.createFile(rutaUsuarios);
+        //Crear descriptor arcihvo maestro
+        archivos.createFile("c:\\MEIA\\DescriptorA.txt");
+        //Crear bitácora
+        archivos.createFile("c:\\MEIA\\Bitácora.txt");
+        //Crear descriptor de la bitácora
+        archivos.createFile("c:\\MEIA\\DescriptorB.txt");
+        //Si es el primer registro, rol administrador
+        if(archivos.fileSizeNotZero(rutaUsuarios))
+        {
+         archivos.inscribirUsuario(rutaUsuarios, tfNUsuario.getText(), tfNNombre.getText(),tfNApellido.getText(), tfNContraseña.getText().toCharArray(), 0, cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem(),tfNCorreo.getText(), Integer.parseInt(tfNTeléfono.getText()), fotografía, descripción,1);
+        }
+        //Sino, rol de usuario común.
+        else
+        {
+         archivos.inscribirUsuario(rutaUsuarios, tfNUsuario.getText(), tfNNombre.getText(),tfNApellido.getText(), tfNContraseña.getText().toCharArray(), 1, cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem(),tfNCorreo.getText(), Integer.parseInt(tfNTeléfono.getText()), fotografía, descripción,1);    
+        }
+        //Devolver valores por defecto.
+        tfNUsuario.setBackground(Color.white);
+        tfNNombre.setBackground(Color.white);
+        tfNApellido.setBackground(Color.white);
+        tfNContraseña.setBackground(Color.white);
+        tfNCorreo.setBackground(Color.white);
+        tfNTeléfono.setBackground(Color.white);
+        cbDía.setBackground(Color.white);
+        cbMes.setBackground(Color.white);
+        cbAño.setBackground(Color.white);
+    }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+    //Función que obtiene un puntaje para la contraseña
+    public Boolean contraseñaSegura(String cadena)
+    {
+        //Atributos
+        int puntaje;
+        int Mayúsculas = 0;
+        int Letras = 0;
+        int Números = 0;
+        int Símbolos = 0;
+        //Analizar la cadena ingresada
+        char[] caracteres = cadena.toCharArray();
+        for(int i = 0; i < caracteres.length; i++)
+        {
+            //Si es letra o número
+            if(Character.isLetterOrDigit(caracteres[i]))
+            {
+              //Si es una letra
+              if(Character.isLetter(caracteres[i]))
+               {
+                  //Si es mayúscula
+                  if(Character.isUpperCase(caracteres[i]))
+                   {
+                     Mayúsculas++;
+                   }
+               Letras++;
+               }
+              //Si es un número
+                else if(Character.isDigit(caracteres[i]))
+                {
+                Números++;
+                }   
+            }
+            //Si es un símbolo
+            else
+            {
+                Símbolos++;
+            }
+        }
+        //Determinar el puntaje
+        puntaje = 3 * cadena.length();
+        puntaje += (2 * Mayúsculas);
+        puntaje += 1 + Letras;
+        puntaje += 2 + Números;
+        puntaje += (Símbolos * (cadena.length() + 4));
+        if(Números == 0 && Símbolos == 0)
+        {
+            puntaje = puntaje - 6;
+        }
+        else if(Letras == 0 && Símbolos == 0)
+        {
+            puntaje = puntaje - 3;
+        }
+        if(puntaje <= 35)  
+        {
+            JOptionPane.showMessageDialog(null, "La contraseña es insegura o poco segura", "Error", WIDTH);
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -245,6 +487,7 @@ public class Log_In extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnImagen;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cbAño;
@@ -259,9 +502,9 @@ public class Log_In extends javax.swing.JFrame {
     private javax.swing.JLabel lbNUsuario;
     private javax.swing.JLabel lbNombre;
     private javax.swing.JLabel lbTeléfono;
-    private javax.swing.JTextField tfContraseña;
+    private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfNApellido;
-    private javax.swing.JTextField tfNContraseña;
+    private javax.swing.JPasswordField tfNContraseña;
     private javax.swing.JTextField tfNCorreo;
     private javax.swing.JTextField tfNNombre;
     private javax.swing.JTextField tfNTeléfono;

@@ -28,11 +28,6 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lbApellido" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbEslogan" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbNUsuario" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbNombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbNContraseña" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
@@ -41,37 +36,39 @@
                                       <Component id="cbMes" min="-2" pref="57" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="cbAño" min="-2" pref="73" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="138" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lbLogin" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tfUsuario" min="-2" pref="86" max="-2" attributes="0"/>
+                                          <Component id="tfUsuario" min="-2" pref="130" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbContraseña" min="-2" max="-2" attributes="0"/>
+                                          <Component id="pfPassword" min="-2" pref="113" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="tfContraseña" min="-2" pref="86" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="lbContraseña" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbApellido" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbEslogan" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbNUsuario" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbNContraseña" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="tfNContraseña" pref="119" max="32767" attributes="0"/>
-                              <Component id="tfNApellido" alignment="1" max="32767" attributes="0"/>
-                              <Component id="tfNNombre" alignment="1" max="32767" attributes="0"/>
-                              <Component id="tfNUsuario" alignment="1" max="32767" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lbCorreo" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -83,14 +80,25 @@
                                   <Component id="tfNCorreo" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Component id="tfNContraseña" min="-2" pref="117" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="tfNApellido" alignment="1" pref="119" max="32767" attributes="0"/>
+                                  <Component id="tfNNombre" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="tfNUsuario" alignment="1" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
-                      <Component id="btnRegistrar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+              <Component id="btnImagen" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnRegistrar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,8 +113,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="tfUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLogin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="pfPassword" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lbEslogan" min="-2" max="-2" attributes="0"/>
@@ -127,8 +135,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tfNContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbNContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfNContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -147,8 +155,11 @@
                   <Component id="lbTeléfono" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnRegistrar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnRegistrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnImagen" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -163,11 +174,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfUsuarioActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfContrase&#xf1;a">
-    </Component>
     <Component class="javax.swing.JTextField" name="tfNUsuario">
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfNContrase&#xf1;a">
     </Component>
     <Component class="javax.swing.JTextField" name="tfNNombre">
     </Component>
@@ -360,6 +367,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Registarse"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLogin">
       <Properties>
@@ -378,6 +388,18 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xbf;Eres nuevo? &#xa1;Registrate!"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="pfPassword">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnImagen">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Foto Perfil"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImagenActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="tfNContrase&#xf1;a">
     </Component>
   </SubComponents>
 </Form>
