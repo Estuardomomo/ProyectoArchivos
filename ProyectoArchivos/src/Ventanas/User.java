@@ -24,7 +24,7 @@ public class User {
     private String photoPath;
     private int status;
     
-    
+    //Constructor
     User(){
         this.user = "";
         this.name = "";
@@ -37,8 +37,6 @@ public class User {
         this.description = "";
         this.photoPath = "";
         this.status = 1; //está vigente  
-        
-        
     }
 
     public String getUser() {
