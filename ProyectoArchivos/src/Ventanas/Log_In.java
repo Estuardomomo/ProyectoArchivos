@@ -272,8 +272,8 @@ public class Log_In extends javax.swing.JFrame {
     }//GEN-LAST:event_btnImagenActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-    //Verificar nuevo Usuario
-    if(tfNUsuario.getText().equals(""))
+    //Verificar lo escrito y que el nombre de usuario indicado no esté registrado
+    if(tfNUsuario.getText().equals("") || !"|0".equals(archivos.busqueda(tfNUsuario.getText())))
     {
         nuevoUsuario = false;
         tfNUsuario.setBackground(Color.pink);
