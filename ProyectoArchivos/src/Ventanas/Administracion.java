@@ -5,6 +5,7 @@
  */
 package Ventanas;
 
+
 /**
  *
  * @author keviu
@@ -14,11 +15,26 @@ public class Administracion extends javax.swing.JFrame {
     /**
      * Creates new form Administracion
      */
+    User cliente =new User();
     public Administracion() {
         initComponents();
-        TabMantenimiento.setVisible(false);
+        TabIngresar.setVisible(false);
+        TabMantenimiento.setTabComponentAt(WIDTH, rootPane);
+        
+     
+    }
+    public Administracion(User uncliente) {
+        initComponents();
+     cliente=uncliente  ; 
+        if (cliente.getStatus()==0) {
+            TabMantenimiento.setEnabledAt(TabMantenimiento.indexOfComponent(TabIngresar),false);
+        }
+     
+
+        
         
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,38 +47,102 @@ public class Administracion extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        LfotoPerfil = new javax.swing.JLabel();
         TabOpciones = new javax.swing.JTabbedPane();
-        TabMantenimiento = new javax.swing.JTabbedPane();
-        TabCambios = new javax.swing.JTabbedPane();
-        TabIngresar = new javax.swing.JTabbedPane();
-        TabBusqueda = new javax.swing.JTabbedPane();
+        PMantenimiento = new javax.swing.JPanel();
+        TabMantemiento = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        PBusqueda = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Bienvenido:");
 
-        TabMantenimiento.addTab("Cambio", TabCambios);
-        TabMantenimiento.addTab("Ingresar", TabIngresar);
-        TabMantenimiento.setVisible(false);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 488, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 198, Short.MAX_VALUE)
+        );
 
-        TabOpciones.addTab("Mantenimiento", TabMantenimiento);
-        TabOpciones.addTab("Busqueda", TabBusqueda);
+        TabMantemiento.addTab("tab1", jPanel1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 488, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 198, Short.MAX_VALUE)
+        );
+
+        TabMantemiento.addTab("tab2", jPanel2);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 488, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 198, Short.MAX_VALUE)
+        );
+
+        TabMantemiento.addTab("tab3", jPanel3);
+
+        javax.swing.GroupLayout PMantenimientoLayout = new javax.swing.GroupLayout(PMantenimiento);
+        PMantenimiento.setLayout(PMantenimientoLayout);
+        PMantenimientoLayout.setHorizontalGroup(
+            PMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(TabMantemiento)
+        );
+        PMantenimientoLayout.setVerticalGroup(
+            PMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(TabMantemiento)
+        );
+
+        TabOpciones.addTab("Mantenimiento", PMantenimiento);
+
+        javax.swing.GroupLayout PBusquedaLayout = new javax.swing.GroupLayout(PBusqueda);
+        PBusqueda.setLayout(PBusquedaLayout);
+        PBusquedaLayout.setHorizontalGroup(
+            PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 493, Short.MAX_VALUE)
+        );
+        PBusquedaLayout.setVerticalGroup(
+            PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 226, Short.MAX_VALUE)
+        );
+
+        TabOpciones.addTab("Busqueda", PBusqueda);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(10, 10, 10)
+                        .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(LfotoPerfil)
+                        .addGap(104, 104, 104))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(99, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,9 +151,14 @@ public class Administracion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(LfotoPerfil))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -116,15 +201,19 @@ public class Administracion extends javax.swing.JFrame {
            
         });
        
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane TabBusqueda;
-    private javax.swing.JTabbedPane TabCambios;
-    private javax.swing.JTabbedPane TabIngresar;
-    private javax.swing.JTabbedPane TabMantenimiento;
+    private javax.swing.JLabel LfotoPerfil;
+    private javax.swing.JPanel PBusqueda;
+    private javax.swing.JPanel PMantenimiento;
+    private javax.swing.JTabbedPane TabMantemiento;
     private javax.swing.JTabbedPane TabOpciones;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
