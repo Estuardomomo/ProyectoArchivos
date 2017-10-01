@@ -5,6 +5,7 @@
  */
 package Ventanas;
 
+import java.awt.Color;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,36 +30,42 @@ public class Administracion extends javax.swing.JFrame {
      * Creates new form Administracion
      */
     User cliente =new User();
+    String rutaUsuarios = "c:\\MEIA\\Usuarios.txt";
+    String fotografía;
+    String descripción = "Añade una breve descripción";
+    Boolean usuario;
+    Boolean contraseña;
+    Boolean nuevoUsuario;
+    Boolean nuevaContraseña;
+    Boolean nombre;
+    Boolean apellido;
+    Boolean fecha;
+    Boolean correo;
+    Boolean teléfono;
+    FileMethods archivos = new FileMethods();
     public Administracion() {
         initComponents();
-        TabMantemiento.setEnabledAt(TabMantemiento.indexOfComponent(jPanel1),false);
         
-        TabMantemiento.removeTabAt(TabMantemiento.indexOfComponent(jPanel1));
+    
+     
+    }
+    public Administracion(User uncliente) {
+        initComponents();
+        cliente=uncliente  ; 
+        if (cliente.getStatus()==0) {
+//            TabMantemiento.setEnabledAt(TabMantemiento.indexOfComponent(jPanel1),false);
+            TabMantemiento.removeTabAt(TabMantemiento.indexOfComponent(jPanel2));
+            TabMantemiento.removeTabAt(TabMantemiento.indexOfComponent(jPanel3));
+        }
+        
         Log_In n=new Log_In();
         JInternalFrame internalFrame = new JInternalFrame();
         internalFrame.setContentPane(n.getContentPane());
         internalFrame.pack();
         internalFrame.setVisible(true);
         this.Escritorio.add(internalFrame);
-//        n.setVisible(true);
-        
-//        TabIngresar.setVisible(false);
-//        TabMantenimiento.setTabComponentAt(WIDTH, rootPane);
-        jPanel1.setVisible(false);
-        
      
     }
-//    public Administracion(User uncliente) {
-//        initComponents();
-//     cliente=uncliente  ; 
-//        if (cliente.getStatus()==0) {
-//            TabMantenimiento.setEnabledAt(TabMantenimiento.indexOfComponent(TabIngresar),false);
-//        }
-//     
-//
-//        
-//        
-//    }
     
 
     /**
@@ -77,6 +84,21 @@ public class Administracion extends javax.swing.JFrame {
         PMantenimiento = new javax.swing.JPanel();
         TabMantemiento = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        cbMes = new javax.swing.JComboBox<>();
+        cbAño = new javax.swing.JComboBox<>();
+        tfNCorreo = new javax.swing.JTextField();
+        tfNTeléfono = new javax.swing.JTextField();
+        tfNContraseña = new javax.swing.JPasswordField();
+        lbNContraseña = new javax.swing.JLabel();
+        lbCorreo = new javax.swing.JLabel();
+        lbTeléfono = new javax.swing.JLabel();
+        cbDía = new javax.swing.JComboBox<>();
+        btnImagen = new javax.swing.JButton();
+        LModificarDatos = new javax.swing.JLabel();
+        lbNContraseñaNueva = new javax.swing.JLabel();
+        tfNContraseña1 = new javax.swing.JPasswordField();
+        lbCumpleaños = new javax.swing.JLabel();
+        BtnGuardar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         Escritorio = new javax.swing.JDesktopPane();
         jPanel3 = new javax.swing.JPanel();
@@ -84,20 +106,115 @@ public class Administracion extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         PBusqueda = new javax.swing.JPanel();
         BtnBuscar = new javax.swing.JButton();
+        LBusqueNoAd = new javax.swing.JLabel();
+        TfBusquedaNoAd = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Bienvenido:");
 
+        cbMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic" }));
+
+        cbAño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950" }));
+
+        lbNContraseña.setText("Contraseña");
+
+        lbCorreo.setText("Correo electónico");
+
+        lbTeléfono.setText("Teléfono");
+
+        cbDía.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        btnImagen.setText("Nueva Foto de Perfil");
+        btnImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImagenActionPerformed(evt);
+            }
+        });
+
+        LModificarDatos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        LModificarDatos.setText("Modificar Datos");
+
+        lbNContraseñaNueva.setText("Nueva Contraseña");
+
+        lbCumpleaños.setText("Contraseña");
+
+        BtnGuardar.setText("Guardar Datos");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnImagen)
+                                .addGap(76, 76, 76)
+                                .addComponent(BtnGuardar))
+                            .addComponent(lbTeléfono)
+                            .addComponent(lbNContraseña)
+                            .addComponent(lbNContraseñaNueva)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbCorreo)
+                                    .addComponent(lbCumpleaños))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(29, 29, 29)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(cbDía, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(cbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(cbAño, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(tfNContraseña1)
+                                            .addComponent(tfNContraseña)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfNCorreo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tfNTeléfono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(LModificarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(156, 190, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(LModificarDatos)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbNContraseña)
+                    .addComponent(tfNContraseña1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbNContraseñaNueva)
+                    .addComponent(tfNContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCumpleaños)
+                    .addComponent(cbDía, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbCorreo)
+                    .addComponent(tfNCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbTeléfono)
+                    .addComponent(tfNTeléfono, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnImagen)
+                    .addComponent(BtnGuardar))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         TabMantemiento.addTab("Usuario", jPanel1);
@@ -121,7 +238,7 @@ public class Administracion extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(Escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,14 +267,14 @@ public class Administracion extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(297, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         TabMantemiento.addTab("Busqueda Administrativa", jPanel3);
@@ -188,8 +305,16 @@ public class Administracion extends javax.swing.JFrame {
         PBusqueda.setLayout(PBusquedaLayout);
         PBusquedaLayout.setHorizontalGroup(
             PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PBusquedaLayout.createSequentialGroup()
-                .addContainerGap(390, Short.MAX_VALUE)
+            .addGroup(PBusquedaLayout.createSequentialGroup()
+                .addGroup(PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PBusquedaLayout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(LBusqueNoAd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE))
+                    .addGroup(PBusquedaLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(TfBusquedaNoAd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(BtnBuscar)
                 .addGap(61, 61, 61))
         );
@@ -197,8 +322,12 @@ public class Administracion extends javax.swing.JFrame {
             PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PBusquedaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BtnBuscar)
-                .addContainerGap(394, Short.MAX_VALUE))
+                .addGroup(PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnBuscar)
+                    .addComponent(TfBusquedaNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62)
+                .addComponent(LBusqueNoAd)
+                .addContainerGap(332, Short.MAX_VALUE))
         );
 
         TabOpciones.addTab("Busqueda", PBusqueda);
@@ -260,26 +389,14 @@ public class Administracion extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-//                
-//                
-//
-//                long puntero= raf.getFilePointer();
-//
-//                System.out.println("el punto esta ahora en====>"+raf.getFilePointer());
-//
-//                raf.seek(puntero);/*¿Para volver a escribir en el archivo, tengo que mover el puntero hacia el fin del archivo necesariamente?*/
-//                raf.writeBytes(" Como estas???");
-//
-//                raf.seek(0);/*¿¿¿Y para leerlo tengo que ubicar de nuevo el puntero al inicio???*/
-//                System.out.println(raf.readUTF() + raf.readUTF());
-//
-//                raf.close();
-//                
 
-                  
-        
     }//GEN-LAST:event_BtnBuscarActionPerformed
+
+    private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
+
+        //Seleccionar una foto de perfil.
+        fotografía = archivos.fotoPerfil(this);
+    }//GEN-LAST:event_btnImagenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,12 +440,20 @@ public class Administracion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBuscar;
+    private javax.swing.JButton BtnGuardar;
     private javax.swing.JDesktopPane Escritorio;
+    private javax.swing.JLabel LBusqueNoAd;
+    private javax.swing.JLabel LModificarDatos;
     private javax.swing.JLabel LfotoPerfil;
     private javax.swing.JPanel PBusqueda;
     private javax.swing.JPanel PMantenimiento;
     private javax.swing.JTabbedPane TabMantemiento;
     private javax.swing.JTabbedPane TabOpciones;
+    private javax.swing.JTextField TfBusquedaNoAd;
+    private javax.swing.JButton btnImagen;
+    private javax.swing.JComboBox<String> cbAño;
+    private javax.swing.JComboBox<String> cbDía;
+    private javax.swing.JComboBox<String> cbMes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -336,5 +461,14 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lbCorreo;
+    private javax.swing.JLabel lbCumpleaños;
+    private javax.swing.JLabel lbNContraseña;
+    private javax.swing.JLabel lbNContraseñaNueva;
+    private javax.swing.JLabel lbTeléfono;
+    private javax.swing.JPasswordField tfNContraseña;
+    private javax.swing.JPasswordField tfNContraseña1;
+    private javax.swing.JTextField tfNCorreo;
+    private javax.swing.JTextField tfNTeléfono;
     // End of variables declaration//GEN-END:variables
 }
