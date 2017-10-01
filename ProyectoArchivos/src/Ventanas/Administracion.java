@@ -108,7 +108,6 @@ public class Administracion extends javax.swing.JFrame {
         BtnBuscar = new javax.swing.JButton();
         LBusqueNoAd = new javax.swing.JLabel();
         TfBusquedaNoAd = new javax.swing.JTextField();
-        BtDarsebaja = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -333,13 +332,6 @@ public class Administracion extends javax.swing.JFrame {
 
         TabOpciones.addTab("Busqueda", PBusqueda);
 
-        BtDarsebaja.setText("Darse De baja");
-        BtDarsebaja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtDarsebajaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -353,11 +345,9 @@ public class Administracion extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(20, Short.MAX_VALUE)
                         .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtDarsebaja)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)))
                 .addComponent(LfotoPerfil)
                 .addGap(104, 104, 104))
         );
@@ -370,9 +360,7 @@ public class Administracion extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addGap(77, 77, 77)
-                        .addComponent(BtDarsebaja)
-                        .addGap(12, 12, 12)
+                        .addGap(112, 112, 112)
                         .addComponent(LfotoPerfil))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
@@ -409,10 +397,6 @@ public class Administracion extends javax.swing.JFrame {
         //Seleccionar una foto de perfil.
         fotografía = archivos.fotoPerfil(this);
     }//GEN-LAST:event_btnImagenActionPerformed
-
-    private void BtDarsebajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtDarsebajaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtDarsebajaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -455,7 +439,6 @@ public class Administracion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtDarsebaja;
     private javax.swing.JButton BtnBuscar;
     private javax.swing.JButton BtnGuardar;
     private javax.swing.JDesktopPane Escritorio;
