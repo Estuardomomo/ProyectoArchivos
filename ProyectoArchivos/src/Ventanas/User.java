@@ -5,6 +5,7 @@
  */
 package Ventanas;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -16,13 +17,14 @@ public class User {
     private String name;
     private String lastName;
     private char[] password;
-    private String rol;
+    private int rol;
     private String date; //fecha actual
     private String email;
     private int celNumber;
     private String description;
     private String photoPath;
     private int status;
+    private String registro;
     
     //Constructor
     User(){
@@ -30,7 +32,7 @@ public class User {
         this.name = "";
         this.lastName = "";
         
-        this.rol = "";
+        this.rol = 0;
         this.date = "";
         this.email ="";
         this.celNumber = 00000000;
@@ -44,7 +46,7 @@ public class User {
     }
 
     public void setUser(String user) {
-        this.user = user;
+        this.user = user.replaceAll("#", "");
     }
 
     public String getName() {
@@ -52,7 +54,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.replaceAll("#", "");
     }
 
     public String getLastName() {
@@ -60,7 +62,7 @@ public class User {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = lastName.replaceAll("#", "");
     }
 
     public char[] getPassword() {
@@ -71,11 +73,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRol() {
+    public int getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(int rol) {
         this.rol = rol;
     }
 
@@ -88,7 +90,7 @@ public class User {
     }
 
     public String getEmail() {
-        return email;
+        return email.replaceAll(" ", "");
     }
 
     public void setEmail(String email) {
@@ -108,7 +110,7 @@ public class User {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description.replaceAll("#", "");;
     }
 
     public String getPhotoPath() {
@@ -116,7 +118,7 @@ public class User {
     }
 
     public void setPhotoPath(String photoPath) {
-        this.photoPath = photoPath;
+        this.photoPath = photoPath.replaceAll(" ", "");;
     }
 
     public int getStatus() {
@@ -125,5 +127,31 @@ public class User {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+     public String getRegistro() {
+         registro="";
+         rellenar(user,16,"#");
+         rellenar(name,50,"#");
+         rellenar(lastName,50,"#");
+         registro+=password.toString() +"|";
+         registro+=rol +"|";
+         registro+=date +"|";
+         rellenar(email,32," ");
+         registro+=celNumber +"|";
+         rellenar(photoPath,50," ");
+         rellenar(description,50,"#");
+         registro+=status + System.getProperty("line.separator");;
+         return registro;
+    }
+
+    public void setStatus(String registro) {
+        this.registro = registro;
+    }
+    public void rellenar(String var,int cantidad,String relleno) {
+        registro+=var;
+        for (int i = var.length(); i < cantidad; i++) {
+           registro+=relleno; 
+        }
+        registro+="|"; 
     }
 }

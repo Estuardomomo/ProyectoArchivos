@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -80,7 +81,7 @@ public class FileMethods {
                                 newUser.setName(values[1]);
                                 newUser.setLastName(values[2]);
                                 newUser.setPassword(convertPassword(values[3]));
-                                newUser.setRol(values[4]);
+                                newUser.setRol(Integer.parseInt(values[4]));
                                 newUser.setDate(values[5]);
                                 newUser.setEmail(values[6]);
                                 newUser.setCelNumber(Integer.parseInt(values[7]));
@@ -141,9 +142,22 @@ public class FileMethods {
     public void inscribirUsuario(String path, String user, String name, String lastName, char[] password, int rol, String birthday, String email, int celnumber, String photoPath, String description, int status){
         File archivo = new File(path);
         try
-            {
+            {  
+
+                User newUser=new User();
+                newUser.setUser(user);
+                newUser.setName(name);
+                newUser.setLastName(lastName);
+                newUser.setPassword(password);
+                newUser.setRol(rol);
+                newUser.setDate(birthday);
+                newUser.setEmail(email);
+                newUser.setCelNumber(celnumber);
+                newUser.setPhotoPath(photoPath);
+                newUser.setDescription(description);
+                newUser.setStatus(status);
                 FileWriter Escribir = new FileWriter(archivo, true);
-                Escribir.write(user + "|" +name + "|" + lastName + "|" + password.toString() + "|" + rol +"|" + birthday + "|" + email + "|" + celnumber +"|" + photoPath + "|" + description + "|" + status + System.getProperty("line.separator"));
+                Escribir.write(newUser.getRegistro());
                 Escribir.close();
             }
             catch(IOException e)
@@ -193,23 +207,39 @@ public class FileMethods {
             {
             int númLinea = 0;
             FileReader lector = new FileReader(Archivo);
-            BufferedReader LeerArchivo = new BufferedReader(lector);
+            RandomAccessFile LeerArchivo = new RandomAccessFile(Archivo,"rw");
+//          BufferedReader LeerArchivo = new BufferedReader(lector);
             String Linea = LeerArchivo.readLine();
-            String[] Registro;
+            String[] values;
             while(Linea != null) //Leemos linea por linea hasta el final.
                     {
+                        
                         if(!"".equals(Linea))
                         {
-                            Registro = Linea.split("|");
+                            User newUser=new User();
+                            values = Linea.split(Pattern.quote("|"));
+                            newUser.setUser(values[0]);
+                            newUser.setName(values[1]);
+                            newUser.setLastName(values[2]);
+                            newUser.setPassword(convertPassword(values[3]));
+                            newUser.setRol(Integer.parseInt(values[4]));
+                            newUser.setDate(values[5]);
+                            newUser.setEmail(values[6]);
+                            newUser.setCelNumber(Integer.parseInt(values[7]));
+                            newUser.setPhotoPath(values[8]);
+                            newUser.setDescription(values[9]);
+                            newUser.setStatus(Integer.parseInt(values[10]));
+                            
                             //Si el usuario es correcto y no se ha dado de baja
-                            if(cadena.equals(Registro[0]) && !"0".equals(Registro[10]))
+                            if(cadena.equals(newUser.getUser()) && !(newUser.getStatus()==0))
                             {
                                 //Lo encontró
-                                Salida = "c:\\MEIA\\Bitácora.txt|" + númLinea;
+                                Salida = ruta+"|" + LeerArchivo.getFilePointer()+"|"+númLinea;
                             }
                         }
+                        númLinea=(int)LeerArchivo.getFilePointer();
                         Linea=LeerArchivo.readLine();
-                        númLinea++;
+                        
                     }
                     //IMPORTANTE: cerrar los archivos después de utilizarlos
                     lector.close();

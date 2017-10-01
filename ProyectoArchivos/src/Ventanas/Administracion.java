@@ -5,6 +5,19 @@
  */
 package Ventanas;
 
+import static java.awt.image.ImageObserver.WIDTH;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -18,22 +31,34 @@ public class Administracion extends javax.swing.JFrame {
     User cliente =new User();
     public Administracion() {
         initComponents();
-        TabIngresar.setVisible(false);
-        TabMantenimiento.setTabComponentAt(WIDTH, rootPane);
+        TabMantemiento.setEnabledAt(TabMantemiento.indexOfComponent(jPanel1),false);
+        
+        TabMantemiento.removeTabAt(TabMantemiento.indexOfComponent(jPanel1));
+        Log_In n=new Log_In();
+        JInternalFrame internalFrame = new JInternalFrame();
+        internalFrame.setContentPane(n.getContentPane());
+        internalFrame.pack();
+        internalFrame.setVisible(true);
+        this.Escritorio.add(internalFrame);
+//        n.setVisible(true);
+        
+//        TabIngresar.setVisible(false);
+//        TabMantenimiento.setTabComponentAt(WIDTH, rootPane);
+        jPanel1.setVisible(false);
         
      
     }
-    public Administracion(User uncliente) {
-        initComponents();
-     cliente=uncliente  ; 
-        if (cliente.getStatus()==0) {
-            TabMantenimiento.setEnabledAt(TabMantenimiento.indexOfComponent(TabIngresar),false);
-        }
-     
-
-        
-        
-    }
+//    public Administracion(User uncliente) {
+//        initComponents();
+//     cliente=uncliente  ; 
+//        if (cliente.getStatus()==0) {
+//            TabMantenimiento.setEnabledAt(TabMantenimiento.indexOfComponent(TabIngresar),false);
+//        }
+//     
+//
+//        
+//        
+//    }
     
 
     /**
@@ -53,8 +78,12 @@ public class Administracion extends javax.swing.JFrame {
         TabMantemiento = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        Escritorio = new javax.swing.JDesktopPane();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         PBusqueda = new javax.swing.JPanel();
+        BtnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,40 +93,74 @@ public class Administracion extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 198, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        TabMantemiento.addTab("tab1", jPanel1);
+        TabMantemiento.addTab("Usuario", jPanel1);
+
+        Escritorio.setPreferredSize(new java.awt.Dimension(483, 325));
+
+        javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
+        Escritorio.setLayout(EscritorioLayout);
+        EscritorioLayout.setHorizontalGroup(
+            EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 490, Short.MAX_VALUE)
+        );
+        EscritorioLayout.setVerticalGroup(
+            EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(Escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 21, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 198, Short.MAX_VALUE)
+            .addComponent(Escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
 
-        TabMantemiento.addTab("tab2", jPanel2);
+        TabMantemiento.addTab("Nuevo Usuario", jPanel2);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(213, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 198, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(297, Short.MAX_VALUE))
         );
 
-        TabMantemiento.addTab("tab3", jPanel3);
+        TabMantemiento.addTab("Busqueda Administrativa", jPanel3);
 
         javax.swing.GroupLayout PMantenimientoLayout = new javax.swing.GroupLayout(PMantenimiento);
         PMantenimiento.setLayout(PMantenimientoLayout);
@@ -107,20 +170,35 @@ public class Administracion extends javax.swing.JFrame {
         );
         PMantenimientoLayout.setVerticalGroup(
             PMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TabMantemiento)
+            .addGroup(PMantenimientoLayout.createSequentialGroup()
+                .addComponent(TabMantemiento, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         TabOpciones.addTab("Mantenimiento", PMantenimiento);
+
+        BtnBuscar.setText("Buscar");
+        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PBusquedaLayout = new javax.swing.GroupLayout(PBusqueda);
         PBusqueda.setLayout(PBusquedaLayout);
         PBusquedaLayout.setHorizontalGroup(
             PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 493, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PBusquedaLayout.createSequentialGroup()
+                .addContainerGap(390, Short.MAX_VALUE)
+                .addComponent(BtnBuscar)
+                .addGap(61, 61, 61))
         );
         PBusquedaLayout.setVerticalGroup(
             PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 226, Short.MAX_VALUE)
+            .addGroup(PBusquedaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BtnBuscar)
+                .addContainerGap(394, Short.MAX_VALUE))
         );
 
         TabOpciones.addTab("Busqueda", PBusqueda);
@@ -130,39 +208,78 @@ public class Administracion extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(LfotoPerfil)
-                        .addGap(104, 104, 104))
-                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(20, Short.MAX_VALUE)
+                        .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)))
+                .addComponent(LfotoPerfil)
+                .addGap(104, 104, 104))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
                         .addGap(112, 112, 112)
                         .addComponent(LfotoPerfil))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addGap(40, 40, 40)
+                        .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+        // TODO add your handling code here:
+        FileMethods metodos= new FileMethods();
+        String hola=metodos.busqueda("zuok");
+        String[]nume=hola.split(Pattern.quote("|")) ;
+        JOptionPane.showMessageDialog(null,hola, "Usuario o contraseña incorrecta", WIDTH);
+        File archivo = new File(nume[0]);      
+        RandomAccessFile raf;
+        try {
+            raf = new RandomAccessFile(archivo,"rw");
+            raf.seek(Integer.parseInt(nume[1])-3);
+            raf.writeBytes("0");
+            raf.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+//                
+//                
+//
+//                long puntero= raf.getFilePointer();
+//
+//                System.out.println("el punto esta ahora en====>"+raf.getFilePointer());
+//
+//                raf.seek(puntero);/*¿Para volver a escribir en el archivo, tengo que mover el puntero hacia el fin del archivo necesariamente?*/
+//                raf.writeBytes(" Como estas???");
+//
+//                raf.seek(0);/*¿¿¿Y para leerlo tengo que ubicar de nuevo el puntero al inicio???*/
+//                System.out.println(raf.readUTF() + raf.readUTF());
+//
+//                raf.close();
+//                
+
+                  
+        
+    }//GEN-LAST:event_BtnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,6 +322,8 @@ public class Administracion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnBuscar;
+    private javax.swing.JDesktopPane Escritorio;
     private javax.swing.JLabel LfotoPerfil;
     private javax.swing.JPanel PBusqueda;
     private javax.swing.JPanel PMantenimiento;
@@ -215,5 +334,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
