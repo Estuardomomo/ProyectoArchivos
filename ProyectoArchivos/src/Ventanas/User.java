@@ -15,7 +15,7 @@ public class User {
     private String user;
     private String name;
     private String lastName;
-    private char[] password;
+    private String password;
     private String rol;
     private String date; //fecha actual
     private String email;
@@ -65,11 +65,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

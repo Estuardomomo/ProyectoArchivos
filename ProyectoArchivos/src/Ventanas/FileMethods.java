@@ -5,6 +5,7 @@
  */
 package Ventanas;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -47,7 +48,7 @@ public class FileMethods {
            }
     }
     //Booleano que verifica el formato del correo
-    public static boolean validateEmail(String email) {
+    public boolean validateEmail(String email) {
  
         // Compiles the given regular expression into a pattern.
         Pattern pattern = Pattern.compile(PATTERN_EMAIL);
@@ -58,27 +59,29 @@ public class FileMethods {
  
     }
     //Revisa que el usuario y contraseña ingresadas sean válidas.
-    public boolean loginMethod(String name, char[] password, String path, User newUser){
+    public boolean loginMethod(String name, String password, String path, User newUser){
         File filee = new File(path);
         FileReader lecturaArchivo;
             try
             {
                 lecturaArchivo = new FileReader(filee);
                 BufferedReader readFile = new BufferedReader(lecturaArchivo);   
-                String line ="";
+                String line = "";
                 try
                 {
                     line = readFile.readLine();
                     String[] values;
-                   
+                   String contraseñaEncriptada = EncriptadoMD5(password);
                     while (line != null) {
                         if (line !="") {
-                            values = line.split("|");
-                            if (values[0] == name && isPasswordCorrect(password, values[3])) { //son iguales, así que se crea el objeto user
+                            values = line.split("\\|");
+                            boolean a = CompareStrings(name, values[0]);
+                            boolean b = CompareStrings(contraseñaEncriptada, values[3]);
+                            if (CompareStrings(name, values[0]) && CompareStrings(contraseñaEncriptada, values[3])) { //son iguales, así que se crea el objeto user
                                 newUser.setUser(values[0]);
                                 newUser.setName(values[1]);
                                 newUser.setLastName(values[2]);
-                                newUser.setPassword(convertPassword(values[3]));
+                                newUser.setPassword(contraseñaEncriptada);
                                 newUser.setRol(values[4]);
                                 newUser.setDate(values[5]);
                                 newUser.setEmail(values[6]);
@@ -87,7 +90,7 @@ public class FileMethods {
                                 newUser.setDescription(values[9]);
                                 newUser.setStatus(Integer.parseInt(values[10]));
                                 //Se asigna valores al objeto usuario actual para poder manejarlo en los siguientes forms
-                               break;
+                               return true;
                             }
                             
                             
@@ -96,7 +99,7 @@ public class FileMethods {
                     }
                     lecturaArchivo.close();
                     readFile.close();
-                    return true;
+                    return false;
                                     }
                 catch(IOException ex){
                     
@@ -121,15 +124,18 @@ public class FileMethods {
         }
     }
     //Función que compara la contraseña ingresada con la guardada en el archivo.
-    public boolean isPasswordCorrect(char[] inputPassword, String correctPassword){
-        char[] password = correctPassword.toCharArray(); //creo que separa por caracteres el string
+    public boolean CompareStrings(String inputPassword, String correctPassword){
+        String b = inputPassword.replaceAll(" ", "");
+        int ib= b.length();
+        String n = correctPassword.replaceAll(" ", "");
+        int in= n.length();
         
-        if (inputPassword.length != password.length) {
+        if (b.length() != n.length()) {
             return false;
         }else{
-            return Arrays.equals(inputPassword, password);
+            return inputPassword.equals(correctPassword);
         }
-        //leí que llena de ceros el correctPassword pero por el momento no sé porque
+        
     }
     //Convierte una cadena a un arreglo de bytes
     public char[] convertPassword(String filePassword){
@@ -137,12 +143,13 @@ public class FileMethods {
         return password;
     }
    //Función que escribe en el archivo de usuarios 
-    public void inscribirUsuario(String path, String user, String name, String lastName, char[] password, int rol, String birthday, String email, int celnumber, String photoPath, String description, int status){
+    public void inscribirUsuario(String path, String user, String name, String lastName, String password, int rol, String birthday, String email, int celnumber, String photoPath, String description, int status){
         File archivo = new File(path);
+        //String prueba = new String(password);
         try
             {
                 FileWriter Escribir = new FileWriter(archivo, true);
-                Escribir.write(user + "|" +name + "|" + lastName + "|" + password.toString() + "|" + rol +"|" + birthday + "|" + email + "|" + celnumber +"|" + photoPath + "|" + description + "|" + status + System.getProperty("line.separator"));
+                Escribir.write(user + "|" +name + "|" + lastName + "|" + password + "|" + rol +"|" + birthday + "|" + email + "|" + celnumber +"|" + photoPath + "|" + description + "|" + status + System.getProperty("line.separator"));
                 Escribir.close();
             }
             catch(IOException e)
@@ -180,4 +187,32 @@ public class FileMethods {
      }
      return nuevaRuta;
     }
+    //Encriptar contraseña
+    public String EncriptadoMD5(String password) {
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+            byte[] array = md.digest(password.getBytes());
+            StringBuffer encrypt = new StringBuffer();
+            for (int i = 0; i < array.length; ++i) {
+            encrypt.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+            }       
+        return encrypt.toString();
+        }catch (java.security.NoSuchAlgorithmException e) {
+        }
+               
+        return null;         
+    }
+    //Método para abrir un archivo desde la aplicación de Java
+    public void AbrirArchivo(String ruta){
+        try{
+            File file = new File(ruta);
+            Desktop.getDesktop().open(file);
+        }catch(IOException ex){
+            //Se generó un error
+        }
+    }
+    
+    
+    
+    
 }
