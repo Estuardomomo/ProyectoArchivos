@@ -70,14 +70,12 @@ public class FileMethods {
                 String line = "";
                 try
                 {
-                    line = readFile.readLine();
-                    String[] values;
+                   line = readFile.readLine();
+                   String[] values;
                    String contraseñaEncriptada = EncriptadoMD5(password);
                     while (line != null) {
                         if (line !="") {
                             values = line.split("\\|");
-                            boolean a = CompareStrings(name, values[0]);
-                            boolean b = CompareStrings(contraseñaEncriptada, values[3]);
                             if (CompareStrings(name, values[0]) && CompareStrings(contraseñaEncriptada, values[3])) { //son iguales, así que se crea el objeto user
                                 newUser.setUser(values[0]);
                                 newUser.setName(values[1]);
@@ -130,7 +128,7 @@ public class FileMethods {
         int ib= b.length();
         String n = correctPassword.replaceAll(" ", "");
         int in= n.length();
-        
+        char[] a = n.toCharArray();
         if (b.length() != n.length()) {
             return false;
         }else{
