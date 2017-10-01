@@ -287,7 +287,7 @@ public class Registro extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         //Verificar nuevo Usuario
         //archivos.busqueda(tfNUsurario.getText()!= "|0")
-        if(tfNUsuario.getText().equals(""))
+        if(tfNUsuario.getText().equals("") || !"|0".equals(archivos.busqueda(tfNUsuario.getText())))
         {
             nuevoUsuario = false;
             tfNUsuario.setBackground(Color.pink);

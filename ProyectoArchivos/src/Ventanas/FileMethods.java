@@ -6,6 +6,7 @@
 package Ventanas;
 import java.awt.Component;
 import java.awt.Desktop;
+import static java.awt.image.ImageObserver.WIDTH;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -187,6 +188,7 @@ public class FileMethods {
      }
      return nuevaRuta;
     }
+
     //Encriptar contraseña
     public String EncriptadoMD5(String password) {
         try {
@@ -212,7 +214,73 @@ public class FileMethods {
         }
     }
     
-    
-    
-    
+    //Busca una cadena en la ruta especificada
+    private String busquedaInterna(String ruta, String cadena)
+    {
+        String Salida = "|0";
+        try
+        {
+            //Si el archivo existe, lo leerá una linea a la vez
+            File Archivo = new File(ruta);
+            if(Archivo.exists())
+            {
+            int númLinea = 0;
+            FileReader lector = new FileReader(Archivo);
+            BufferedReader LeerArchivo = new BufferedReader(lector);
+            String Linea = LeerArchivo.readLine();
+            String[] Registro;
+            while(Linea != null) //Leemos linea por linea hasta el final.
+                    {
+                        if(!"".equals(Linea))
+                        {
+                            Registro = Linea.split("|");
+                            //Si el usuario es correcto y no se ha dado de baja
+                            if(cadena.equals(Registro[0]) && !"0".equals(Registro[10]))
+                            {
+                                //Lo encontró
+                                Salida = "c:\\MEIA\\Bitácora.txt|" + númLinea;
+                            }
+                        }
+                        Linea=LeerArchivo.readLine();
+                        númLinea++;
+                    }
+                    //IMPORTANTE: cerrar los archivos después de utilizarlos
+                    lector.close();
+                    LeerArchivo.close();
+            }
+        }
+        catch(Exception ex){}
+        return Salida;
+    }
+    //Función que devuelve la ruta y el número de linea donde se econtró la cadena
+    public String busqueda(String cadena)
+    {
+        //Primero buscamos en la bitácora
+        String Salida = busquedaInterna("c:\\MEIA\\Bitácora.txt",cadena);
+        if( Salida != "|0")
+        {
+            return Salida;
+        }
+        //Luego buscamos en los archivos maestros
+        Salida = busquedaInterna("c:\\MEIA\\Usuarios.txt",cadena);
+        if(Salida != "|0")
+        {
+            return Salida;
+        }
+        Salida = busquedaInterna("c:\\MEIA\\Maestro.txt",cadena);
+        return Salida;
+    }
+    //Elimina un nombre de usuario especificado
+    public void Eliminar(String cadena) throws IOException
+    {
+        String[] ubicacion = busqueda(cadena).split("|");
+        if(ubicacion[0] != "")
+        {
+            File Archivo = new File(ubicacion[0]);
+            for (int i = 0; i <= Integer.parseInt(ubicacion[1]); i++) {
+                
+            }
+        }
+    }
+
 }

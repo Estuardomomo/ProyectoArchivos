@@ -157,9 +157,15 @@ public class Log_In extends javax.swing.JFrame {
         registroFrame.setVisible(true);
         
     }//GEN-LAST:event_jButton1ActionPerformed
+ 
 
-   //Función que obtiene un puntaje para la contraseña
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+    //Verificar lo escrito y que el nombre de usuario indicado no esté registrado
     
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+    //Función que obtiene un puntaje para la contraseña
+    
+
     /**
      * @param args the command line arguments
      */
