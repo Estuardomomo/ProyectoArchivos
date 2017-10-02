@@ -407,6 +407,13 @@ public class Registro extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    public void OcultarCerrar(boolean var) {                                            
+        // TODO add your handling code here:
+        if(var){
+        btnRegresar.setVisible(false);
+        }
+        
+    }
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);

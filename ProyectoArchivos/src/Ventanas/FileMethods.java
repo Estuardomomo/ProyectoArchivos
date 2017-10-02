@@ -417,8 +417,8 @@ public class FileMethods {
         RandomAccessFile raf;
         try {
             raf = new RandomAccessFile(archivo,"rw");
-            raf.seek(Integer.parseInt(numeros[1])-3);
-            raf.writeBytes("0");
+            raf.seek(Integer.parseInt(numeros[2]));
+            raf.writeBytes(registroactualizado);
             raf.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);

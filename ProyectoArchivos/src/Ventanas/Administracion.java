@@ -58,7 +58,7 @@ public class Administracion extends javax.swing.JFrame {
             TabMantemiento.removeTabAt(TabMantemiento.indexOfComponent(jPanel3));
         }
         else{
-            Log_In n=new Log_In();
+            Registro n=new Registro();
             JInternalFrame internalFrame = new JInternalFrame();
             internalFrame.setContentPane(n.getContentPane());
             internalFrame.pack();
@@ -66,12 +66,14 @@ public class Administracion extends javax.swing.JFrame {
             this.Escritorio.add(internalFrame);
             BtnDarBAja.setVisible(false);
         }
+        jLabel2.setText(cliente.getUser());
         String[] nacimiento=cliente.getDate().split(Pattern.quote("/"));
         cbDía.setSelectedItem(nacimiento[0]);
         cbMes.setSelectedItem(nacimiento[1]);
         cbAño.setSelectedItem(nacimiento[2]);
         tfNCorreo.setText(cliente.getEmail());
         tfNTeléfono.setText(Integer.toString(cliente.getCelNumber()));
+        TADescriptor.setText(cliente.getDescription());
 //        LfotoPerfil;
         
         
@@ -111,6 +113,9 @@ public class Administracion extends javax.swing.JFrame {
         tfNContraseña = new javax.swing.JPasswordField();
         lbCumpleaños = new javax.swing.JLabel();
         BtnGuardar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TADescriptor = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         Escritorio = new javax.swing.JDesktopPane();
         jPanel3 = new javax.swing.JPanel();
@@ -131,9 +136,11 @@ public class Administracion extends javax.swing.JFrame {
 
         cbAño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950" }));
 
+        tfNTeléfono.setMinimumSize(new java.awt.Dimension(10, 20));
+
         lbNContraseña.setText("Contraseña");
 
-        lbCorreo.setText("Correo electónico");
+        lbCorreo.setText("Correo");
 
         lbTeléfono.setText("Teléfono");
 
@@ -151,58 +158,70 @@ public class Administracion extends javax.swing.JFrame {
 
         lbNContraseñaNueva.setText("Nueva Contraseña");
 
-        lbCumpleaños.setText("Contraseña");
+        lbCumpleaños.setText("Fecha Nacimiento");
 
         BtnGuardar.setText("Guardar Datos");
+        BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGuardarActionPerformed(evt);
+            }
+        });
+
+        TADescriptor.setColumns(20);
+        TADescriptor.setRows(5);
+        jScrollPane2.setViewportView(TADescriptor);
+
+        jLabel3.setText("Descripcion");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(btnImagen)
+                .addGap(105, 105, 105)
+                .addComponent(BtnGuardar)
+                .addGap(0, 172, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbNContraseña)
+                    .addComponent(lbNContraseñaNueva)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbCorreo)
+                            .addComponent(lbCumpleaños)
+                            .addComponent(lbTeléfono, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnImagen)
-                                .addGap(76, 76, 76)
-                                .addComponent(BtnGuardar))
-                            .addComponent(lbTeléfono)
-                            .addComponent(lbNContraseña)
-                            .addComponent(lbNContraseñaNueva)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbCorreo)
-                                    .addComponent(lbCumpleaños))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(29, 29, 29)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(29, 29, 29)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(cbDía, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(cbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(cbAño, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(tfNContraseña)
-                                            .addComponent(tfNContraseñaNueva)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGap(30, 30, 30)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfNCorreo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(tfNTeléfono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(cbDía, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cbAño, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(tfNContraseña)
+                                    .addComponent(tfNContraseñaNueva)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfNCorreo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfNTeléfono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(LModificarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(156, 190, Short.MAX_VALUE))
+                        .addGap(50, 50, 50)
+                        .addComponent(LModificarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(LModificarDatos)
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNContraseña)
                     .addComponent(tfNContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -219,16 +238,21 @@ public class Administracion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbCorreo)
-                    .addComponent(tfNCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfNCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbTeléfono)
-                    .addComponent(tfNTeléfono, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfNTeléfono, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbTeléfono, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnImagen)
                     .addComponent(BtnGuardar))
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         TabMantemiento.addTab("Usuario", jPanel1);
@@ -374,8 +398,7 @@ public class Administracion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel2)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
@@ -470,6 +493,26 @@ public class Administracion extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BtnDarBAjaActionPerformed
 
+    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+        // TODO add your handling code here:
+        //Verificar Contraseña
+        cliente.setDate(cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem());
+        cliente.setEmail(tfNCorreo.getText());
+        cliente.setCelNumber(Integer.parseInt(tfNTeléfono.getText()));
+        cliente.setDescription(TADescriptor.getText());
+        FileMethods metodos= new FileMethods();
+        try {
+            String busqueda=metodos.busqueda(cliente.getUser());
+            metodos.Actualizar(busqueda,cliente.getRegistro());
+            JOptionPane.showMessageDialog(null,"Datos Modificado", "Modificacion", WIDTH);
+//        String busqueda=metodos.busqueda(cliente.getRegistro());
+        } catch (IOException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      
+    }//GEN-LAST:event_BtnGuardarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -521,6 +564,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JLabel LfotoPerfil;
     private javax.swing.JPanel PBusqueda;
     private javax.swing.JPanel PMantenimiento;
+    private javax.swing.JTextArea TADescriptor;
     private javax.swing.JTabbedPane TabMantemiento;
     private javax.swing.JTabbedPane TabOpciones;
     private javax.swing.JTextField TfBusquedaNoAd;
@@ -530,10 +574,12 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbMes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbCorreo;
     private javax.swing.JLabel lbCumpleaños;
