@@ -426,6 +426,40 @@ public class FileMethods {
             Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public User readUser(String busqueda){
+        FileMethods metodos= new FileMethods();
+        User newUser=new User();
+        String[]numeros=busqueda.split(Pattern.quote("|")) ;
+        File archivo = new File(numeros[0]);      
+        RandomAccessFile raf;
+        try {
+            raf = new RandomAccessFile(archivo,"rw");
+            raf.seek(Integer.parseInt(numeros[2]));
+            String Linea=raf.readLine();
+            raf.close();
+            
+            String[] values = Linea.split(Pattern.quote("|"));
+            newUser.setUser(values[0]);
+            newUser.setName(values[1]);
+            newUser.setLastName(values[2]);
+            newUser.setPassword(values[3]);
+            newUser.setRol(values[4]);
+            newUser.setDate(values[5]);
+            newUser.setEmail(values[6]);
+            newUser.setCelNumber(Integer.parseInt(values[7]));
+            newUser.setPhotoPath(values[8]);
+            newUser.setDescription(values[9]);
+            newUser.setStatus(Integer.parseInt(values[10]));
+            return newUser;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+            return newUser;
+        } catch (IOException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+            return newUser;
+        }
+        
+    }
     //Actualizar el respectivo descriptor tras una inserción
     public void actualizarDescriptor(int i,String cadena)
     {

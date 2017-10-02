@@ -33,15 +33,7 @@ public class Administracion extends javax.swing.JFrame {
     String rutaUsuarios = "c:\\MEIA\\Usuarios.txt";
     String fotografía;
     String descripción = "Añade una breve descripción";
-    Boolean usuario;
-    Boolean contraseña;
-    Boolean nuevoUsuario;
-    Boolean nuevaContraseña;
-    Boolean nombre;
-    Boolean apellido;
-    Boolean fecha;
-    Boolean correo;
-    Boolean teléfono;
+    User auxiliar =new User();
     FileMethods archivos = new FileMethods();
     public Administracion() {
         initComponents();
@@ -66,6 +58,8 @@ public class Administracion extends javax.swing.JFrame {
             this.Escritorio.add(internalFrame);
             BtnDarBAja.setVisible(false);
         }
+        BtnGuardarAd.setVisible(false);
+        BtnDarBajaAd.setVisible(false);
         jLabel2.setText(cliente.getUser());
         String[] nacimiento=cliente.getDate().split(Pattern.quote("/"));
         cbDía.setSelectedItem(nacimiento[0]);
@@ -119,8 +113,25 @@ public class Administracion extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         Escritorio = new javax.swing.JDesktopPane();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TfBusquedaAd = new javax.swing.JTextField();
+        BtnBuscarAd = new javax.swing.JButton();
+        BtnDarBajaAd = new javax.swing.JButton();
+        BtnGuardarAd = new javax.swing.JButton();
+        lbNContraseña1 = new javax.swing.JLabel();
+        tfNContraseña1 = new javax.swing.JPasswordField();
+        lbNContraseñaNueva1 = new javax.swing.JLabel();
+        tfNContraseñaNueva1 = new javax.swing.JPasswordField();
+        lbCumpleaños1 = new javax.swing.JLabel();
+        cbDía1 = new javax.swing.JComboBox<>();
+        cbMes1 = new javax.swing.JComboBox<>();
+        cbAño1 = new javax.swing.JComboBox<>();
+        tfNCorreo1 = new javax.swing.JTextField();
+        lbCorreo1 = new javax.swing.JLabel();
+        lbTeléfono1 = new javax.swing.JLabel();
+        tfNTeléfono1 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TADescriptor1 = new javax.swing.JTextArea();
         PBusqueda = new javax.swing.JPanel();
         BtnBuscar = new javax.swing.JButton();
         TfBusquedaNoAd = new javax.swing.JTextField();
@@ -285,18 +296,50 @@ public class Administracion extends javax.swing.JFrame {
 
         TabMantemiento.addTab("Nuevo Usuario", jPanel2);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        BtnBuscarAd.setText("Buscar");
+        BtnBuscarAd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarAdActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
+
+        BtnDarBajaAd.setText("Dar de Baja");
+        BtnDarBajaAd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDarBajaAdActionPerformed(evt);
+            }
+        });
+
+        BtnGuardarAd.setText("Guardar Datos");
+        BtnGuardarAd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGuardarAdActionPerformed(evt);
+            }
+        });
+
+        lbNContraseña1.setText("Contraseña");
+
+        lbNContraseñaNueva1.setText("Nueva Contraseña");
+
+        lbCumpleaños1.setText("Fecha Nacimiento");
+
+        cbDía1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        cbMes1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic" }));
+
+        cbAño1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950" }));
+
+        lbCorreo1.setText("Correo");
+
+        lbTeléfono1.setText("Teléfono");
+
+        tfNTeléfono1.setMinimumSize(new java.awt.Dimension(10, 20));
+
+        jLabel4.setText("Descripcion");
+
+        TADescriptor1.setColumns(20);
+        TADescriptor1.setRows(5);
+        jScrollPane3.setViewportView(TADescriptor1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -304,15 +347,87 @@ public class Administracion extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(TfBusquedaAd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnBuscarAd))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbNContraseña1)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbCorreo1)
+                                    .addComponent(lbCumpleaños1)
+                                    .addComponent(lbTeléfono1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfNCorreo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfNTeléfono1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lbNContraseñaNueva1)
+                                .addGap(23, 23, 23)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(cbDía1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cbMes1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cbAño1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(tfNContraseña1)
+                                    .addComponent(tfNContraseñaNueva1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BtnDarBajaAd)
+                            .addComponent(BtnGuardarAd))
+                        .addContainerGap(49, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnBuscarAd)
+                    .addComponent(TfBusquedaAd, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(BtnDarBajaAd, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69)
+                        .addComponent(BtnGuardarAd))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbNContraseña1)
+                            .addComponent(tfNContraseña1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfNContraseñaNueva1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbNContraseñaNueva1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbCumpleaños1)
+                            .addComponent(cbDía1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbMes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbAño1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbCorreo1)
+                            .addComponent(tfNCorreo1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfNTeléfono1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lbTeléfono1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         TabMantemiento.addTab("Busqueda Administrativa", jPanel3);
@@ -449,19 +564,7 @@ public class Administracion extends javax.swing.JFrame {
 //             JOptionPane.showMessageDialog(null,"EL Usuario: "+LBusqueNoAd.getText()+" No esxiste", "Usuario o contraseña incorrecta", WIDTH);
         }
         
-//       
-//        File archivo = new File(nume[0]);      
-//        RandomAccessFile raf;
-//        try {
-//            raf = new RandomAccessFile(archivo,"rw");
-//            raf.seek(Integer.parseInt(nume[1])-3);
-//            raf.writeBytes("0");
-//            raf.close();
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
 
     }//GEN-LAST:event_BtnBuscarActionPerformed
 
@@ -513,6 +616,62 @@ public class Administracion extends javax.swing.JFrame {
       
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
+    private void BtnBuscarAdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarAdActionPerformed
+        // TODO add your handling code here:
+        FileMethods metodos= new FileMethods();
+        String busqueda=metodos.busqueda(TfBusquedaAd.getText());
+        String[]nume=busqueda.split(Pattern.quote("|")) ;
+        String nulo="";
+        if(nume[0].equals(nulo))
+        {
+            JOptionPane.showMessageDialog(null,"EL Usuario: "+TfBusquedaAd.getText()+" si existe", "Modificacion", WIDTH);
+        }
+        else{
+        auxiliar=metodos.readUser(busqueda);
+        BtnGuardarAd.setVisible(true);
+        BtnDarBajaAd.setVisible(true);
+        String[] nacimiento=auxiliar.getDate().split(Pattern.quote("/"));
+        cbDía1.setSelectedItem(nacimiento[0]);
+        cbMes1.setSelectedItem(nacimiento[1]);
+        cbAño1.setSelectedItem(nacimiento[2]);
+        tfNCorreo1.setText(auxiliar.getEmail());
+        tfNTeléfono1.setText(Integer.toString(auxiliar.getCelNumber()));
+        TADescriptor1.setText(auxiliar.getDescription());
+        
+//             JOptionPane.showMessageDialog(null,"EL Usuario: "+LBusqueNoAd.getText()+" No esxiste", "Usuario o contraseña incorrecta", WIDTH);
+        }
+    }//GEN-LAST:event_BtnBuscarAdActionPerformed
+
+    private void BtnDarBajaAdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDarBajaAdActionPerformed
+        // TODO add your handling code here:
+        FileMethods metodos= new FileMethods();
+        try {
+            String busqueda=metodos.busqueda(auxiliar.getUser());
+            metodos.Eliminar(busqueda);
+            this.dispose();
+            metodos.actualizarDescriptor(0, "");
+        } catch (IOException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BtnDarBajaAdActionPerformed
+
+    private void BtnGuardarAdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarAdActionPerformed
+        // TODO add your handling code here:
+         auxiliar.setDate(cbDía1.getSelectedItem()+"/"+cbMes1.getSelectedItem()+"/"+cbAño1.getSelectedItem());
+        auxiliar.setEmail(tfNCorreo1.getText());
+        auxiliar.setCelNumber(Integer.parseInt(tfNTeléfono1.getText()));
+        auxiliar.setDescription(TADescriptor1.getText());
+        FileMethods metodos= new FileMethods();
+        try {
+            String busqueda=metodos.busqueda(auxiliar.getUser());
+            metodos.Actualizar(busqueda,auxiliar.getRegistro());
+            JOptionPane.showMessageDialog(null,"Datos Modificado", "Modificacion", WIDTH);
+//        String busqueda=metodos.busqueda(cliente.getRegistro());
+        } catch (IOException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BtnGuardarAdActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -556,8 +715,11 @@ public class Administracion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BrnCerrar;
     private javax.swing.JButton BtnBuscar;
+    private javax.swing.JButton BtnBuscarAd;
     private javax.swing.JButton BtnDarBAja;
+    private javax.swing.JButton BtnDarBajaAd;
     private javax.swing.JButton BtnGuardar;
+    private javax.swing.JButton BtnGuardarAd;
     private javax.swing.JDesktopPane Escritorio;
     private javax.swing.JLabel LBusqueNoAd;
     private javax.swing.JLabel LModificarDatos;
@@ -565,30 +727,44 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JPanel PBusqueda;
     private javax.swing.JPanel PMantenimiento;
     private javax.swing.JTextArea TADescriptor;
+    private javax.swing.JTextArea TADescriptor1;
     private javax.swing.JTabbedPane TabMantemiento;
     private javax.swing.JTabbedPane TabOpciones;
+    private javax.swing.JTextField TfBusquedaAd;
     private javax.swing.JTextField TfBusquedaNoAd;
     private javax.swing.JButton btnImagen;
     private javax.swing.JComboBox<String> cbAño;
+    private javax.swing.JComboBox<String> cbAño1;
     private javax.swing.JComboBox<String> cbDía;
+    private javax.swing.JComboBox<String> cbDía1;
     private javax.swing.JComboBox<String> cbMes;
+    private javax.swing.JComboBox<String> cbMes1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lbCorreo;
+    private javax.swing.JLabel lbCorreo1;
     private javax.swing.JLabel lbCumpleaños;
+    private javax.swing.JLabel lbCumpleaños1;
     private javax.swing.JLabel lbNContraseña;
+    private javax.swing.JLabel lbNContraseña1;
     private javax.swing.JLabel lbNContraseñaNueva;
+    private javax.swing.JLabel lbNContraseñaNueva1;
     private javax.swing.JLabel lbTeléfono;
+    private javax.swing.JLabel lbTeléfono1;
     private javax.swing.JPasswordField tfNContraseña;
+    private javax.swing.JPasswordField tfNContraseña1;
     private javax.swing.JPasswordField tfNContraseñaNueva;
+    private javax.swing.JPasswordField tfNContraseñaNueva1;
     private javax.swing.JTextField tfNCorreo;
+    private javax.swing.JTextField tfNCorreo1;
     private javax.swing.JTextField tfNTeléfono;
+    private javax.swing.JTextField tfNTeléfono1;
     // End of variables declaration//GEN-END:variables
 }
