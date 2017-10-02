@@ -29,11 +29,14 @@ public class Registro extends javax.swing.JFrame {
     Boolean fecha;
     Boolean correo;
     Boolean teléfono;
+    Boolean Foto = false;
     /**
      * Creates new form Registro
      */
     public Registro() {
         initComponents();
+        archivos.createFolder("c:\\MEIA\\");
+        archivos.createFolder("c:\\MEIA\\Fotografías");
     }
 
     /**
@@ -50,7 +53,6 @@ public class Registro extends javax.swing.JFrame {
         btnImagen = new javax.swing.JButton();
         tfNContraseña = new javax.swing.JPasswordField();
         lbNContraseña = new javax.swing.JLabel();
-        tfNFoto = new javax.swing.JTextField();
         lbCorreo = new javax.swing.JLabel();
         lbTeléfono = new javax.swing.JLabel();
         btnRegistrar = new javax.swing.JButton();
@@ -64,7 +66,7 @@ public class Registro extends javax.swing.JFrame {
         tfNTeléfono = new javax.swing.JTextField();
         lbEslogan = new javax.swing.JLabel();
         lbNombre1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,10 +104,10 @@ public class Registro extends javax.swing.JFrame {
 
         lbNombre1.setText("Apellido");
 
-        jButton1.setText("Cerrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setText("Cerrar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
 
@@ -137,7 +139,10 @@ public class Registro extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(tfNTeléfono, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tfNFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(btnRegistrar)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(btnRegresar))))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(lbCorreo)
                                     .addGap(18, 18, 18)
@@ -155,15 +160,7 @@ public class Registro extends javax.swing.JFrame {
                                         .addComponent(cbAño, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addComponent(tfNNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(tfNApellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(56, 161, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jButton1))
-                    .addComponent(btnRegistrar))
-                .addGap(61, 61, 61))
+                .addGap(56, 114, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,13 +198,10 @@ public class Registro extends javax.swing.JFrame {
                     .addComponent(tfNTeléfono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnImagen))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegistrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(btnImagen)
+                    .addComponent(btnRegistrar)
+                    .addComponent(btnRegresar))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         pack();
@@ -216,9 +210,8 @@ public class Registro extends javax.swing.JFrame {
     private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
 
         //Seleccionar una foto de perfil.
-        tfNFoto.setEnabled(false);
         fotografía = archivos.fotoPerfil(this);
-        tfNFoto.setText(fotografía);
+        Foto = true;
         
     }//GEN-LAST:event_btnImagenActionPerformed
 
@@ -287,7 +280,7 @@ public class Registro extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         //Verificar nuevo Usuario
         //archivos.busqueda(tfNUsurario.getText()!= "|0")
-        if(tfNUsuario.getText().equals("") || !"|0".equals(archivos.busqueda(tfNUsuario.getText())))
+        if(archivos.busqueda(tfNUsuario.getText()) != "|0" || tfNUsuario.getText() == "")
         {
             nuevoUsuario = false;
             tfNUsuario.setBackground(Color.pink);
@@ -370,35 +363,29 @@ public class Registro extends javax.swing.JFrame {
             tfNTeléfono.setBackground(Color.pink);
         }
         //Verificar si busca la foto
-        if (tfNFoto.getText().equals("")) {
-            tfNFoto.setBackground(Color.pink);
-        }
-        else{
-            tfNFoto.setBackground(Color.green);
-        }
-
-        //Si todo es correcto, ingresar los registros.
-        if(nuevoUsuario && nombre && apellido && nuevaContraseña && fecha && correo && teléfono && fotografía != null)
+        if(Foto)
         {
-            //Crear folder
-            archivos.createFolder("c:\\MEIA\\");
-                //Crear archivo maestro
-                archivos.createFile(rutaUsuarios);
-                //Crear descriptor arcihvo maestro
-                archivos.createFile("c:\\MEIA\\DescriptorA.txt");
-                //Crear bitácora
-                archivos.createFile("c:\\MEIA\\Bitácora.txt");
-                //Crear descriptor de la bitácora
-                archivos.createFile("c:\\MEIA\\DescriptorB.txt");
+            btnImagen.setBackground(Color.green);
+        }
+        else
+        {
+            btnImagen.setBackground(Color.red);
+        }
+        //Si todo es correcto, ingresar los registros.
+        if(nuevoUsuario && nombre && apellido && nuevaContraseña && fecha && correo && teléfono && Foto)
+        {
+            //Crear bitácora
+            archivos.createFile("c:\\MEIA\\Bitácora.txt");
+            archivos.actualizarDescriptor(0, tfNUsuario.getText());
                 //Si es el primer registro, rol administrador
-                if(archivos.fileSizeNotZero(rutaUsuarios))
+                if(archivos.fileSizeNotZero("c:\\MEIA\\Bitácora.txt"))
                 {
-                    archivos.inscribirUsuario(rutaUsuarios, tfNUsuario.getText(), tfNNombre.getText(),tfNApellido.getText(), contraseñaEncriptada, 0, cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem(),tfNCorreo.getText(), Integer.parseInt(tfNTeléfono.getText()), fotografía, descripción,1);
+                    archivos.inscribirUsuario(tfNUsuario.getText(), tfNNombre.getText(),tfNApellido.getText(), contraseñaEncriptada, "0", cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem(),tfNCorreo.getText(), Integer.parseInt(tfNTeléfono.getText()), fotografía, descripción,1);
                 }
                 //Sino, rol de usuario común.
                 else
                 {
-                    archivos.inscribirUsuario(rutaUsuarios, tfNUsuario.getText(), tfNNombre.getText(),tfNApellido.getText(), contraseñaEncriptada, 1, cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem(),tfNCorreo.getText(), Integer.parseInt(tfNTeléfono.getText()), fotografía, descripción,1);
+                    archivos.inscribirUsuario(tfNUsuario.getText(), tfNNombre.getText(),tfNApellido.getText(), contraseñaEncriptada, "1", cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem(),tfNCorreo.getText(), Integer.parseInt(tfNTeléfono.getText()), fotografía, descripción,1);
                 }
                 //Devolver valores por defecto.
                 tfNUsuario.setBackground(Color.white);
@@ -413,9 +400,6 @@ public class Registro extends javax.swing.JFrame {
                 tfNCorreo.setText("");
                 tfNTeléfono.setBackground(Color.white);
                 tfNTeléfono.setText("");
-                tfNFoto.setBackground(Color.white);
-                tfNFoto.setText("");
-                
                 cbDía.setBackground(Color.white);
                 cbMes.setBackground(Color.white);
                 cbAño.setBackground(Color.white);
@@ -423,10 +407,10 @@ public class Registro extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -466,10 +450,10 @@ public class Registro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnImagen;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cbAño;
     private javax.swing.JComboBox<String> cbDía;
     private javax.swing.JComboBox<String> cbMes;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lbCorreo;
     private javax.swing.JLabel lbEslogan;
     private javax.swing.JLabel lbNContraseña;
@@ -480,7 +464,6 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JTextField tfNApellido;
     private javax.swing.JPasswordField tfNContraseña;
     private javax.swing.JTextField tfNCorreo;
-    private javax.swing.JTextField tfNFoto;
     private javax.swing.JTextField tfNNombre;
     private javax.swing.JTextField tfNTeléfono;
     private javax.swing.JTextField tfNUsuario;

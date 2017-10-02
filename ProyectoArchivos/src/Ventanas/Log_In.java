@@ -16,7 +16,7 @@ public class Log_In extends javax.swing.JFrame {
     //ATRIBUTOS
     User objUsuario = new User();
     FileMethods archivos = new FileMethods();
-    String rutaUsuarios = "C:\\MEIA\\Usuarios.txt";
+    String rutaUsuarios = "C:\\MEIA\\Usuario.txt";
     
   
     /**
@@ -128,9 +128,9 @@ public class Log_In extends javax.swing.JFrame {
             return;
         }
         
-        if (archivos.fileSizeNotZero(rutaUsuarios)) { //quiere decir que ya hay usuarios en el documento Usuarios.txt
+        if (archivos.fileSizeNotZero("c:\\MEIA\\Bitácora.txt")) { //quiere decir que ya hay usuarios en el documento Usuarios.txt
                         
-            if(!archivos.loginMethod(tfLUsuario.getText().toString(), pfPassword.getText(), rutaUsuarios, objUsuario)){ //el usuario si existe y pudo hacer login se abre la nueva ventana con este método asumo que ya hay usuarios en la base de datos
+            if(!archivos.loginMethod(tfLUsuario.getText().toString(), pfPassword.getText(), "c:\\MEIA\\Bitácora.txt", objUsuario)){ //el usuario si existe y pudo hacer login se abre la nueva ventana con este método asumo que ya hay usuarios en la base de datos
                   //Mandar mensaje que no se pudo logear porque la contraseña es incorrecta o porque no existe el usuario 
                   JOptionPane.showMessageDialog(null,"Comprueba el nombre de usuario y tu contraseña y vuelve a intentarlo.", "Usuario o contraseña incorrecta", WIDTH);
                   
@@ -138,8 +138,9 @@ public class Log_In extends javax.swing.JFrame {
                 //se manda al siguiente form que sería la parte de kevin
                 //RECORDATORIO: el siguiente jFrame debe recibir por parámetros el objeto "actualUser" 
                 //El código de backup solo era para probar mi código en la parte del menú de kevin POR FAVOR pasarlo y eliminarlo de esta parte
-                Backup b = new Backup();
-                b.setUser(objUsuario);
+                
+                Administracion b = new Administracion(objUsuario);
+                
                 b.setVisible(true);
                 //this.setVisible(false);
             }

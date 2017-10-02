@@ -14,7 +14,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
@@ -76,8 +80,7 @@ public class FileMethods {
                     while (line != null) {
                         if (line !="") {
                             values = line.split("\\|");
-                            if (CompareStrings(name, values[0]) && CompareStrings(contraseñaEncriptada, values[3])) { //son iguales, así que se crea el objeto user
-                                newUser.setUser(values[0]);
+                            newUser.setUser(values[0]);
                                 newUser.setName(values[1]);
                                 newUser.setLastName(values[2]);
                                 newUser.setPassword(contraseñaEncriptada);
@@ -88,6 +91,8 @@ public class FileMethods {
                                 newUser.setPhotoPath(values[8]);
                                 newUser.setDescription(values[9]);
                                 newUser.setStatus(Integer.parseInt(values[10]));
+                            if (CompareStrings(name, newUser.getUser()) && CompareStrings(contraseñaEncriptada, values[3])) { //son iguales, así que se crea el objeto user
+                                
                                 //Se asigna valores al objeto usuario actual para poder manejarlo en los siguientes forms
                                return true;
                             }
@@ -137,23 +142,122 @@ public class FileMethods {
         
     }
     //Convierte una cadena a un arreglo de bytes
-    public char[] convertPassword(String filePassword){
-        char[] password = filePassword.toCharArray();
-        return password;
-    }
+    //public char[] convertPassword(String filePassword){
+      //  char[] password = filePassword.toCharArray();
+      //  return password;
+    //}
    //Función que escribe en el archivo de usuarios 
-    public void inscribirUsuario(String path, String user, String name, String lastName, String password, int rol, String birthday, String email, int celnumber, String photoPath, String description, int status){
-        File archivo = new File(path);
-        //String prueba = new String(password);
+    public void inscribirUsuario(String user, String name, String lastName, String password, String rol, String birthday, String email, int celnumber, String photoPath, String description, int status){
+        File archivo = new File("c:\\MEIA\\Bitácora.txt");
         try
             {
-                FileWriter Escribir = new FileWriter(archivo, true);
-                Escribir.write(user + "|" +name + "|" + lastName + "|" + password + "|" + rol +"|" + birthday + "|" + email + "|" + celnumber +"|" + photoPath + "|" + description + "|" + status + System.getProperty("line.separator"));
-                Escribir.close();
+                User newUser=new User();
+                newUser.setUser(user);
+                newUser.setName(name);
+                newUser.setLastName(lastName);
+                newUser.setPassword(password);
+                newUser.setRol(rol);
+                newUser.setDate(birthday);
+                newUser.setEmail(email);
+                newUser.setCelNumber(celnumber);
+                newUser.setPhotoPath(photoPath);
+                newUser.setDescription(description);
+                newUser.setStatus(status);
+                int límite = maxRegistros();
+                String[] Registros = conteoRegistros(0).split("|");
+                int cantidadRegistros = Integer.parseInt(Registros[0]) + Integer.parseInt(Registros[2]);
+                if(cantidadRegistros <= límite)
+                {
+                    FileWriter Escribir = new FileWriter(archivo, true);
+                    Escribir.write(newUser.getRegistro());
+                    Escribir.close();
+                }
+                else
+                {
+                    reorganizar();
+                    FileWriter Escribir = new FileWriter(archivo, true);
+                    Escribir.write(newUser.getRegistro());
+                    Escribir.close();
+                    
+                }
             }
             catch(IOException e)
             {
             }
+    }
+    //Reorganiza los archivos para la inserción.
+    private void reorganizar()
+    {
+        File Usuarios = new File("c:\\MEIA\\Usuarios.txt");
+        if(Usuarios.exists())
+        {
+            //Traspaso información, borro usuarios y llamo organizar;
+        }
+        else
+        {
+            
+            //Ordeno, creo usuario.txt y escribo.
+        }
+    }
+      //Obtiene el límite de registros de la bitácora.
+    private int maxRegistros()
+    {
+        int Salida = 0;
+        try
+        {
+            File Descriptor = new File("c:\\MEIA\\DescriptorB.txt");
+            FileReader lector = new FileReader(Descriptor);
+            BufferedReader LeerArchivo = new BufferedReader(lector);
+            for (int i = 0; i < 10; i++) {
+                LeerArchivo.readLine();
+            }
+            String[] Linea = LeerArchivo.readLine().split(" ");
+            Salida = Integer.parseInt(Linea[1]);
+        }
+        catch(IOException e){}
+        return Salida;
+    }
+      //Obtener la cantidad de registros activos e inactivos de un archivo.
+    private String conteoRegistros(int j)
+    {
+        int contadorActivo = 0;
+        int contadorInactivo = 0;
+        try
+        {
+            File Archivo;
+        if(j == 0)
+        {
+            Archivo = new File("c:\\MEIA\\Bitácora.txt");
+        }
+        else
+        {
+            Archivo = new File("c:\\MEIA\\Usuarios.txt");
+        }
+        FileReader lector = new FileReader(Archivo);
+        BufferedReader leerArchivo = new BufferedReader(lector);
+        String Linea = leerArchivo.readLine();
+        String[] Registro;
+        while(Linea != null)
+        {
+            Registro = Linea.split(Pattern.quote("|"));
+            if("1".equals(Registro[10]))
+            {
+                contadorActivo++;
+            }
+            else
+            {
+                contadorInactivo++;
+            }
+            Linea = leerArchivo.readLine();
+        }
+        lector.close();
+        leerArchivo.close();
+        }
+        catch(IOException ex)
+        {
+        }
+        contadorActivo++;
+        return contadorActivo + "|" + contadorInactivo;
     }
     //Escribe en la bitácora de registros de copias de seguridad.
     public boolean writeOnBitacora(String path, String filePath,String user, String date){
@@ -211,8 +315,7 @@ public class FileMethods {
             //Se generó un error
         }
     }
-    
-    //Busca una cadena en la ruta especificada
+//Busca una cadena en la ruta especificada
     private String busquedaInterna(String ruta, String cadena)
     {
         String Salida = "|0";
@@ -224,23 +327,41 @@ public class FileMethods {
             {
             int númLinea = 0;
             FileReader lector = new FileReader(Archivo);
-            BufferedReader LeerArchivo = new BufferedReader(lector);
+            RandomAccessFile LeerArchivo = new RandomAccessFile(Archivo,"rw");
+//          BufferedReader LeerArchivo = new BufferedReader(lector);
             String Linea = LeerArchivo.readLine();
-            String[] Registro;
+            String[] values;
             while(Linea != null) //Leemos linea por linea hasta el final.
                     {
+                        
                         if(!"".equals(Linea))
                         {
-                            Registro = Linea.split("|");
+                            User newUser=new User();
+                            values = Linea.split(Pattern.quote("|"));
+                            newUser.setUser(values[0]);
+                            newUser.setName(values[1]);
+                            newUser.setLastName(values[2]);
+                            newUser.setPassword(values[3]);
+                            newUser.setRol(values[4]);
+                            newUser.setDate(values[5]);
+                            newUser.setEmail(values[6]);
+                            newUser.setCelNumber(Integer.parseInt(values[7]));
+                            newUser.setPhotoPath(values[8]);
+                            newUser.setDescription(values[9]);
+                            newUser.setStatus(Integer.parseInt(values[10]));
+                            String k=newUser.getUser();
+                            int s=newUser.getStatus();
+                            
                             //Si el usuario es correcto y no se ha dado de baja
-                            if(cadena.equals(Registro[0]) && !"0".equals(Registro[10]))
+                            if(cadena.equals(k) & !(s==0))
                             {
                                 //Lo encontró
-                                Salida = "c:\\MEIA\\Bitácora.txt|" + númLinea;
+                                Salida = ruta+"|" + LeerArchivo.getFilePointer()+"|"+númLinea;
                             }
                         }
+                        númLinea=(int)LeerArchivo.getFilePointer();
                         Linea=LeerArchivo.readLine();
-                        númLinea++;
+                        
                     }
                     //IMPORTANTE: cerrar los archivos después de utilizarlos
                     lector.close();
@@ -271,14 +392,107 @@ public class FileMethods {
     //Elimina un nombre de usuario especificado
     public void Eliminar(String cadena) throws IOException
     {
-        String[] ubicacion = busqueda(cadena).split("|");
-        if(ubicacion[0] != "")
-        {
-            File Archivo = new File(ubicacion[0]);
-            for (int i = 0; i <= Integer.parseInt(ubicacion[1]); i++) {
-                
-            }
+        FileMethods metodos= new FileMethods();
+        
+        String[]numeros=cadena.split(Pattern.quote("|")) ;
+        File archivo = new File(numeros[0]);      
+        RandomAccessFile raf;
+        try {
+            raf = new RandomAccessFile(archivo,"rw");
+            raf.seek(Integer.parseInt(numeros[1])-3);
+            raf.writeBytes("0");
+            raf.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    public void Actualizar(String usuario,String registroactualizado) throws IOException
+    {
+        FileMethods metodos= new FileMethods();
+        
+        String[]numeros=usuario.split(Pattern.quote("|")) ;
+        File archivo = new File(numeros[0]);      
+        RandomAccessFile raf;
+        try {
+            raf = new RandomAccessFile(archivo,"rw");
+            raf.seek(Integer.parseInt(numeros[1])-3);
+            raf.writeBytes("0");
+            raf.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //Actualizar el respectivo descriptor tras una inserción
+    public void actualizarDescriptor(int i,String cadena)
+    {
+        try
+        {
+          switch(i)
+        {
+            case 0:
+            {
+                File descriptor = new File("c:\\MEIA\\DescriptorB.txt");
+                if(!descriptor.exists())
+                {
+                    createFile("c:\\MEIA\\DescriptorB.txt");
+      
+                    FileWriter escritor = new FileWriter(descriptor);
+                    Date fecha = new Date();
+                    escritor.write("Archivo: c:\\MEIA\\DescriptorB.txt\r\nDescripción: Bitácora_de_usuarios\r\nTipo: archivo_de_datos\r\nOrganización: Apilo\r\nAutor: "+cadena+ "\r\nCreado: "+ fecha+ "\r\nModificado: "+fecha+"\r\nSeparador_campos: |\r\nRegistros_activos: 1\r\nRegistros_inactivos: 0\r\nRegistros_máximo: 10");
+                    escritor.close();
+                }
+                else
+                {
+                    String[] Registros = conteoRegistros(0).split("|");
+                    Date Fecha = new Date();
+                    RandomAccessFile raf = new RandomAccessFile(descriptor,"rw");
+                    for (int j = 0; j < 6; j++) {
+                       raf.readLine();
+                    }
+                    raf.writeBytes("Modificado: "+Fecha+"\r\n");
+                    raf.readLine();
+                    raf.writeBytes("Registros_activos: "+Registros[0]+"\r\n");
+                    raf.writeBytes("Registros_inactivos: "+Registros[2] );
+                    raf.close();
+                }
+                    break;
+            }
+            case 1:
+            {
+                File descriptor = new File("c:\\MEIA\\DescriptorA.txt");
+                FileWriter escritor;
+                if(!descriptor.exists())
+                {
+                    Date fecha = new Date();
+                    escritor = new FileWriter(descriptor);
+                    escritor.write("Archivo: C://MEIA/Usuario.txt\r\nDescripción: Usuarios_del_sistema.\r\nTipo: archivo_de_datos\r\nOrganización: Secuencial\r\nAutor: "+cadena+"\r\nCreado: "+fecha+"\r\nModificado: "+fecha+"\r\nSeparador_campos: |\r\nLlave: Usuario\r\nOrden: Ascendente\r\nRegistros_activos: 1\r\nRegistros_inactivos: 0");
+                    escritor.close();   
+                }
+                else
+                {
+                    String[] Registros = conteoRegistros(1).split("|");
+                    Date Fecha = new Date();
+                    RandomAccessFile raf = new RandomAccessFile(descriptor,"rw");
+                    for (int j = 0; j < 6; j++) {
+                       raf.readLine();
+                    }
+                    raf.writeBytes("Modificado: "+Fecha+"\r\n");
+                    raf.readLine();
+                    raf.writeBytes("Registros_activos: "+Registros[0]+"\r\n");
+                    raf.writeBytes("Registros_inactivos: "+Registros[2] );
+                    raf.close();
+                }
+                break;
+            }
+        }
+        }
+        catch(IOException e)
+        {
+            
+        }
+    }
 }
