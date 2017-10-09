@@ -4,17 +4,24 @@
  * and open the template in the editor.
  */
 package Ventanas;
+import static Ventanas.Backup.LOGGER;
 import java.awt.Component;
 import java.awt.Desktop;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Level;
@@ -36,6 +43,7 @@ public class FileMethods {
     //Cadena que hizo Jackie, creo que para verificar el formato del correo
     private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    static final Logger LOGGER = Logger.getAnonymousLogger();
     //Crear una nueva carpeta
     public void createFolder(String path){
         File folder = new File(path);
@@ -63,8 +71,27 @@ public class FileMethods {
         return matcher.matches();
  
     }
+    public boolean loginMethod(String nombre, String contraseña, User newUser)
+    {
+        File ArchivoMaestro = new File("c:\\MEIA\\Usuarios.txt");
+        if(ArchivoMaestro.exists())
+        {
+            if(loginMethodInterno(nombre,contraseña,"c:\\MEIA\\Bitácora.txt",newUser))
+            {
+                return true;
+            }
+            else
+            {
+                return loginMethodInterno(nombre,contraseña,"c:\\MEIA\\Usuarios.txt",newUser);
+            }   
+        }
+        else
+        {
+            return loginMethodInterno(nombre,contraseña,"c:\\MEIA\\Bitácora.txt",newUser);
+        }
+    }
     //Revisa que el usuario y contraseña ingresadas sean válidas.
-    public boolean loginMethod(String name, String password, String path, User newUser){
+    private boolean loginMethodInterno(String name, String password, String path, User newUser){
         File filee = new File(path);
         FileReader lecturaArchivo;
             try
@@ -174,7 +201,9 @@ public class FileMethods {
                 }
                 else
                 {
-                    reorganizar();
+                    reorganizar(límite);
+                    actualizarDescriptor(0,user);
+                    actualizarDescriptor(1,"");
                     FileWriter Escribir = new FileWriter(archivo, true);
                     Escribir.write(newUser.getRegistro());
                     Escribir.close();
@@ -186,17 +215,95 @@ public class FileMethods {
             }
     }
     //Reorganiza los archivos para la inserción.
-    private void reorganizar()
+    private void reorganizar(int max)
     {
-        File Usuarios = new File("c:\\MEIA\\Usuarios.txt");
-        if(Usuarios.exists())
+        File ArchivoMaestro = new File("c:\\MEIA\\Usuarios.txt");
+        File Bitácora = new File("c:\\MEIA\\Bitácora.txt");
+        if(ArchivoMaestro.exists())
         {
-            //Traspaso información, borro usuarios y llamo organizar;
+            try
+            {
+                RandomAccessFile raf = new RandomAccessFile(Bitácora,"rw");
+                for (int i = 0; i < max; i++) {
+                    raf.readLine();
+                }
+                FileReader lector = new FileReader(ArchivoMaestro);
+                BufferedReader leerArchivo = new BufferedReader(lector);
+                String Linea = leerArchivo.readLine();
+                while(Linea != null)
+                {
+                    raf.writeBytes(Linea+"\r\n");
+                    Linea = leerArchivo.readLine();
+                }
+                lector.close();
+                leerArchivo.close();
+                raf.close();
+                ArchivoMaestro.delete();
+                reorganizar(max);
+            }catch(IOException ex){}
         }
         else
         {
-            
-            //Ordeno, creo usuario.txt y escribo.
+            try
+        {
+            //Obtener los nombres de usuario.
+            FileReader lector = new FileReader(Bitácora);
+            BufferedReader leerArchivo = new BufferedReader(lector);
+            String linea = leerArchivo.readLine();
+            String Colección = "";
+            int númLineas = 0;
+            while(linea != null)
+            {
+                númLineas++;
+                String[] Datos = linea.split(Pattern.quote("|"));
+                if("1".equals(Datos[10]))
+                {
+                    Colección += Datos[0] + "|";   
+                }
+                linea = leerArchivo.readLine();
+            }
+            lector.close();
+            leerArchivo.close();
+            String[] Usuarios = Colección.split(Pattern.quote("|"));
+            int[] Posición = new int[númLineas];
+            for (int i = 0; i < númLineas; i++) {
+                Posición[i] = i;
+            }
+            //Obtener el orden de los registros
+            for (int j = 1; j <= Usuarios.length; j++) {
+                for (int k = 0; k < Usuarios.length -j; k++) {
+                    if(Usuarios[k].compareTo(Usuarios[k+1]) > 0)
+                    {
+                        String aux = Usuarios[k];
+                        Usuarios[k] = Usuarios[k+1];
+                        Usuarios[k+1] = aux;
+                        int temp = Posición[k];
+                        Posición[k] = Posición[k+1];
+                        Posición[k+1] = temp;
+                    }
+                }
+            }
+            //Leer, escribir, leer, escribir, leer...
+            createFile("c:\\MEIA\\Usuarios.txt");
+            FileWriter escribir = new FileWriter(ArchivoMaestro);
+            for (int i = 0; i < Posición.length; i++) {
+                lector = new FileReader(Bitácora);
+                leerArchivo = new BufferedReader(lector);
+                for (int j = 0; j < Posición[i]; j++) {
+                 leerArchivo.readLine();
+                }
+                escribir.write(leerArchivo.readLine()+"\r\n");
+                actualizarDescriptor(1,Usuarios[i]);
+                lector.close();
+                leerArchivo.close();
+            }
+            escribir.close();
+            Bitácora.delete();
+            createFile("c:\\MEIA\\Bitácora.txt");
+            File Desc = new File("c:\\MEIA\\DescriptorB.txt");
+            Desc.delete();
+        }
+        catch(IOException e){}
         }
     }
       //Obtiene el límite de registros de la bitácora.
@@ -232,6 +339,7 @@ public class FileMethods {
         else
         {
             Archivo = new File("c:\\MEIA\\Usuarios.txt");
+            contadorActivo--;
         }
         FileReader lector = new FileReader(Archivo);
         BufferedReader leerArchivo = new BufferedReader(lector);
@@ -402,6 +510,7 @@ public class FileMethods {
             raf.seek(Integer.parseInt(numeros[1])-3);
             raf.writeBytes("0");
             raf.close();
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -516,6 +625,8 @@ public class FileMethods {
                     }
                     raf.writeBytes("Modificado: "+Fecha+"\r\n");
                     raf.readLine();
+                    raf.readLine();
+                    raf.readLine();
                     raf.writeBytes("Registros_activos: "+Registros[0]+"\r\n");
                     raf.writeBytes("Registros_inactivos: "+Registros[2] );
                     raf.close();
@@ -529,4 +640,20 @@ public class FileMethods {
             
         }
     }
+    
+     //Metodo para copiar todos los archivos a una nueva ruta
+    public void copyFile(String origin, String actual){
+        //static final Logger LOGGER = Logger.getAnonymousLogger();
+        try{
+            Path originPath = Paths.get(origin);
+            Path actualPath = Paths.get(actual);
+            Files.copy(originPath, actualPath, StandardCopyOption.REPLACE_EXISTING);
+        }catch(FileNotFoundException ex){
+            LOGGER.log(Level.SEVERE, ex.getMessage());
+        }catch(IOException ex){
+            LOGGER.log(Level.SEVERE, ex.getMessage());
+        }      
+            
+    }
+    
 }
