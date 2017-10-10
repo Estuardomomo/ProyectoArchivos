@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package Ventanas;
+
 import java.awt.Color;
 import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author jsala
@@ -209,9 +211,13 @@ public class Registro extends javax.swing.JFrame {
 
     private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
         //Seleccionar una foto de perfil.
+       
         fotografía = archivos.fotoPerfil(this);
-        //archivos.copyFile(fotografía + "\\", "C:\\MEIA\\Fotografías\\");
-        Foto = true;      
+        if (archivos.CopiarUnArchivo(fotografía + "\\", "C:\\MEIA\\Fotografías\\")) {
+            Foto = true;
+        }
+                 
+             
     }//GEN-LAST:event_btnImagenActionPerformed
 
     //Método que estable la seguridad de la contraseña
@@ -375,7 +381,7 @@ public class Registro extends javax.swing.JFrame {
         {
             //Crear bitácora
             archivos.createFile("c:\\MEIA\\Bitácora.txt");
-            archivos.actualizarDescriptor(0, tfNUsuario.getText());
+            archivos.ActualizarDescriptor(0, tfNUsuario.getText());
                 //Si es el primer registro, rol administrador
                 if(archivos.fileSizeNotZero("c:\\MEIA\\Bitácora.txt"))
                 {

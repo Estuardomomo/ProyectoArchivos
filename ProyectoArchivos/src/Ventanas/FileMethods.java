@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Ventanas;
+import static Ventanas.Backup.CPath;
 import static Ventanas.Backup.LOGGER;
 import java.awt.Component;
 import java.awt.Desktop;
@@ -18,6 +19,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -168,11 +170,7 @@ public class FileMethods {
         }
         
     }
-    //Convierte una cadena a un arreglo de bytes
-    //public char[] convertPassword(String filePassword){
-      //  char[] password = filePassword.toCharArray();
-      //  return password;
-    //}
+    
    //Función que escribe en el archivo de usuarios 
     public void inscribirUsuario(String user, String name, String lastName, String password, String rol, String birthday, String email, int celnumber, String photoPath, String description, int status){
         File archivo = new File("c:\\MEIA\\Bitácora.txt");
@@ -202,8 +200,8 @@ public class FileMethods {
                 else
                 {
                     reorganizar(límite);
-                    actualizarDescriptor(0,user);
-                    actualizarDescriptor(1,"");
+                    ActualizarDescriptor(0,user);
+                    ActualizarDescriptor(1,"");
                     FileWriter Escribir = new FileWriter(archivo, true);
                     Escribir.write(newUser.getRegistro());
                     Escribir.close();
@@ -293,7 +291,7 @@ public class FileMethods {
                  leerArchivo.readLine();
                 }
                 escribir.write(leerArchivo.readLine()+"\r\n");
-                actualizarDescriptor(1,Usuarios[i]);
+                ActualizarDescriptor(1,Usuarios[i]);
                 lector.close();
                 leerArchivo.close();
             }
@@ -570,7 +568,7 @@ public class FileMethods {
         
     }
     //Actualizar el respectivo descriptor tras una inserción
-    public void actualizarDescriptor(int i,String cadena)
+    public void ActualizarDescriptor(int i,String cadena)
     {
         try
         {
@@ -642,7 +640,7 @@ public class FileMethods {
     }
     
      //Metodo para copiar todos los archivos a una nueva ruta
-    public void copyFile(String origin, String actual){
+    private void CopiarArchivosCarpeta(String origin, String actual){
         //static final Logger LOGGER = Logger.getAnonymousLogger();
         try{
             Path originPath = Paths.get(origin);
@@ -654,6 +652,31 @@ public class FileMethods {
             LOGGER.log(Level.SEVERE, ex.getMessage());
         }      
             
+    }
+    
+    public void CopiarCarpeta(String rutaCarpeta, String rutaCopiaCarpeta){
+        File origin = new File(rutaCarpeta);
+        String[] paths = origin.list();
+        for (int i = 0; i < paths.length; i++) {
+            CopiarArchivosCarpeta(rutaCarpeta + paths[i] ,rutaCopiaCarpeta + paths[i]);
+        }
+    }
+    public boolean CopiarUnArchivo(String rutaArchivo, String rutaCopiaArchivo){
+        try{
+           
+           FileInputStream fis = new FileInputStream(rutaArchivo); //inFile -> Archivo a copiar OJO El archivo ya debe venir con los \\ finales 
+           File archivoOriginal = new File(rutaArchivo);           //es decir c:\\user\\hackerman\\texto.txt\\
+           FileOutputStream fos = new FileOutputStream(rutaCopiaArchivo+ archivoOriginal.getName()); //outFile -> Copia del archivo
+           FileChannel inChannel = fis.getChannel(); 
+           FileChannel outChannel = fos.getChannel();
+           inChannel.transferTo(0, inChannel.size(), outChannel);
+           fis.close(); 
+           fos.close();
+           return true;
+           
+       }catch (IOException ioe) {
+           return false;
+       }
     }
     
 }

@@ -8,17 +8,11 @@ package Ventanas;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.io.File;
 import javax.swing.JFileChooser;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.logging.Level;
+
 import java.util.logging.Logger;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 /**
@@ -165,11 +159,11 @@ public class Backup extends javax.swing.JFrame {
         // TODO add your handling code here:
         TF_backupPath.setEnabled(false);
         JFileChooser dialog = new JFileChooser();
-        //FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo de texto", "");
+        
         dialog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         File newFile;
         String filePath;
-        // dialog.setFileFilter(filter);
+        
         int value = dialog.showOpenDialog(this);
         if (value == JFileChooser.APPROVE_OPTION){
             newFile = dialog.getSelectedFile();
@@ -185,7 +179,7 @@ public class Backup extends javax.swing.JFrame {
     }//GEN-LAST:event_TF_backupPathActionPerformed
 
     //Metodo para copiar todos los archivos a una nueva ruta
-    private void copyFile(String origin, String actual){
+   /* private void copyFile(String origin, String actual){
         //static final Logger LOGGER = Logger.getAnonymousLogger();
         try{
             Path originPath = Paths.get(origin);
@@ -196,8 +190,8 @@ public class Backup extends javax.swing.JFrame {
         }catch(IOException ex){
             LOGGER.log(Level.SEVERE, ex.getMessage());
         }      
-            
-    }
+        NO CREO QUE ESTO SIRVA, ELIMINARLO SIN PROBLEMA    
+    }*/ 
     //Método para escribir en bitácora
     private void writeBitacora(){
         f.createFile(bitacoraPath);
@@ -211,12 +205,8 @@ public class Backup extends javax.swing.JFrame {
         // TODO add your handling code here:
         ValidateUserRol();
         f.createFolder(TF_backupPath.getText());
-        copyFile(CPath ,TF_backupPath.getText());
-        File origin = new File(CPath);
-        String[] paths = origin.list();
-        for (int i = 0; i < paths.length; i++) {
-            copyFile(CPath + paths[i] ,TF_backupPath.getText()+"\\" + paths[i]);
-        }
+        //copyFile(CPath ,TF_backupPath.getText()); no creo que sea necesaria esta línea del código solo la dejo por si algo pasa
+        f.CopiarCarpeta(CPath, TF_backupPath.getText()+"\\");
         JOptionPane.showMessageDialog(null,"Se realizó la copia de seguridad con éxito", "Respaldo de información", WIDTH);
         writeBitacora();
     }//GEN-LAST:event_jButton3ActionPerformed

@@ -570,10 +570,10 @@ public class Administracion extends javax.swing.JFrame {
         String nulo="";
         if(nume[0].equals(nulo))
         {
-            LBusqueNoAd.setText("EL Usuario: "+TfBusquedaNoAd.getText()+" no existe");
+            LBusqueNoAd.setText("El usuario "+TfBusquedaNoAd.getText()+" no existe");
         }
         else{
-            LBusqueNoAd.setText("EL Usuario: "+TfBusquedaNoAd.getText()+" si existe");
+            LBusqueNoAd.setText("El usuario "+TfBusquedaNoAd.getText()+" si existe");
 //             JOptionPane.showMessageDialog(null,"EL Usuario: "+LBusqueNoAd.getText()+" No esxiste", "Usuario o contraseña incorrecta", WIDTH);
         }
         
@@ -591,7 +591,7 @@ public class Administracion extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_BrnCerrarActionPerformed
-
+//BOTóN: dar de baja
     private void BtnDarBAjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDarBAjaActionPerformed
         // TODO add your handling code here:
         FileMethods metodos= new FileMethods();
@@ -599,7 +599,8 @@ public class Administracion extends javax.swing.JFrame {
             String busqueda=metodos.busqueda(cliente.getUser());
             metodos.Eliminar(busqueda);
             this.dispose();
-            metodos.actualizarDescriptor(0, "");
+            metodos.ActualizarDescriptor(0, "");
+            metodos.ActualizarDescriptor(1, ""); // Jackie-9/10/2017
 //        String busqueda=metodos.busqueda(cliente.getRegistro());
         } catch (IOException ex) {
             Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
@@ -644,7 +645,7 @@ public class Administracion extends javax.swing.JFrame {
         String nulo="";
         if(nume[0].equals(nulo))
         {
-            JOptionPane.showMessageDialog(null,"EL Usuario: "+TfBusquedaAd.getText()+" si existe", "Modificacion", WIDTH);
+            JOptionPane.showMessageDialog(null,"El usuario "+TfBusquedaAd.getText()+" si existe", "Modificacion", WIDTH);
         }
         else{
         auxiliar=metodos.readUser(busqueda);
@@ -661,16 +662,16 @@ public class Administracion extends javax.swing.JFrame {
 //             JOptionPane.showMessageDialog(null,"EL Usuario: "+LBusqueNoAd.getText()+" No esxiste", "Usuario o contraseña incorrecta", WIDTH);
         }
     }//GEN-LAST:event_BtnBuscarAdActionPerformed
-
+//BOTóN: daar de baja
     private void BtnDarBajaAdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDarBajaAdActionPerformed
         // TODO add your handling code here:
         FileMethods metodos= new FileMethods();
         try {
             String busqueda=metodos.busqueda(auxiliar.getUser());
             metodos.Eliminar(busqueda);
-            archivos.actualizarDescriptor(1, "");
+            archivos.ActualizarDescriptor(1, "");
             this.dispose();
-            metodos.actualizarDescriptor(0, "");
+            metodos.ActualizarDescriptor(0, "");
         } catch (IOException ex) {
             Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
         }
