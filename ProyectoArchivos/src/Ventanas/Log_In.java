@@ -128,9 +128,9 @@ public class Log_In extends javax.swing.JFrame {
             return;
         }
         
-        if (archivos.fileSizeNotZero("c:\\MEIA\\Bitácora.txt")) { //quiere decir que ya hay usuarios en el documento Usuarios.txt
+        if (archivos.fileSizeNotZero("c:\\MEIA\\Bitácora.txt")) { //quiere decir que ya hay elementos en la bitácora.
                         
-            if(!archivos.loginMethod(tfLUsuario.getText().toString(), pfPassword.getText(), "c:\\MEIA\\Bitácora.txt", objUsuario)){ //el usuario si existe y pudo hacer login se abre la nueva ventana con este método asumo que ya hay usuarios en la base de datos
+            if(!archivos.loginMethod(tfLUsuario.getText().toString(), pfPassword.getText(), objUsuario)){ //el usuario si existe y pudo hacer login se abre la nueva ventana con este método asumo que ya hay usuarios en la base de datos
                   //Mandar mensaje que no se pudo logear porque la contraseña es incorrecta o porque no existe el usuario 
                   JOptionPane.showMessageDialog(null,"Comprueba el nombre de usuario y tu contraseña y vuelve a intentarlo.", "Usuario o contraseña incorrecta", WIDTH);
                   

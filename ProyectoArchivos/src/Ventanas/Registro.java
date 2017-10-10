@@ -208,11 +208,10 @@ public class Registro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
-
         //Seleccionar una foto de perfil.
         fotografía = archivos.fotoPerfil(this);
-        Foto = true;
-        
+        //archivos.copyFile(fotografía + "\\", "C:\\MEIA\\Fotografías\\");
+        Foto = true;      
     }//GEN-LAST:event_btnImagenActionPerformed
 
     //Método que estable la seguridad de la contraseña
@@ -403,6 +402,9 @@ public class Registro extends javax.swing.JFrame {
                 cbDía.setBackground(Color.white);
                 cbMes.setBackground(Color.white);
                 cbAño.setBackground(Color.white);
+                btnImagen.setBackground(Color.white);
+                fotografía = "";
+                Foto = false;
             }
         
     }//GEN-LAST:event_btnRegistrarActionPerformed

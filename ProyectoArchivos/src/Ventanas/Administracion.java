@@ -48,10 +48,12 @@ public class Administracion extends javax.swing.JFrame {
 //            TabMantemiento.setEnabledAt(TabMantemiento.indexOfComponent(jPanel1),false);
             TabMantemiento.removeTabAt(TabMantemiento.indexOfComponent(jPanel2));
             TabMantemiento.removeTabAt(TabMantemiento.indexOfComponent(jPanel3));
+            jButton1.setVisible(true);
         }
         else{
             Registro n=new Registro();
             JInternalFrame internalFrame = new JInternalFrame();
+            n.OcultarCerrar(true);
             internalFrame.setContentPane(n.getContentPane());
             internalFrame.pack();
             internalFrame.setVisible(true);
@@ -138,6 +140,7 @@ public class Administracion extends javax.swing.JFrame {
         LBusqueNoAd = new javax.swing.JLabel();
         BtnDarBAja = new javax.swing.JButton();
         BrnCerrar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -500,6 +503,13 @@ public class Administracion extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Backup");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -522,7 +532,8 @@ public class Administracion extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BrnCerrar)
-                            .addComponent(BtnDarBAja))))
+                            .addComponent(BtnDarBAja)
+                            .addComponent(jButton1))))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -538,7 +549,9 @@ public class Administracion extends javax.swing.JFrame {
                             .addComponent(LfotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(49, 49, 49)
                         .addComponent(BtnDarBAja, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(140, 140, 140)
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton1)
+                        .addGap(77, 77, 77)
                         .addComponent(BrnCerrar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
@@ -599,6 +612,13 @@ public class Administracion extends javax.swing.JFrame {
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
         // TODO add your handling code here:
         //Verificar Contraseña
+        String contraseñaEncriptada;
+        String contraseñaEncriptadavieja = archivos.EncriptadoMD5(tfNContraseña.getText());
+        
+        if((!tfNContraseñaNueva.getText().equals(""))&cliente.getPassword().equals(contraseñaEncriptadavieja)){
+            contraseñaEncriptada = archivos.EncriptadoMD5(tfNContraseñaNueva.getText());
+            cliente.setPassword(contraseñaEncriptada);
+        }
         cliente.setDate(cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem());
         cliente.setEmail(tfNCorreo.getText());
         cliente.setCelNumber(Integer.parseInt(tfNTeléfono.getText()));
@@ -648,6 +668,7 @@ public class Administracion extends javax.swing.JFrame {
         try {
             String busqueda=metodos.busqueda(auxiliar.getUser());
             metodos.Eliminar(busqueda);
+            archivos.actualizarDescriptor(1, "");
             this.dispose();
             metodos.actualizarDescriptor(0, "");
         } catch (IOException ex) {
@@ -657,7 +678,7 @@ public class Administracion extends javax.swing.JFrame {
 
     private void BtnGuardarAdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarAdActionPerformed
         // TODO add your handling code here:
-         auxiliar.setDate(cbDía1.getSelectedItem()+"/"+cbMes1.getSelectedItem()+"/"+cbAño1.getSelectedItem());
+        auxiliar.setDate(cbDía1.getSelectedItem()+"/"+cbMes1.getSelectedItem()+"/"+cbAño1.getSelectedItem());
         auxiliar.setEmail(tfNCorreo1.getText());
         auxiliar.setCelNumber(Integer.parseInt(tfNTeléfono1.getText()));
         auxiliar.setDescription(TADescriptor1.getText());
@@ -671,6 +692,13 @@ public class Administracion extends javax.swing.JFrame {
             Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnGuardarAdActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Backup b=new Backup();
+        b.setUser(cliente);
+        b.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -739,6 +767,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbDía1;
     private javax.swing.JComboBox<String> cbMes;
     private javax.swing.JComboBox<String> cbMes1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
