@@ -144,9 +144,7 @@ public class Administracion extends javax.swing.JFrame {
         BtnBuscar = new javax.swing.JButton();
         TfBusquedaNoAd = new javax.swing.JTextField();
         LBusqueNoAd = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TablaBusquedaU = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         BtnDarBAja = new javax.swing.JButton();
         BrnCerrar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -468,39 +466,17 @@ public class Administracion extends javax.swing.JFrame {
 
         LBusqueNoAd.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
-        TablaBusquedaU.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "null", "Title 2"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true
-            };
+        jInternalFrame1.setVisible(true);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TablaBusquedaU.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaBusquedaUMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(TablaBusquedaU);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 416, Short.MAX_VALUE)
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 309, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 126, Short.MAX_VALUE)
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout PBusquedaLayout = new javax.swing.GroupLayout(PBusqueda);
@@ -511,6 +487,9 @@ public class Administracion extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PBusquedaLayout.createSequentialGroup()
+                        .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(PBusquedaLayout.createSequentialGroup()
                         .addComponent(TfBusquedaNoAd, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnBuscar)
@@ -518,15 +497,6 @@ public class Administracion extends javax.swing.JFrame {
                     .addGroup(PBusquedaLayout.createSequentialGroup()
                         .addComponent(LBusqueNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(PBusquedaLayout.createSequentialGroup()
-                .addGroup(PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PBusquedaLayout.createSequentialGroup()
-                        .addGap(295, 295, 295)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PBusquedaLayout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         PBusquedaLayout.setVerticalGroup(
             PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -538,10 +508,8 @@ public class Administracion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(LBusqueNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(341, Short.MAX_VALUE))
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(465, Short.MAX_VALUE))
         );
 
         TabOpciones.addTab("Busqueda", PBusqueda);
@@ -638,8 +606,8 @@ public class Administracion extends javax.swing.JFrame {
         }
         
         JButtonTableExample frame = new JButtonTableExample();
-        TablaBusquedaU=frame.gettable();
-        TabOpciones.add(frame);
+        jInternalFrame1.setContentPane(frame.getContentPane());
+       
         
        
 //        jPanel4.addComponent(frame);
@@ -771,43 +739,6 @@ public class Administracion extends javax.swing.JFrame {
         b.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void TablaBusquedaUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaBusquedaUMouseClicked
-        // TODO add your handling code here:
-////                int column = TablaBusquedaU.getColumnModel().getColumnIndexAtX(evt.getX());
-////        int row = evt.getY()/TablaBusquedaU.getRowHeight();
-////        
-////        if(row < TablaBusquedaU.getRowCount() && row >= 0 && column < TablaBusquedaU.getColumnCount() && column >= 0){
-////            Object value = TablaBusquedaU.getValueAt(row, column);
-////            if(value instanceof JButton){
-////                ((JButton)value).doClick();
-////                JButton boton = (JButton) value;
-////                 
-////                       
-////                if(boton.getText().equals("Buscar")){
-////                    BtnBuscar.addActionListener((ActionListener) this);
-////                    System.out.println("Click en el boton modificar");
-////                    //EVENTOS MODIFICAR
-////                }
-////                if(boton.getName().equals("e")){
-////                    JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
-////                    System.out.println("Click en el boton eliminar");
-////                    //EVENTOS ELIMINAR
-////                }
-////            }
-////            if(value instanceof JCheckBox){
-////                //((JCheckBox)value).doClick();
-////                JCheckBox ch = (JCheckBox)value;
-////                if(ch.isSelected()==true){
-////                    ch.setSelected(false);
-////                }
-////                if(ch.isSelected()==false){
-////                    ch.setSelected(true);
-////                }
-////                
-////            }
-////        }
-    }//GEN-LAST:event_TablaBusquedaUMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -857,6 +788,8 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton BtnGuardarAd;
     private javax.swing.JDesktopPane Escritorio;
+    private javax.swing.JDesktopPane Escritorio1;
+    private javax.swing.JDesktopPane Escritorio2;
     private javax.swing.JLabel LBusqueNoAd;
     private javax.swing.JLabel LModificarDatos;
     private javax.swing.JLabel LfotoPerfil;
@@ -866,7 +799,6 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JTextArea TADescriptor1;
     private javax.swing.JTabbedPane TabMantemiento;
     private javax.swing.JTabbedPane TabOpciones;
-    private javax.swing.JTable TablaBusquedaU;
     private javax.swing.JTextField TfBusquedaAd;
     private javax.swing.JTextField TfBusquedaNoAd;
     private javax.swing.JButton btnImagen;
@@ -877,6 +809,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbMes;
     private javax.swing.JComboBox<String> cbMes1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -884,8 +817,6 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lbCorreo;

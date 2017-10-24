@@ -40,7 +40,7 @@ public class JButtonTableExample extends JFrame {
     JScrollPane scroll = new JScrollPane(table);
     getContentPane().add(scroll);
     setSize(400, 100);
-    setVisible(true);
+    setVisible(false);
     
   }
   public JTable gettable() {

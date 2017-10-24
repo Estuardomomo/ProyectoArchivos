@@ -220,7 +220,7 @@ public class Registro extends javax.swing.JFrame {
              
     }//GEN-LAST:event_btnImagenActionPerformed
 
-    //Método que estable la seguridad de la contraseña
+    //Método que estable la seguridad de la contraseña - Usuario
     public Boolean contraseñaSegura(char[] caracteres)
     {
         //Atributos

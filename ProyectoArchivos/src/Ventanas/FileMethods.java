@@ -42,7 +42,7 @@ public class FileMethods {
     //Constructor
     public FileMethods()
     {}
-    //Cadena que hizo Jackie, creo que para verificar el formato del correo
+    //Verificar el formato del correo - Usuario/Registro.
     private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     static final Logger LOGGER = Logger.getAnonymousLogger();
@@ -62,7 +62,7 @@ public class FileMethods {
                 JOptionPane.showMessageDialog(null, ex.toString());
            }
     }
-    //Booleano que verifica el formato del correo
+    //Booleano que verifica el formato del correo -Usuario/Registro
     public boolean validateEmail(String email) {
  
         // Compiles the given regular expression into a pattern.
@@ -73,6 +73,7 @@ public class FileMethods {
         return matcher.matches();
  
     }
+    //Registro/Usuario.
     public boolean loginMethod(String nombre, String contraseña, User newUser)
     {
         File ArchivoMaestro = new File("c:\\MEIA\\Usuarios.txt");
@@ -170,7 +171,7 @@ public class FileMethods {
         }
         
     }
-    
+
    //Función que escribe en el archivo de usuarios 
     public void inscribirUsuario(String user, String name, String lastName, String password, String rol, String birthday, String email, int celnumber, String photoPath, String description, int status){
         File archivo = new File("c:\\MEIA\\Bitácora.txt");
