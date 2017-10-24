@@ -171,7 +171,7 @@ public class FileMethods {
         }
         
     }
-    
+
    //Función que escribe en el archivo de usuarios 
     public void inscribirUsuario(String user, String name, String lastName, String password, String rol, String birthday, String email, int celnumber, String photoPath, String description, int status){
         File archivo = new File("c:\\MEIA\\Bitácora.txt");
