@@ -41,6 +41,14 @@ public class Administracion extends javax.swing.JFrame {
     String descripción = "Añade una breve descripción";
     User auxiliar =new User();
     FileMethods archivos = new FileMethods();
+    String RutaU = "c:\\MEIA\\Usuarios.txt";
+    String RutaBU = "c:\\MEIA\\BitácoraUsuarios.txt";
+    String DescriptorU = "c:\\MEIA\\DescriptorU.txt";
+    String DescriptorBU = "c:\\MEIA\\DescriptorBU.txt";
+    String RutaA = "c:\\MEIA\\Lista_Amigos.txt";
+    String RutaBA = "c:\\MEIA\\BitácoraAmigos.txt";
+    String DescriptorA = "c:\\MEIA\\DescriptorA.txt";
+    String DescriptorBA = "c:\\MEIA\\DescriptorBA.txt";
     public Administracion() {
         initComponents();
         
@@ -145,6 +153,7 @@ public class Administracion extends javax.swing.JFrame {
         TfBusquedaNoAd = new javax.swing.JTextField();
         LBusqueNoAd = new javax.swing.JLabel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
+        jPanel4 = new javax.swing.JPanel();
         BtnDarBAja = new javax.swing.JButton();
         BrnCerrar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -202,7 +211,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addComponent(btnImagen)
                 .addGap(105, 105, 105)
                 .addComponent(BtnGuardar)
-                .addGap(0, 291, Short.MAX_VALUE))
+                .addGap(0, 490, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,7 +400,7 @@ public class Administracion extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnDarBajaAd)
                             .addComponent(BtnGuardarAd))
-                        .addContainerGap(168, Short.MAX_VALUE))
+                        .addContainerGap(367, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -476,7 +485,7 @@ public class Administracion extends javax.swing.JFrame {
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 178, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout PBusquedaLayout = new javax.swing.GroupLayout(PBusqueda);
@@ -487,14 +496,13 @@ public class Administracion extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PBusquedaLayout.createSequentialGroup()
-                        .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(PBusquedaLayout.createSequentialGroup()
-                        .addComponent(TfBusquedaNoAd, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                        .addComponent(TfBusquedaNoAd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnBuscar)
                         .addGap(61, 61, 61))
                     .addGroup(PBusquedaLayout.createSequentialGroup()
+                        .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(LBusqueNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -506,13 +514,26 @@ public class Administracion extends javax.swing.JFrame {
                     .addComponent(BtnBuscar)
                     .addComponent(TfBusquedaNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(LBusqueNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(465, Short.MAX_VALUE))
+                .addGroup(PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LBusqueNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(541, Short.MAX_VALUE))
         );
 
         TabOpciones.addTab("Busqueda", PBusqueda);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 834, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 801, Short.MAX_VALUE)
+        );
+
+        TabOpciones.addTab("Solicitudes", jPanel4);
 
         BtnDarBAja.setText("Dar de Baja");
         BtnDarBAja.addActionListener(new java.awt.event.ActionListener() {
@@ -593,6 +614,8 @@ public class Administracion extends javax.swing.JFrame {
         String busqueda=metodos.busqueda(TfBusquedaNoAd.getText());
         String[]nume=busqueda.split(Pattern.quote("|")) ;
         String nulo="";
+        Secuencial listaA =new Secuencial(RutaU);
+        busqueda=listaA.busqueda(true, TfBusquedaNoAd.getText(), RutaU, RutaBU);
         if(nume[0].equals(nulo))
         {
             LBusqueNoAd.setText("El usuario "+TfBusquedaNoAd.getText()+" no existe");
@@ -601,12 +624,12 @@ public class Administracion extends javax.swing.JFrame {
         else{
             LBusqueNoAd.setText("El usuario "+TfBusquedaNoAd.getText()+" si existe");
             
-            
+            JButtonTableExample frame = new JButtonTableExample(busqueda,1);
+        jInternalFrame1.setContentPane(frame.getContentPane());
 //             JOptionPane.showMessageDialog(null,"EL Usuario: "+LBusqueNoAd.getText()+" No esxiste", "Usuario o contraseña incorrecta", WIDTH);
         }
         
-        JButtonTableExample frame = new JButtonTableExample();
-        jInternalFrame1.setContentPane(frame.getContentPane());
+        
        
         
        
@@ -817,6 +840,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lbCorreo;
