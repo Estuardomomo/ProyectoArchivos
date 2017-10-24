@@ -5,7 +5,11 @@
  */
 package Ventanas;
 
+
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,6 +20,8 @@ import java.io.RandomAccessFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
@@ -138,6 +144,9 @@ public class Administracion extends javax.swing.JFrame {
         BtnBuscar = new javax.swing.JButton();
         TfBusquedaNoAd = new javax.swing.JTextField();
         LBusqueNoAd = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaBusquedaU = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
         BtnDarBAja = new javax.swing.JButton();
         BrnCerrar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -195,7 +204,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addComponent(btnImagen)
                 .addGap(105, 105, 105)
                 .addComponent(BtnGuardar)
-                .addGap(0, 172, Short.MAX_VALUE))
+                .addGap(0, 291, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,7 +393,7 @@ public class Administracion extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnDarBajaAd)
                             .addComponent(BtnGuardarAd))
-                        .addContainerGap(49, Short.MAX_VALUE))
+                        .addContainerGap(168, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -459,6 +468,41 @@ public class Administracion extends javax.swing.JFrame {
 
         LBusqueNoAd.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
+        TablaBusquedaU.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "null", "Title 2"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TablaBusquedaU.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaBusquedaUMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TablaBusquedaU);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 416, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 126, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout PBusquedaLayout = new javax.swing.GroupLayout(PBusqueda);
         PBusqueda.setLayout(PBusquedaLayout);
         PBusquedaLayout.setHorizontalGroup(
@@ -467,13 +511,22 @@ public class Administracion extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PBusquedaLayout.createSequentialGroup()
-                        .addComponent(LBusqueNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PBusquedaLayout.createSequentialGroup()
-                        .addComponent(TfBusquedaNoAd, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                        .addComponent(TfBusquedaNoAd, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnBuscar)
-                        .addGap(61, 61, 61))))
+                        .addGap(61, 61, 61))
+                    .addGroup(PBusquedaLayout.createSequentialGroup()
+                        .addComponent(LBusqueNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(PBusquedaLayout.createSequentialGroup()
+                .addGroup(PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PBusquedaLayout.createSequentialGroup()
+                        .addGap(295, 295, 295)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PBusquedaLayout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         PBusquedaLayout.setVerticalGroup(
             PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -484,7 +537,11 @@ public class Administracion extends javax.swing.JFrame {
                     .addComponent(TfBusquedaNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(LBusqueNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(314, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(341, Short.MAX_VALUE))
         );
 
         TabOpciones.addTab("Busqueda", PBusqueda);
@@ -518,7 +575,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 61, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -534,7 +591,7 @@ public class Administracion extends javax.swing.JFrame {
                             .addComponent(BrnCerrar)
                             .addComponent(BtnDarBAja)
                             .addComponent(jButton1))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -556,7 +613,7 @@ public class Administracion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -571,12 +628,25 @@ public class Administracion extends javax.swing.JFrame {
         if(nume[0].equals(nulo))
         {
             LBusqueNoAd.setText("El usuario "+TfBusquedaNoAd.getText()+" no existe");
+            
         }
         else{
             LBusqueNoAd.setText("El usuario "+TfBusquedaNoAd.getText()+" si existe");
+            
+            
 //             JOptionPane.showMessageDialog(null,"EL Usuario: "+LBusqueNoAd.getText()+" No esxiste", "Usuario o contraseña incorrecta", WIDTH);
         }
         
+        JButtonTableExample frame = new JButtonTableExample();
+        TablaBusquedaU=frame.gettable();
+        TabOpciones.add(frame);
+        
+       
+//        jPanel4.addComponent(frame);
+
+//       Tabla t=new Tabla();
+//       t.seeTable(TablaBusquedaU, BtnBuscar);
+//        
 
 
     }//GEN-LAST:event_BtnBuscarActionPerformed
@@ -701,6 +771,43 @@ public class Administracion extends javax.swing.JFrame {
         b.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void TablaBusquedaUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaBusquedaUMouseClicked
+        // TODO add your handling code here:
+////                int column = TablaBusquedaU.getColumnModel().getColumnIndexAtX(evt.getX());
+////        int row = evt.getY()/TablaBusquedaU.getRowHeight();
+////        
+////        if(row < TablaBusquedaU.getRowCount() && row >= 0 && column < TablaBusquedaU.getColumnCount() && column >= 0){
+////            Object value = TablaBusquedaU.getValueAt(row, column);
+////            if(value instanceof JButton){
+////                ((JButton)value).doClick();
+////                JButton boton = (JButton) value;
+////                 
+////                       
+////                if(boton.getText().equals("Buscar")){
+////                    BtnBuscar.addActionListener((ActionListener) this);
+////                    System.out.println("Click en el boton modificar");
+////                    //EVENTOS MODIFICAR
+////                }
+////                if(boton.getName().equals("e")){
+////                    JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
+////                    System.out.println("Click en el boton eliminar");
+////                    //EVENTOS ELIMINAR
+////                }
+////            }
+////            if(value instanceof JCheckBox){
+////                //((JCheckBox)value).doClick();
+////                JCheckBox ch = (JCheckBox)value;
+////                if(ch.isSelected()==true){
+////                    ch.setSelected(false);
+////                }
+////                if(ch.isSelected()==false){
+////                    ch.setSelected(true);
+////                }
+////                
+////            }
+////        }
+    }//GEN-LAST:event_TablaBusquedaUMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -759,6 +866,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JTextArea TADescriptor1;
     private javax.swing.JTabbedPane TabMantemiento;
     private javax.swing.JTabbedPane TabOpciones;
+    private javax.swing.JTable TablaBusquedaU;
     private javax.swing.JTextField TfBusquedaAd;
     private javax.swing.JTextField TfBusquedaNoAd;
     private javax.swing.JButton btnImagen;
@@ -776,6 +884,8 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lbCorreo;
