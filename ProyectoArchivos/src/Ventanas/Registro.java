@@ -7,6 +7,7 @@ package Ventanas;
 
 import java.awt.Color;
 import static java.awt.image.ImageObserver.WIDTH;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 public class Registro extends javax.swing.JFrame {
 
     //ATRIBUTOS
+    Secuencial prueba;
     User objUsuario = new User();
     FileMethods archivos = new FileMethods();
     String rutaUsuarios = "c:\\MEIA\\Usuarios.txt";
@@ -39,6 +41,7 @@ public class Registro extends javax.swing.JFrame {
         initComponents();
         archivos.createFolder("c:\\MEIA\\");
         archivos.createFolder("c:\\MEIA\\Fotografías");
+        prueba = new Secuencial("c:\\MEIA\\BitácoraAmigos.txt");
     }
 
     /**
@@ -382,15 +385,24 @@ public class Registro extends javax.swing.JFrame {
             //Crear bitácora
             archivos.createFile("c:\\MEIA\\Bitácora.txt");
             archivos.ActualizarDescriptor(0, tfNUsuario.getText());
+            Solicitud amistad = new Solicitud();
+            amistad.SetEmisor(tfNUsuario.getText());
+            amistad.SetReceptor(tfNUsuario.getText());
+            amistad.SetAceptado(0);
+            amistad.SetFecha((new Date()).toString());
+            amistad.SetStatus(1);
+            prueba.ActualizarDescriptor("c:\\MEIA\\DescriptorBA.txt", tfNUsuario.getText() );
                 //Si es el primer registro, rol administrador
                 if(archivos.fileSizeNotZero("c:\\MEIA\\Bitácora.txt"))
                 {
                     archivos.inscribirUsuario(tfNUsuario.getText(), tfNNombre.getText(),tfNApellido.getText(), contraseñaEncriptada, "0", cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem(),tfNCorreo.getText(), Integer.parseInt(tfNTeléfono.getText()), fotografía, descripción,1);
+                    prueba.Insertar("c:\\MEIA\\BitácoraAmigos.txt", new User(), amistad);
                 }
                 //Sino, rol de usuario común.
                 else
                 {
                     archivos.inscribirUsuario(tfNUsuario.getText(), tfNNombre.getText(),tfNApellido.getText(), contraseñaEncriptada, "1", cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem(),tfNCorreo.getText(), Integer.parseInt(tfNTeléfono.getText()), fotografía, descripción,1);
+                    prueba.Insertar("c:\\MEIA\\BitácoraAmigos.txt", new User(), amistad);
                 }
                 //Devolver valores por defecto.
                 tfNUsuario.setBackground(Color.white);

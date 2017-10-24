@@ -79,7 +79,7 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad)
             {
                 File archivo = new File(RutaBA);
                 FileWriter Escribir = new FileWriter(archivo, true);
-                Escribir.write(usuario.getRegistro());
+                Escribir.write(amistad.GetRegistro());
                 Escribir.close();
             }
             else
@@ -178,9 +178,9 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad)
             }
             else
             {
-                if(direccion.equals(DescriptorBU) || direccion.equals(DescriptorBA))
+                if(direccion.equals(DescriptorBU))
                 {
-                    String[] Registros = conteoRegistros(direccion).split(Pattern.quote("|"));
+                    String[] Registros = conteoRegistros(RutaBU).split("|");
                     Date Fecha = new Date();
                     RandomAccessFile raf = new RandomAccessFile(descriptor,"rw");
                     for (int j = 0; j < 6; j++) {
@@ -189,12 +189,26 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad)
                     raf.writeBytes("Modificado: "+Fecha+"\r\n");
                     raf.readLine();
                     raf.writeBytes("Registros_activos: "+Registros[0]+"\r\n");
-                    raf.writeBytes("Registros_inactivos: "+Registros[1] );
+                    raf.writeBytes("Registros_inactivos: "+Registros[2]+"\r\n");
+                    raf.close();
+                }
+                else if(direccion.equals(DescriptorBA))
+                {
+                    String[] Registros = conteoRegistros(RutaBU).split("|");
+                    Date Fecha = new Date();
+                    RandomAccessFile raf = new RandomAccessFile(descriptor,"rw");
+                    for (int j = 0; j < 6; j++) {
+                        raf.readLine();
+                    }
+                    raf.writeBytes("Modificado: "+Fecha+"\r\n");
+                    raf.readLine();
+                    raf.writeBytes("Registros_activos: "+Registros[0]+"\r\n");
+                    raf.writeBytes("Registros_inactivos: "+Registros[2]+"\r\n");
                     raf.close();
                 }
                 else
                 {
-                    String[] Registros = conteoRegistros(direccion).split(Pattern.quote("|"));
+                    String[] Registros = conteoRegistros(RutaBA).split("|");
                     Date Fecha = new Date();
                     RandomAccessFile raf = new RandomAccessFile(descriptor,"rw");
                     for (int j = 0; j < 6; j++) {
@@ -205,7 +219,7 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad)
                     raf.readLine();
                     raf.readLine();
                     raf.writeBytes("Registros_activos: "+Registros[0]+"\r\n");
-                    raf.writeBytes("Registros_inactivos: "+Registros[1] );
+                    raf.writeBytes("Registros_inactivos: "+Registros[2]+"\r\n");
                     raf.close();
                 }
                 
