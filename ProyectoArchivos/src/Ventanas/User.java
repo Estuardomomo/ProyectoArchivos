@@ -39,6 +39,7 @@ public class User {
         this.status = 1; //está vigente  
     }
 
+    //Métodos GET-SET
     public String getUser() {
         return user;
     }
@@ -138,13 +139,14 @@ public class User {
          registro+=celNumber +"|";
          rellenar(photoPath,50," ");
          rellenar(description,50,"#");
-         registro+=status + System.getProperty("line.separator");;
+         registro+=status + System.getProperty("line.separator");
          return registro;
     }
 
     public void setStatus(String registro) {
         this.registro = registro;
     }
+    //Procedimiento que establece un tamaño fijo para un atributo.
     public void rellenar(String var,int cantidad,String relleno) {
         registro+=var;
         for (int i = var.length(); i < cantidad; i++) {
