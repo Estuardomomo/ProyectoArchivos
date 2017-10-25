@@ -153,7 +153,10 @@ public class Administracion extends javax.swing.JFrame {
         TfBusquedaNoAd = new javax.swing.JTextField();
         LBusqueNoAd = new javax.swing.JLabel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
-        jPanel4 = new javax.swing.JPanel();
+        Solocitudes = new javax.swing.JPanel();
+        FrameSolicitudes = new javax.swing.JInternalFrame();
+        BtnSolicitud = new javax.swing.JButton();
+        BtnVerAmigos = new javax.swing.JButton();
         BtnDarBAja = new javax.swing.JButton();
         BrnCerrar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -211,7 +214,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addComponent(btnImagen)
                 .addGap(105, 105, 105)
                 .addComponent(BtnGuardar)
-                .addGap(0, 490, Short.MAX_VALUE))
+                .addGap(0, 504, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,7 +403,7 @@ public class Administracion extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnDarBajaAd)
                             .addComponent(BtnGuardarAd))
-                        .addContainerGap(367, Short.MAX_VALUE))
+                        .addContainerGap(381, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -485,7 +488,7 @@ public class Administracion extends javax.swing.JFrame {
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 178, Short.MAX_VALUE)
+            .addGap(0, 254, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout PBusquedaLayout = new javax.swing.GroupLayout(PBusqueda);
@@ -522,18 +525,66 @@ public class Administracion extends javax.swing.JFrame {
 
         TabOpciones.addTab("Busqueda", PBusqueda);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 834, Short.MAX_VALUE)
+        Solocitudes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CLicpanel(evt);
+            }
+        });
+
+        FrameSolicitudes.setVisible(true);
+
+        javax.swing.GroupLayout FrameSolicitudesLayout = new javax.swing.GroupLayout(FrameSolicitudes.getContentPane());
+        FrameSolicitudes.getContentPane().setLayout(FrameSolicitudesLayout);
+        FrameSolicitudesLayout.setHorizontalGroup(
+            FrameSolicitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 309, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 801, Short.MAX_VALUE)
+        FrameSolicitudesLayout.setVerticalGroup(
+            FrameSolicitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 254, Short.MAX_VALUE)
         );
 
-        TabOpciones.addTab("Solicitudes", jPanel4);
+        BtnSolicitud.setText("Solicitudes");
+        BtnSolicitud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSolicitudActionPerformed(evt);
+            }
+        });
+
+        BtnVerAmigos.setText("Amigos");
+        BtnVerAmigos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnVerAmigosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout SolocitudesLayout = new javax.swing.GroupLayout(Solocitudes);
+        Solocitudes.setLayout(SolocitudesLayout);
+        SolocitudesLayout.setHorizontalGroup(
+            SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SolocitudesLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(FrameSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addGroup(SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(BtnSolicitud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnVerAmigos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(377, Short.MAX_VALUE))
+        );
+        SolocitudesLayout.setVerticalGroup(
+            SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SolocitudesLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SolocitudesLayout.createSequentialGroup()
+                        .addComponent(BtnSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(BtnVerAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(FrameSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(551, Short.MAX_VALUE))
+        );
+
+        TabOpciones.addTab("Solicitudes", Solocitudes);
 
         BtnDarBAja.setText("Dar de Baja");
         BtnDarBAja.addActionListener(new java.awt.event.ActionListener() {
@@ -615,7 +666,7 @@ public class Administracion extends javax.swing.JFrame {
         String[]nume=busqueda.split(Pattern.quote("|")) ;
         String nulo="";
         Secuencial listaA =new Secuencial(RutaU);
-        busqueda=listaA.busqueda(true, TfBusquedaNoAd.getText(), RutaU, RutaBU);
+        busqueda=listaA.busqueda(true, TfBusquedaNoAd.getText(), RutaBU, RutaU);
         if(nume[0].equals(nulo))
         {
             LBusqueNoAd.setText("El usuario "+TfBusquedaNoAd.getText()+" no existe");
@@ -624,10 +675,11 @@ public class Administracion extends javax.swing.JFrame {
         else{
             LBusqueNoAd.setText("El usuario "+TfBusquedaNoAd.getText()+" si existe");
             
-            JButtonTableExample frame = new JButtonTableExample(busqueda,1);
-        jInternalFrame1.setContentPane(frame.getContentPane());
+            
 //             JOptionPane.showMessageDialog(null,"EL Usuario: "+LBusqueNoAd.getText()+" No esxiste", "Usuario o contraseña incorrecta", WIDTH);
         }
+        JButtonTableExample frame = new JButtonTableExample(busqueda,1,cliente);
+        jInternalFrame1.setContentPane(frame.getContentPane());
         
         
        
@@ -762,6 +814,37 @@ public class Administracion extends javax.swing.JFrame {
         b.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void CLicpanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CLicpanel
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_CLicpanel
+
+    private void BtnSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSolicitudActionPerformed
+        // TODO add your handling code here:
+        FileMethods metodos= new FileMethods();
+        String busqueda=metodos.busqueda(TfBusquedaNoAd.getText());
+        String[]nume=busqueda.split(Pattern.quote("|")) ;
+        String nulo="";
+        Secuencial listaA =new Secuencial(RutaBA);
+        busqueda=listaA.busqueda(true, cliente.getUser(), RutaBA, RutaA);
+        
+        JButtonTableExample frame = new JButtonTableExample(busqueda,2,cliente);
+        FrameSolicitudes.setContentPane(frame.getContentPane());
+    }//GEN-LAST:event_BtnSolicitudActionPerformed
+
+    private void BtnVerAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerAmigosActionPerformed
+        // TODO add your handling code here:
+        FileMethods metodos= new FileMethods();
+        String busqueda=metodos.busqueda(TfBusquedaNoAd.getText());
+        String[]nume=busqueda.split(Pattern.quote("|")) ;
+        String nulo="";
+        Secuencial listaA =new Secuencial(RutaBA);
+        busqueda=listaA.busqueda(true, cliente.getUser(), RutaBA, RutaA);
+        
+        JButtonTableExample frame = new JButtonTableExample(busqueda,3,cliente);
+        FrameSolicitudes.setContentPane(frame.getContentPane());
+    }//GEN-LAST:event_BtnVerAmigosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -810,14 +893,16 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JButton BtnDarBajaAd;
     private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton BtnGuardarAd;
+    private javax.swing.JButton BtnSolicitud;
+    private javax.swing.JButton BtnVerAmigos;
     private javax.swing.JDesktopPane Escritorio;
-    private javax.swing.JDesktopPane Escritorio1;
-    private javax.swing.JDesktopPane Escritorio2;
+    private javax.swing.JInternalFrame FrameSolicitudes;
     private javax.swing.JLabel LBusqueNoAd;
     private javax.swing.JLabel LModificarDatos;
     private javax.swing.JLabel LfotoPerfil;
     private javax.swing.JPanel PBusqueda;
     private javax.swing.JPanel PMantenimiento;
+    private javax.swing.JPanel Solocitudes;
     private javax.swing.JTextArea TADescriptor;
     private javax.swing.JTextArea TADescriptor1;
     private javax.swing.JTabbedPane TabMantemiento;
@@ -840,7 +925,6 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lbCorreo;

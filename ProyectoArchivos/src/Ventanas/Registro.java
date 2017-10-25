@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class Registro extends javax.swing.JFrame {
 
     //ATRIBUTOS
-    Secuencial prueba;
+    Secuencial objSecuencial;
     User objUsuario = new User();
     FileMethods archivos = new FileMethods();
     String rutaUsuarios = "c:\\MEIA\\Usuarios.txt";
@@ -41,7 +41,7 @@ public class Registro extends javax.swing.JFrame {
         initComponents();
         archivos.createFolder("c:\\MEIA\\");
         archivos.createFolder("c:\\MEIA\\Fotografías");
-        prueba = new Secuencial("c:\\MEIA\\BitácoraAmigos.txt");
+        objSecuencial = new Secuencial("c:\\MEIA\\BitácoraUsuarios.txt");
     }
 
     /**
@@ -383,48 +383,47 @@ public class Registro extends javax.swing.JFrame {
         if(nuevoUsuario && nombre && apellido && nuevaContraseña && fecha && correo && teléfono && Foto)
         {
             //Crear bitácora
-            archivos.createFile("c:\\MEIA\\Bitácora.txt");
-            archivos.ActualizarDescriptor(0, tfNUsuario.getText());
-            Solicitud amistad = new Solicitud();
-            amistad.SetEmisor(tfNUsuario.getText());
-            amistad.SetReceptor(tfNUsuario.getText());
-            amistad.SetAceptado(0);
-            amistad.SetFecha((new Date()).toString());
-            amistad.SetStatus(1);
-            prueba.ActualizarDescriptor("c:\\MEIA\\DescriptorBA.txt", tfNUsuario.getText() );
-                //Si es el primer registro, rol administrador
-                if(archivos.fileSizeNotZero("c:\\MEIA\\Bitácora.txt"))
-                {
-                    archivos.inscribirUsuario(tfNUsuario.getText(), tfNNombre.getText(),tfNApellido.getText(), contraseñaEncriptada, "0", cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem(),tfNCorreo.getText(), Integer.parseInt(tfNTeléfono.getText()), fotografía, descripción,1);
-                    prueba.Insertar("c:\\MEIA\\BitácoraAmigos.txt", new User(), amistad);
-                }
-                //Sino, rol de usuario común.
-                else
-                {
-                    archivos.inscribirUsuario(tfNUsuario.getText(), tfNNombre.getText(),tfNApellido.getText(), contraseñaEncriptada, "1", cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem(),tfNCorreo.getText(), Integer.parseInt(tfNTeléfono.getText()), fotografía, descripción,1);
-                    prueba.Insertar("c:\\MEIA\\BitácoraAmigos.txt", new User(), amistad);
-                }
-                //Devolver valores por defecto.
-                tfNUsuario.setBackground(Color.white);
-                tfNUsuario.setText("");
-                tfNNombre.setBackground(Color.white);
-                tfNNombre.setText("");
-                tfNApellido.setBackground(Color.white);
-                tfNApellido.setText("");
-                tfNContraseña.setBackground(Color.white);
-                tfNContraseña.setText("");
-                tfNCorreo.setBackground(Color.white);
-                tfNCorreo.setText("");
-                tfNTeléfono.setBackground(Color.white);
-                tfNTeléfono.setText("");
-                cbDía.setBackground(Color.white);
-                cbMes.setBackground(Color.white);
-                cbAño.setBackground(Color.white);
-                btnImagen.setBackground(Color.white);
-                fotografía = "";
-                Foto = false;
+            User NuevoUsuario = new User();
+            NuevoUsuario.setUser(tfNUsuario.getText());
+            NuevoUsuario.setName(tfNNombre.getText());
+            NuevoUsuario.setLastName(tfNApellido.getText());
+            NuevoUsuario.setPassword(contraseñaEncriptada);
+            if(archivos.fileSizeNotZero("c:\\MEIA\\BitácoraUsuarios.txt"))
+            {
+                NuevoUsuario.setRol("0");
             }
-        
+            else
+            {
+                NuevoUsuario.setRol("1");
+            }
+            NuevoUsuario.setDate(cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem());
+            NuevoUsuario.setEmail(tfNCorreo.getText());
+            NuevoUsuario.setCelNumber(Integer.parseInt(tfNTeléfono.getText()));
+            NuevoUsuario.setPhotoPath(fotografía);
+            NuevoUsuario.setDescription(descripción);
+            NuevoUsuario.setStatus(1);
+            objSecuencial.ActualizarDescriptor("c:\\MEIA\\DescriptorBU.txt", tfNUsuario.getText() );
+            objSecuencial.Insertar("c:\\MEIA\\BitácoraUsuarios.txt", NuevoUsuario, new Solicitud(), new Grupo());
+            //Devolver valores por defecto.
+            tfNUsuario.setBackground(Color.white);
+            tfNUsuario.setText("");
+            tfNNombre.setBackground(Color.white);
+            tfNNombre.setText("");
+            tfNApellido.setBackground(Color.white);
+            tfNApellido.setText("");
+            tfNContraseña.setBackground(Color.white);
+            tfNContraseña.setText("");
+            tfNCorreo.setBackground(Color.white);
+            tfNCorreo.setText("");
+            tfNTeléfono.setBackground(Color.white);
+            tfNTeléfono.setText("");
+            cbDía.setBackground(Color.white);
+            cbMes.setBackground(Color.white);
+            cbAño.setBackground(Color.white);
+            btnImagen.setBackground(Color.white);
+            fotografía = "";
+            Foto = false;
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     public void OcultarCerrar(boolean var) {                                            
@@ -464,6 +463,7 @@ public class Registro extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Registro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

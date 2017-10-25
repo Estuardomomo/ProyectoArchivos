@@ -79,7 +79,7 @@ public class FileMethods {
         File ArchivoMaestro = new File("c:\\MEIA\\Usuarios.txt");
         if(ArchivoMaestro.exists())
         {
-            if(loginMethodInterno(nombre,contraseña,"c:\\MEIA\\Bitácora.txt",newUser))
+            if(loginMethodInterno(nombre,contraseña,"c:\\MEIA\\BitácoraUsuarios.txt",newUser))
             {
                 return true;
             }
@@ -90,7 +90,7 @@ public class FileMethods {
         }
         else
         {
-            return loginMethodInterno(nombre,contraseña,"c:\\MEIA\\Bitácora.txt",newUser);
+            return loginMethodInterno(nombre,contraseña,"c:\\MEIA\\BitácoraUsuarios.txt",newUser);
         }
     }
     //Revisa que el usuario y contraseña ingresadas sean válidas.
