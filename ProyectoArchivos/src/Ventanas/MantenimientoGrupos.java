@@ -355,7 +355,7 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
     {
         cbGrupos.removeAllItems();
         cbGrupos2.removeAllItems();
-        String[] Datos = objSecuencial.busqueda(true, Usuario.getUser(), RutaBG, RutaG).split(Pattern.quote("|"));
+        String[] Datos = objSecuencial.busqueda(true, Usuario.getUser(), RutaBG, RutaG).split(Pattern.quote("|"));//todos lis grupos que creo usuario
         if(Datos[0] != "")
         {
             for (int i = 0; i < Datos.length -1; i++) {

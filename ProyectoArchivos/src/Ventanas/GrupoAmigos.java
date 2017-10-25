@@ -5,6 +5,7 @@
  */
 package Ventanas;
 
+import java.util.Date;
 import javax.swing.DefaultListModel;
 
 /**
@@ -22,8 +23,13 @@ public class GrupoAmigos extends javax.swing.JFrame {
     DefaultListModel integrantes = new DefaultListModel();
     DefaultListModel grupos = new DefaultListModel();
     //Secuencial secuencial = new Secuencial();
-    SecuencialIndizado secuencialIndizado = new SecuencialIndizado();
-    
+    SecuencialIndizado secuencialIndizado;
+    Secuencial secuencial;
+    String amigoSeleccionado;
+    String grupoSeleccionado;
+    Grupo objGrupo;
+    int numeroDeIntegrantes;
+    int contador;
     public GrupoAmigos() {
         initComponents();
     }
@@ -32,6 +38,8 @@ public class GrupoAmigos extends javax.swing.JFrame {
         this.usuario = usuario;
         MostrarGrupos();
         tfUsario.setText(usuario.getUser());
+        numeroDeIntegrantes = 0;
+        contador = 0;
     }
     private void AmigosDelUsuario(){
         
@@ -62,6 +70,11 @@ public class GrupoAmigos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        listAmigos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listAmigosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listAmigos);
 
         jScrollPane2.setViewportView(listIntegrantes);
@@ -72,13 +85,29 @@ public class GrupoAmigos extends javax.swing.JFrame {
 
         jLabel3.setText("Grupo Actual");
 
+        cbGrupoActual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbGrupoActualMouseClicked(evt);
+            }
+        });
+
         jLabel4.setText("Usuario:");
 
         tfUsario.setEnabled(false);
 
         jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Añadir amigo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Cerrar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +191,56 @@ public class GrupoAmigos extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
+//añadir amigo
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if (AñadirIntegrante()) {
+            if ((amigoSeleccionado != "" || amigoSeleccionado !=null) && (grupoSeleccionado != null || grupoSeleccionado != "")) {
+                secuencialIndizado.EscribirIndizado(SecuencialIndizado.GRUPOAMIGOS, FormatoDeData(usuario.getUser(),grupoSeleccionado, amigoSeleccionado));
+            }
+        }
+        else{
+            
+        }
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
+    private String FormatoDeData(String usuario, String grupo, String usuarioAmigo){
+        Date fecha = new Date();
+        return usuario + "|" + grupo + "|" + usuarioAmigo + "|" + fecha + "|" + 1;
+    }
+    
+    private void listAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listAmigosMouseClicked
+        // TODO add your handling code here:
+        amigoSeleccionado = listAmigos.getSelectedValue().toString();
+    }//GEN-LAST:event_listAmigosMouseClicked
+//eliminar amigo
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cbGrupoActualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbGrupoActualMouseClicked
+        // TODO add your handling code here:
+        grupoSeleccionado = cbGrupoActual.getSelectedItem().toString();
+    }//GEN-LAST:event_cbGrupoActualMouseClicked
+
+    private boolean AñadirIntegrante(){
+        objGrupo = secuencial.LeerGrupo(secuencial.busqueda(false, usuario.getUser() + "|" + grupoSeleccionado, "c:\\MEIA\\BitácoraGrupos.txt", "c:\\MEIA\\Grupos.txt"));
+        numeroDeIntegrantes = objGrupo.GetMiembros();
+        if(!(contador < numeroDeIntegrantes)) return false;
+        if (secuencialIndizado.BuscarAmigoEnGrupo(usuario.getUser(), grupoSeleccionado, amigoSeleccionado) != null) {
+            //busco el integrante y sino es null devuelve la línea del indice donde lo encontró
+            if (numeroDeIntegrantes > 0) {
+               
+                integrantes.add(++contador, amigoSeleccionado);
+                numeroDeIntegrantes--;
+            }
+            listIntegrantes.setModel(integrantes);
+        }
+        return false;
+    }
     private void MostrarGrupos(){
         for (int i = 0; i < grupos.getSize(); i++) {
             cbGrupoActual.addItem((String)grupos.getElementAt(i));
