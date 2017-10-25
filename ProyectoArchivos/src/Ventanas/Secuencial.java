@@ -646,4 +646,31 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
         }
         
     }
+     public Grupo LeerGrupo(String busqueda)
+    {
+        Grupo objGrupo = new Grupo();
+        String[]numeros = busqueda.split(Pattern.quote("|")) ;
+        File archivo = new File(numeros[0]);      
+        RandomAccessFile raf;
+        try {
+            raf = new RandomAccessFile(archivo,"rw");
+            raf.seek(Integer.parseInt(numeros[2]));
+            String Linea=raf.readLine();
+            raf.close();
+            String[] values = Linea.split(Pattern.quote("|"));
+            objGrupo.SetUsuario(values[0]);
+            objGrupo.SetNombre(values[1]);
+            objGrupo.SetDescripcion(values[2]);
+            objGrupo.SetMiembros(Integer.parseInt(values[3]));
+            objGrupo.SetFecha(values[4]);
+            objGrupo.SetStatus(Integer.parseInt(values[5]));
+            return objGrupo;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+            return objGrupo;
+        } catch (IOException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+            return objGrupo;
+        }
+    }
 }

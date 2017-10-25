@@ -160,6 +160,7 @@ public class Administracion extends javax.swing.JFrame {
         BtnDarBAja = new javax.swing.JButton();
         BrnCerrar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnGrupos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -488,7 +489,7 @@ public class Administracion extends javax.swing.JFrame {
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 254, Short.MAX_VALUE)
+            .addGap(0, 294, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout PBusquedaLayout = new javax.swing.GroupLayout(PBusqueda);
@@ -541,7 +542,7 @@ public class Administracion extends javax.swing.JFrame {
         );
         FrameSolicitudesLayout.setVerticalGroup(
             FrameSolicitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 254, Short.MAX_VALUE)
+            .addGap(0, 294, Short.MAX_VALUE)
         );
 
         BtnSolicitud.setText("Solicitudes");
@@ -607,6 +608,13 @@ public class Administracion extends javax.swing.JFrame {
             }
         });
 
+        btnGrupos.setText("Grupos");
+        btnGrupos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGruposActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -615,7 +623,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 20, Short.MAX_VALUE)
                         .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -629,9 +637,11 @@ public class Administracion extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BrnCerrar)
-                            .addComponent(BtnDarBAja)
-                            .addComponent(jButton1))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnGrupos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtnDarBAja, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -646,9 +656,11 @@ public class Administracion extends javax.swing.JFrame {
                             .addComponent(LfotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(49, 49, 49)
                         .addComponent(BtnDarBAja, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(jButton1)
-                        .addGap(77, 77, 77)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
                         .addComponent(BrnCerrar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
@@ -845,6 +857,12 @@ public class Administracion extends javax.swing.JFrame {
         FrameSolicitudes.setContentPane(frame.getContentPane());
     }//GEN-LAST:event_BtnVerAmigosActionPerformed
 
+    private void btnGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGruposActionPerformed
+        // Llamar al formulario de mantenimiento de grupos
+        MantenimientoGrupos MantenimientoGruposFrame  = new MantenimientoGrupos(cliente);
+        MantenimientoGruposFrame.setVisible(true);
+    }//GEN-LAST:event_btnGruposActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -909,6 +927,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JTabbedPane TabOpciones;
     private javax.swing.JTextField TfBusquedaAd;
     private javax.swing.JTextField TfBusquedaNoAd;
+    private javax.swing.JButton btnGrupos;
     private javax.swing.JButton btnImagen;
     private javax.swing.JComboBox<String> cbAño;
     private javax.swing.JComboBox<String> cbAño1;
