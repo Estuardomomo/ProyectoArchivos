@@ -859,8 +859,8 @@ public class Administracion extends javax.swing.JFrame {
 
     private void btnGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGruposActionPerformed
         // Llamar al formulario de mantenimiento de grupos
-        MantenimientoGrupos MantenimientoGruposFrame  = new MantenimientoGrupos(cliente);
-        MantenimientoGruposFrame.setVisible(true);
+        MantenimientoGrupos Frame  = new MantenimientoGrupos(cliente);
+        Frame.setVisible(true);
     }//GEN-LAST:event_btnGruposActionPerformed
 
     /**

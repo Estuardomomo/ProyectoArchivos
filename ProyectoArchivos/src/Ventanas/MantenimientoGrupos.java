@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -44,7 +43,6 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
     Boolean GNombre;
     Boolean Gintegrantes;
     Boolean GDescripcion;
-    DefaultListModel listaGrupos = new DefaultListModel();
     //Constructores
     public MantenimientoGrupos() {
         initComponents();
@@ -84,7 +82,6 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
         tfGNDescripcion = new javax.swing.JTextArea();
         btnGModificar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
-        AgregarAmigos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,12 +114,6 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
 
         jLabel5.setText("Modificar un grupo");
 
-        cbGrupos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbGruposActionPerformed(evt);
-            }
-        });
-
         jLabel6.setText("Núm miembros:");
 
         tfGNDescripcion.setColumns(20);
@@ -143,19 +134,21 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
             }
         });
 
-        AgregarAmigos.setText("Añadir integrantes");
-        AgregarAmigos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarAmigosActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbGrupos2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGEliminar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVolver))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -195,19 +188,7 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnGModificar)
-                                .addGap(39, 39, 39))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(AgregarAmigos)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbGrupos2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnGEliminar)))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnVolver)))
+                                .addGap(39, 39, 39)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -243,9 +224,7 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(cbGrupos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGEliminar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AgregarAmigos)
-                        .addGap(0, 43, Short.MAX_VALUE))
+                        .addContainerGap(30, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnVolver)
@@ -311,6 +290,7 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
                 Logger.getLogger(MantenimientoGrupos.class.getName()).log(Level.SEVERE, null, ex);
             }
             //Actualizar los combobox
+            cbGrupos2.remove(this);
             ActualizarOpciones();
         }
     }//GEN-LAST:event_btnGEliminarActionPerformed
@@ -340,29 +320,23 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void AgregarAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarAmigosActionPerformed
-        // TODO add your handling code here:
-        GrupoAmigos a = new GrupoAmigos(listaGrupos,Usuario);
-        a.setVisible(true);
-                
-    }//GEN-LAST:event_AgregarAmigosActionPerformed
-
-    private void cbGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGruposActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbGruposActionPerformed
-
     private void ActualizarOpciones()
     {
-        cbGrupos.removeAllItems();
-        cbGrupos2.removeAllItems();
-        String[] Datos = objSecuencial.busqueda(true, Usuario.getUser(), RutaBG, RutaG).split(Pattern.quote("|"));
-        if(Datos[0] != "")
+        try
         {
-            for (int i = 0; i < Datos.length -1; i++) {
+            cbGrupos.removeAllItems();
+            cbGrupos2.removeAllItems();
+        }catch(Exception e)
+        {
+            
+        }
+        String[] Datos = objSecuencial.busqueda(true, Usuario.getUser(), RutaBG, RutaG).split(Pattern.quote("|"));
+        if(!Datos[0].equals(""))
+        {
+            for (int i = 0; i < Datos.length; i++) {
                 String[] Grupos = Datos[i].split(Pattern.quote(","));
                 cbGrupos.addItem(Grupos[1]);
                 cbGrupos2.addItem(Grupos[1]);
-                listaGrupos.add(i,Grupos[1]);
             }
         }
     }
@@ -402,7 +376,6 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AgregarAmigos;
     private javax.swing.JButton btnGCrear;
     private javax.swing.JButton btnGEliminar;
     private javax.swing.JButton btnGModificar;
