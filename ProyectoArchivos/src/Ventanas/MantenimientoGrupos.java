@@ -50,10 +50,10 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
         initComponents();
     }
     
-    public MantenimientoGrupos(User uncliente) {
+    public void SetMantenimientoGrupos(User uncliente) {
         Usuario = uncliente;
         ActualizarOpciones();
-        initComponents();
+     
     }
 
     /**
@@ -117,12 +117,6 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
 
         jLabel5.setText("Modificar un grupo");
 
-        cbGrupos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbGruposActionPerformed(evt);
-            }
-        });
-
         jLabel6.setText("Núm miembros:");
 
         tfGNDescripcion.setColumns(20);
@@ -143,7 +137,7 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
             }
         });
 
-        AgregarAmigos.setText("Añadir integrantes");
+        AgregarAmigos.setText("Agregar amigos");
         AgregarAmigos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarAmigosActionPerformed(evt);
@@ -156,6 +150,18 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbGrupos2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnGEliminar))
+                            .addComponent(AgregarAmigos))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVolver))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -195,19 +201,7 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnGModificar)
-                                .addGap(39, 39, 39))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(AgregarAmigos)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbGrupos2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnGEliminar)))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnVolver)))
+                                .addGap(39, 39, 39)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -245,7 +239,7 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
                             .addComponent(btnGEliminar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(AgregarAmigos)
-                        .addGap(0, 43, Short.MAX_VALUE))
+                        .addContainerGap(29, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnVolver)
@@ -311,6 +305,7 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
                 Logger.getLogger(MantenimientoGrupos.class.getName()).log(Level.SEVERE, null, ex);
             }
             //Actualizar los combobox
+            cbGrupos2.remove(this);
             ActualizarOpciones();
         }
     }//GEN-LAST:event_btnGEliminarActionPerformed
@@ -342,23 +337,32 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
 
     private void AgregarAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarAmigosActionPerformed
         // TODO add your handling code here:
-        GrupoAmigos a = new GrupoAmigos(listaGrupos,Usuario);
+        GrupoAmigos a = new GrupoAmigos();
+        a.SetGrupoAmigos(listaGrupos,Usuario);
         a.setVisible(true);
-                
     }//GEN-LAST:event_AgregarAmigosActionPerformed
 
-    private void cbGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGruposActionPerformed
+                                               
+
+    private void cbGruposActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbGruposActionPerformed
+    }                                        
 
     private void ActualizarOpciones()
     {
-        cbGrupos.removeAllItems();
-        cbGrupos2.removeAllItems();
-        String[] Datos = objSecuencial.busqueda(true, Usuario.getUser(), RutaBG, RutaG).split(Pattern.quote("|"));//todos lis grupos que creo usuario
-        if(Datos[0] != "")
+        try
         {
-            for (int i = 0; i < Datos.length -1; i++) {
+            cbGrupos.removeAllItems();
+            cbGrupos2.removeAllItems();
+        }catch(Exception e)
+        {
+            
+        }
+        String[] Datos = objSecuencial.busqueda(true, Usuario.getUser(), RutaBG, RutaG).split(Pattern.quote("|"));
+        if(!Datos[0].equals(""))
+
+        {
+            for (int i = 0; i < Datos.length; i++) {
                 String[] Grupos = Datos[i].split(Pattern.quote(","));
                 cbGrupos.addItem(Grupos[1]);
                 cbGrupos2.addItem(Grupos[1]);

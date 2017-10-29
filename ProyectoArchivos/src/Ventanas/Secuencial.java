@@ -106,7 +106,7 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
             {
                 File archivo = new File(RutaBG);
                 FileWriter Escribir = new FileWriter(archivo, true);
-                Escribir.write(amistad.GetRegistro());
+                Escribir.write(group.GetRegistro());
                 Escribir.close();
             }
             else
@@ -115,11 +115,11 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
                 Metodos.createFile(RutaBG);
                 File archivo = new File(RutaBG);
                 FileWriter Escribir = new FileWriter(archivo, true);
-                Escribir.write(amistad.GetRegistro());
+                Escribir.write(group.GetRegistro());
                 Escribir.close();
                 ActualizarDescriptor(DescriptorG, "");
             }
-            ActualizarDescriptor(DescriptorBG, amistad.GetEmisor()); 
+            ActualizarDescriptor(DescriptorBG, group.GetUsuario()); 
         }
     }catch(IOException e){}
 }
@@ -315,17 +315,36 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
     //Función que devuelve la ruta y el número de linea donde se econtró la cadena
     public String busqueda(Boolean acumulativa, String cadena, String rutaBitacora, String rutaMaestro)
     {
-        //Primero buscamos en la bitácora
-        String Salida = busquedaInterna(acumulativa, rutaBitacora,cadena);
-        if( Salida != "|0")
+        String Salida = "";
+        if(acumulativa)
         {
-            return Salida;
+            String bitacora = busquedaInterna(acumulativa, rutaBitacora,cadena);
+            String Maestro = busquedaInterna(acumulativa, rutaMaestro,cadena);
+            if((bitacora.equals("|0")) & (Maestro.equals("|0")))
+            {
+                Salida = "|0";
+            }
+            if(bitacora != "|0")
+            {
+                Salida += bitacora;
+            }
+            if(Maestro != "|0")
+            {
+                Salida += Maestro;
+            }
         }
-        //Luego buscamos en los archivos maestros
-        Salida = busquedaInterna(acumulativa, rutaMaestro,cadena);
-        if(Salida != "|0")
+        else
         {
-            return Salida;
+            Salida = busquedaInterna(acumulativa, rutaBitacora,cadena);
+            if( Salida != "|0")
+            {
+                return Salida;
+            }
+            Salida = busquedaInterna(acumulativa, rutaMaestro,cadena);
+            if(Salida != "|0")
+            {
+                return Salida;
+            }
         }
         return Salida;
     }
@@ -494,7 +513,7 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
     }
 //REORGANIZAR=====================================================================================================================    
     //Reorganiza los archivos para la inserción.
-    private void reorganizar(int max, String rutaMaestro, String rutaBitacora )
+    public void reorganizar(int max, String rutaMaestro, String rutaBitacora )
     {
         File ArchivoMaestro = new File(rutaMaestro);
         File Bitácora = new File(rutaBitacora);

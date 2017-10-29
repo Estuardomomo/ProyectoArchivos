@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -24,7 +25,7 @@ public class SecuencialIndizado {
     public static final String GRUPOAMIGOS = "grupo_amigos.txt";
     private static final String RUTA_ABSOLUTA = "c:\\MEIA\\";
     private static final int INDICESIZE = 151; // 30,20,80,20,1
-    FileMethods archivos;
+    FileMethods archivos = new FileMethods();
     public String BuscarAmigoEnGrupo(String usuario, String grupo, String usuarioAmigo){
         if (usuario == "" || usuario == null)  return ""; //retorno cadena vacía
         if(grupo == "" || grupo == null) return "";
@@ -34,24 +35,24 @@ public class SecuencialIndizado {
         
         
     }
-    private String NuevoRegistroIndex(int numRegistro, String posicion, String llave, String siguiente, String estatus ){     
+    public String NuevoRegistroIndex(int numRegistro, String posicion, String llave, String siguiente, String estatus ){     
        //FORMATO: Registro|posicion|llave|siguiente|estado
        String registro = "";
-       Rellenar(Integer.toString(numRegistro),30,"#" );
-       Rellenar(posicion, 20, "#");
-       Rellenar(llave, 80, "#");
-       Rellenar(siguiente, 20, "#");
+       registro+=Rellenar(Integer.toString(numRegistro),30,"#" );
+       registro+=Rellenar(posicion, 20, "#");
+       registro+=Rellenar(llave, 80, "#");
+       registro+=Rellenar(siguiente, 20, "#");
        registro+=estatus + System.getProperty("line.separator");
        
        return registro;        
     }
-    private void Rellenar(String var,int cantidad,String relleno) {
+    private String Rellenar(String var,int cantidad,String relleno) {
         String registro = "";
         registro+=var;
         for (int i = var.length(); i < cantidad; i++) {
            registro+=relleno; 
         }
-        registro+="|"; 
+        return registro+="|"; 
     }
     
     private void CrearIndice(String fileName, String user){
@@ -112,7 +113,7 @@ public class SecuencialIndizado {
                             + "Modificado: " + fecha +"\r\n"
                             + "Separador: |\r\n"
                             + "No.Registros: 0\r\n"
-                            + "Máximo_Registros: 10");
+                            + "Máximo_Registros: 3");
                    
                     escritor.close();
                 
@@ -160,6 +161,7 @@ public class SecuencialIndizado {
             File descriptor = new File(RUTA_ABSOLUTA + DESCRIPTOR +  BLOQUE  +Integer.toString(count) + fileName);
             Date Fecha = new Date(); 
             RandomAccessFile raf = new RandomAccessFile(descriptor,"rw");
+            
             for (int j = 0; j < 4; j++) {
                    
                 raf.readLine();
@@ -185,29 +187,32 @@ public class SecuencialIndizado {
         File archivoIndice = new File(RUTA_ABSOLUTA + INDICE + fileName);
         if (!archivoIndice.exists()) {
             //no existe el índice entonces se crea el descriptorBloque y el indice
-            CrearIndice(fileName, datos.split("|")[0]);
-            try{
-                String llaveCompuesta = datos.split("|")[0]+ ","+datos.split("|")[1]+ ","+ datos.split("|")[2];
+            CrearIndice(fileName, datos.split(Pattern.quote("|"))[0]);
+        }
+             try{
+                String llaveCompuesta = datos.split(Pattern.quote("|"))[0]+ ","+datos.split(Pattern.quote("|"))[1]+ ","+ datos.split(Pattern.quote("|"))[2];
                 //1. validar que no exista otra clave igual
-                if (BuscarAmigoEnGrupo(datos.split("|")[0], datos.split("|")[1], datos.split("|")[2]) == "") 
+                if (BuscarAmigoEnGrupo(datos.split(Pattern.quote("|"))[0], datos.split(Pattern.quote("|"))[1], datos.split(Pattern.quote("|"))[2]) == "") 
                     return; //Lo debería ser booleano           
                 
                 //Suponiendo que la clave esté validada
                 //2. Se abre el descriptorBloque del indice de archivo 
                 //para ver el primer registro y el bloque actual
                 int primerRegistro = 0, numeroBloqueActual = 0;
-                File descriptorFile = new File(RUTA_ABSOLUTA + DESCRIPTOR + INDICE);
+                File descriptorFile = new File(RUTA_ABSOLUTA + DESCRIPTOR + INDICE + fileName);
                 RandomAccessFile descriptor = new RandomAccessFile(descriptorFile,"rw");
-                for (int i = 0; i < descriptor.length(); i++) {
-                    String linea = descriptor.readLine();
-                    if (linea.split(" ")[0] == "Registro_inicial:") {
-                        primerRegistro = Integer.parseInt(linea.split(" ")[1]);
-                        break;
+                String lineat = descriptor.readLine();
+                while(lineat!= null) {
+                    
+                    if (lineat.split(Pattern.quote(" "))[0].equals("Registro_inicial:")) {
+                        primerRegistro = Integer.parseInt(lineat.split(" ")[1]);
+                      
                     }
-                    if(linea.split(" ")[0] == "Bloque_actual:"){
-                        numeroBloqueActual = Integer.parseInt(linea.split(" ")[1]);
-                        break;
+                    if(lineat.split(Pattern.quote(" "))[0].equals("Bloque_actual:")){
+                        numeroBloqueActual = Integer.parseInt(lineat.split(Pattern.quote(" "))[1]);
+                       
                     }
+                    lineat = descriptor.readLine();
                 }
                 //cierro el descriptorBloque del índice
                 descriptor.close();
@@ -215,30 +220,32 @@ public class SecuencialIndizado {
                 //3. Se valida que exista el bloque actual, sino crearlo.
                 File archivoBloque = new File(RUTA_ABSOLUTA + BLOQUE  +Integer.toString(numeroBloqueActual) + fileName);
                 if (!archivoBloque.exists()) {
-                    CrearBloque(numeroBloqueActual, fileName, datos.split("|")[0]);
+                    CrearBloque(numeroBloqueActual, fileName, datos.split(Pattern.quote("|"))[0]);
                 }
                 //4. Abrir el descriptorBloque del bloque actual para 
                 //obtener el número máx. de registros por bloque, 
                 //número de registros 
                 int numeroRegistro =0, numeroMaximo = 0;
                 RandomAccessFile descriptorBloque = new RandomAccessFile(descriptorFile,"rw");
-                for (int i = 0; i < descriptorBloque.length(); i++) {
-                    String linea = descriptorBloque.readLine();
-                    if (linea.split(" ")[0] == "No.Registros:") {
-                        numeroRegistro = Integer.parseInt(linea.split(" ")[1]);
-                        break;
+                String lineaa = descriptorBloque.readLine();
+                while(lineaa!= null) {
+                    
+                    if (lineaa.split(Pattern.quote(" "))[0].equals( "No.Registros:")) {
+                        numeroRegistro = Integer.parseInt(lineaa.split(Pattern.quote(" "))[1]);
+                      
                     }
-                    if(linea.split(" ")[0] == "Máximo_Registros:"){
-                        numeroMaximo = Integer.parseInt(linea.split(" ")[1]);
-                        break;
+                    if(lineaa.split(Pattern.quote(" "))[0].equals("Máximo_Registros:")){
+                        numeroMaximo = Integer.parseInt(lineaa.split(Pattern.quote(" "))[1]);
+                        
                     }
+                    lineaa = descriptorBloque.readLine();
                 }
                 //cierro el descriptorBloque del bloque
                 descriptorBloque.close();
                 //validar que el bloque pueda seguir recibiendo registros, sino se crea uno nuevo
                 if (numeroRegistro >= numeroMaximo) {
                     numeroBloqueActual++;
-                    CrearBloque(numeroBloqueActual, fileName, datos.split("|")[0]);
+                    CrearBloque(numeroBloqueActual, fileName, datos.split(Pattern.quote("|"))[0]);
                     //el nuevo bloque no tiene ningún registro
                     numeroRegistro =0;
                 }
@@ -254,16 +261,16 @@ public class SecuencialIndizado {
                 bloque.close();
                 //5.2
                 //Se genera la clave para escibirla
-                String llaveAEscribir = datos.split("|")[0] + "," + datos.split("|")[1] + datos.split("|")[2];
+                String llaveAEscribir = datos.split(Pattern.quote("|"))[0] + "," + datos.split(Pattern.quote("|"))[1] + datos.split(Pattern.quote("|"))[2];
                 String escribirIndex = "";
                 String dataActualizada = "";
                 if (primerRegistro == 0) {
                     //Es el primer registro en el índice
-                    escribirIndex = NuevoRegistroIndex(1, Integer.toString(numeroBloqueActual) + "." + Integer.toString(numeroRegistro + 1), llaveAEscribir, "0", "1"  );
+                    escribirIndex = NuevoRegistroIndex(numeroRegistro +1, Integer.toString(numeroBloqueActual) + "." + Integer.toString(numeroRegistro + 1), llaveAEscribir, "0", "1"  );
                     indice.seek(indice.length());
                     indice.writeBytes(escribirIndex+"\r\n");
                     indice.close();
-                    primerRegistro++;
+                    primerRegistro = numeroRegistro++;
                 }
                 else{
                     int pivot = primerRegistro; 
@@ -272,10 +279,10 @@ public class SecuencialIndizado {
                     while(bandera){
                         indice.seek((nuevoRegistro-1)*INDICESIZE); //BUSCAR LA LInea DEL REGISTROsupuestamente el máximo de caracteres en el archivo es de 151
                         String linea = indice.readLine();
-                        String[] temporal = linea.split("|");
+                        String[] temporal = linea.split(Pattern.quote("|"));
                         //estamos en el primer registro y la calve es mayor
                         if (Integer.parseInt(temporal[3]) == 0 && llaveAEscribir.compareTo(temporal[2]) > 0) {
-                            escribirIndex = NuevoRegistroIndex((int)(indice.length()/INDICESIZE +1), Integer.toString(numeroBloqueActual)  +"." + Integer.toString(numeroRegistro + 1), llaveAEscribir,"0", "1");
+                            escribirIndex = NuevoRegistroIndex(numeroRegistro+1, Integer.toString(numeroBloqueActual)  +"." + Integer.toString(numeroRegistro + 1), llaveAEscribir,"0", "1");
                             //cambio apuntador
                             temporal[3] = Integer.toString((int)(indice.length() / INDICESIZE + 1));
                             for (int i = 0; i < temporal.length -1; i++) 
@@ -284,13 +291,13 @@ public class SecuencialIndizado {
                         }
                         //estamos en la posición del primer registro y la llave es menor
                         else if(nuevoRegistro == numeroRegistro && llaveAEscribir.compareTo(temporal[2]) <= 0 ){
-                            primerRegistro = (int)(indice.length() / INDICESIZE + 1); //le asignamos a "numeroRegistro" el valor de registro de la nueva llave
-                            escribirIndex = NuevoRegistroIndex((int)(indice.length() / INDICESIZE + 1),Integer.toString(numeroBloqueActual)  +"." + Integer.toString(numeroRegistro + 1), llaveAEscribir,temporal[0], "1"  );
+                            primerRegistro = numeroRegistro+1; //le asignamos a "numeroRegistro" el valor de registro de la nueva llave
+                            escribirIndex = NuevoRegistroIndex(numeroRegistro+1,Integer.toString(numeroBloqueActual)  +"." + Integer.toString(numeroRegistro + 1), llaveAEscribir,temporal[0], "1"  );
                             break;
                         }
                         //Se coloca en medio de dos llaves
                         else if(llaveAEscribir.compareTo(temporal[2]) <=0){
-                            escribirIndex = NuevoRegistroIndex((int)(indice.length() / INDICESIZE + 1),Integer.toString(numeroBloqueActual)  +"." + Integer.toString(numeroRegistro + 1), llaveAEscribir,Integer.toString(nuevoRegistro), "1" );
+                            escribirIndex = NuevoRegistroIndex(numeroRegistro + 1,Integer.toString(numeroBloqueActual)  +"." + Integer.toString(numeroRegistro + 1), llaveAEscribir,Integer.toString(nuevoRegistro), "1" );
                             //cambio el apuntador
                             temporal[3] = Integer.toString((int)(indice.length() / INDICESIZE + 1));
                             for (int i = 0; i < temporal.length -1; i++) 
@@ -311,14 +318,14 @@ public class SecuencialIndizado {
                     indice.close();
                 }
                 //Se actualiza los descriptores              
-                ActualizarDescriptorIndice(fileName, numeroBloqueActual, primerRegistro, null);
+                ActualizarDescriptorIndice(fileName, numeroBloqueActual, primerRegistro+1, null);
                 ActualizarDescriptorBloque(numeroBloqueActual,fileName, numeroRegistro+1, null);
             }
             catch (IOException  e){
                 
             }
          
-        }
+        
     }
     public String BuscarIndizado(String fileName, String usuario, String grupo, String usuarioAmigo ){
         try{
@@ -337,12 +344,12 @@ public class SecuencialIndizado {
                 RandomAccessFile indice = new RandomAccessFile(currentIndice, "rw");
                 while(true){
                     String linea = indice.readLine();
-                    String currentLlave = linea.split("|")[2];
-                    if (linea.split("|")[3].equals("0")) 
+                    String currentLlave = linea.split(Pattern.quote("|"))[2];
+                    if (linea.split(Pattern.quote("|"))[3].equals("0")) 
                         break;                    
                     if (currentLlave.equals(pivotLlave)) {
                         indice.close();
-                        if (linea.split("|")[4].equals("0")) //estado cero, no devuelvo nada
+                        if (linea.split(Pattern.quote("|"))[4].equals("0")) //estado cero, no devuelvo nada
                             return null;
                         return linea; //registro|posicion|llave|siguiente|estado
                             
@@ -379,7 +386,7 @@ public class SecuencialIndizado {
                     continue;
                 while(bloque.getFilePointer() != bloque.length()){
                     String linea = bloque.readLine();
-                    if (linea.split("|")[4].equals("0")) 
+                    if (linea.split(Pattern.quote("|"))[4].equals("0")) 
                         continue;
                     indiceTemporal.writeBytes(linea + "\r\n");
                     
@@ -441,7 +448,7 @@ public class SecuencialIndizado {
                     }
                 }
                 indiceDescriptor.close();
-                llaveDelParametro = datos.split("|")[0]+ datos.split("|")[1] + datos.split("|")[2];
+                llaveDelParametro = datos.split(Pattern.quote("|"))[0]+ datos.split(Pattern.quote("|"))[1] + datos.split(Pattern.quote("|"))[2];
                 //guardo el apuntador de la llave 
                 int pivot = primerRegistro; //newR
                 int current = primerRegistro; //lastR
@@ -453,7 +460,7 @@ public class SecuencialIndizado {
                     //me coloco sobre el registro que busco
                     indice.seek((pivot-1)* INDICESIZE);
                     //obtengo la llave
-                    String[] temporal = linea.split("|");
+                    String[] temporal = linea.split(Pattern.quote("|"));
                     llaveDelArchivo = temporal[2];
                     //validar si el registro tiene estado 0
                     if (temporal[4].equals("0")) {
@@ -471,11 +478,11 @@ public class SecuencialIndizado {
                         File currentBloque = new File(RUTA_ABSOLUTA + BLOQUE  + (temporal[1].split(".")[0]) + fileName);
                         RandomAccessFile bloque = new RandomAccessFile(currentBloque, "rw");
                         //me ubico en la posición correcta bloque
-                        bloque.seek(Integer.parseInt(temporal[2].split(".")[1]) -1 * INDICESIZE);
+                        bloque.seek(Integer.parseInt(temporal[2].split(Pattern.quote("."))[1]) -1 * INDICESIZE);
                         //escribo la data actualizada
                         bloque.writeBytes(datos);
                         //se actualiza el descriptor del archivo
-                        File currentBloqueDescriptor = new File(RUTA_ABSOLUTA +DESCRIPTOR +BLOQUE  + (temporal[1].split(".")[0]) + fileName);
+                        File currentBloqueDescriptor = new File(RUTA_ABSOLUTA +DESCRIPTOR +BLOQUE  + (temporal[1].split(Pattern.quote("."))[0]) + fileName);
                         RandomAccessFile bloqueDescriptor = new RandomAccessFile(currentBloqueDescriptor,"rw");
                         int numeroDeRegistros = 0;
                         while(bloqueDescriptor.getFilePointer() != bloqueDescriptor.length()){
@@ -487,13 +494,13 @@ public class SecuencialIndizado {
                         }
                         bloque.close();
                         bloqueDescriptor.close();
-                        ActualizarDescriptorBloque(Integer.parseInt(temporal[1].split(".")[0]),fileName, numeroDeRegistros-1, null);
+                        ActualizarDescriptorBloque(Integer.parseInt(temporal[1].split(Pattern.quote("."))[0]),fileName, numeroDeRegistros-1, null);
                         //2. verifico si se dio de baja los datos actualizados
                         //caso1: es el primer registro y se dio de baja. Cambio su apuntador numeroDeRegistro
-                        if (pivot == primerRegistro && datos.split("|")[4].equals("0")) 
+                        if (pivot == primerRegistro && datos.split(Pattern.quote("|"))[4].equals("0")) 
                             primerRegistro = Integer.parseInt(temporal[3]);
                         //caso2: se dio de baja pero no es el primer registro
-                        else if(datos.split("|")[4].equals("0")){
+                        else if(datos.split(Pattern.quote("|"))[4].equals("0")){
                             //Buscar el puntero de la llave que estoy usando
                             //Posicionarme en el indice en el registro anterior del registro que se dio de baja
                             //Guardo esa linea 
@@ -501,7 +508,7 @@ public class SecuencialIndizado {
                             //Se actualiza el índice, le mando los valores de la nueva linea y el apuntador obtenido al inicio
                             String puntero = temporal[3];
                             indice.seek((current-1)*INDICESIZE);
-                            temporal = indice.readLine().split("|");
+                            temporal = indice.readLine().split(Pattern.quote("|"));
                             indice.seek((current-1)*INDICESIZE);
                             indice.writeBytes(NuevoRegistroIndex(Integer.parseInt(temporal[0]),temporal[1], temporal[2], puntero, temporal[4]));
                         }

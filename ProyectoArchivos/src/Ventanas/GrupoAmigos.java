@@ -6,7 +6,9 @@
 package Ventanas;
 
 import java.util.Date;
+import java.util.regex.Pattern;
 import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 
 /**
  *
@@ -23,26 +25,42 @@ public class GrupoAmigos extends javax.swing.JFrame {
     DefaultListModel integrantes = new DefaultListModel();
     DefaultListModel grupos = new DefaultListModel();
     //Secuencial secuencial = new Secuencial();
-    SecuencialIndizado secuencialIndizado;
-    Secuencial secuencial;
-    String amigoSeleccionado;
+    SecuencialIndizado secuencialIndizado = new SecuencialIndizado();
+    Secuencial secuencial = new Secuencial("");
+    String amigoSeleccionado = "";
     String grupoSeleccionado;
     Grupo objGrupo;
     int numeroDeIntegrantes;
-    int contador;
+    String[] amigosDelUsuario;
+   
     public GrupoAmigos() {
         initComponents();
+        
     }
-    public GrupoAmigos(DefaultListModel grupos, User usuario){
+    public void SetGrupoAmigos(DefaultListModel grupos, User usuario){
         this.grupos = grupos;
         this.usuario = usuario;
         MostrarGrupos();
-        tfUsario.setText(usuario.getUser());
-        numeroDeIntegrantes = 0;
-        contador = 0;
+        this.tfUsario.setText(usuario.getUser());
+        
+        numeroDeIntegrantes = 0;        
+        
     }
     private void AmigosDelUsuario(){
-        
+        amigosDelUsuario = secuencial.busqueda(true, usuario.getUser(), secuencial.RutaBA, secuencial.RutaA).split(Pattern.quote("|"));
+        for (int i = 0; i < amigosDelUsuario.length; i++) {
+            String[] temp = amigosDelUsuario[i].split(Pattern.quote(","));
+            if (temp[2] != "0") {
+                if (usuario.getUser().equals(temp[0])) {
+                    amigos.add(i, temp[1]);
+                }
+                if (usuario.getUser().equals(temp[1])) {
+                    amigos.add(i, temp[0]);
+                }
+            }
+            
+        }
+        listAmigos.setModel(amigos);
     }
 
     /**
@@ -67,6 +85,9 @@ public class GrupoAmigos extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        tfNumeroIntegrantes = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +109,11 @@ public class GrupoAmigos extends javax.swing.JFrame {
         cbGrupoActual.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbGrupoActualMouseClicked(evt);
+            }
+        });
+        cbGrupoActual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbGrupoActualActionPerformed(evt);
             }
         });
 
@@ -116,39 +142,62 @@ public class GrupoAmigos extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Integrantes:");
+
+        tfNumeroIntegrantes.setEnabled(false);
+
+        jButton4.setText("j");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jButton1))
-                            .addComponent(jButton2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(34, 34, 34))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(cbGrupoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(55, 55, 55)
+                                .addComponent(jButton2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(64, 64, 64)
+                                .addComponent(jButton1))))
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbGrupoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tfUsario, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))))
+                        .addGap(19, 19, 19))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfNumeroIntegrantes, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 77, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
@@ -161,10 +210,12 @@ public class GrupoAmigos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(tfUsario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cbGrupoActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbGrupoActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(tfNumeroIntegrantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -172,12 +223,14 @@ public class GrupoAmigos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jButton4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1)
                         .addGap(44, 44, 44)))
                 .addGap(9, 9, 9)
@@ -194,13 +247,11 @@ public class GrupoAmigos extends javax.swing.JFrame {
 //añadir amigo
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if (AñadirIntegrante()) {
-            if ((amigoSeleccionado != "" || amigoSeleccionado !=null) && (grupoSeleccionado != null || grupoSeleccionado != "")) {
-                secuencialIndizado.EscribirIndizado(SecuencialIndizado.GRUPOAMIGOS, FormatoDeData(usuario.getUser(),grupoSeleccionado, amigoSeleccionado));
-            }
-        }
-        else{
-            
+       // AñadirIntegrante();
+        if ((amigoSeleccionado != "" || amigoSeleccionado !=null) && (grupoSeleccionado != null || grupoSeleccionado != "")) {
+            grupoSeleccionado = cbGrupoActual.getSelectedItem().toString();
+             secuencialIndizado.EscribirIndizado(SecuencialIndizado.GRUPOAMIGOS, FormatoDeData(usuario.getUser(),grupoSeleccionado, amigoSeleccionado));
+             AñadirIntegrante();
         }
         
         
@@ -208,38 +259,76 @@ public class GrupoAmigos extends javax.swing.JFrame {
 
     private String FormatoDeData(String usuario, String grupo, String usuarioAmigo){
         Date fecha = new Date();
-        return usuario + "|" + grupo + "|" + usuarioAmigo + "|" + fecha + "|" + 1;
+        return Rellenar(usuario,30,"#") +  Rellenar(grupo, 30, "#")  + Rellenar(usuarioAmigo,20,"#")  + fecha + "|" + 1;
     }
-    
+    private String Rellenar(String var,int cantidad,String relleno) {
+        String registro = "";
+        registro+=var;
+        for (int i = var.length(); i < cantidad; i++) {
+           registro+=relleno; 
+        }
+        return registro+="|"; 
+    }
     private void listAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listAmigosMouseClicked
         // TODO add your handling code here:
         amigoSeleccionado = listAmigos.getSelectedValue().toString();
+       
     }//GEN-LAST:event_listAmigosMouseClicked
 //eliminar amigo
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        grupoSeleccionado = cbGrupoActual.getSelectedItem().toString();
+        amigoSeleccionado = listIntegrantes.getSelectedValue().toString();
+      
+        secuencialIndizado.ActualizarIndizado(SecuencialIndizado.GRUPOAMIGOS, FormatoDeData(usuario.getUser(), grupoSeleccionado, amigoSeleccionado) + "|0");
+        integrantes.removeElement(amigoSeleccionado);
+        listIntegrantes.setModel(integrantes);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbGrupoActualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbGrupoActualMouseClicked
         // TODO add your handling code here:
         grupoSeleccionado = cbGrupoActual.getSelectedItem().toString();
-    }//GEN-LAST:event_cbGrupoActualMouseClicked
-
-    private boolean AñadirIntegrante(){
         objGrupo = secuencial.LeerGrupo(secuencial.busqueda(false, usuario.getUser() + "|" + grupoSeleccionado, "c:\\MEIA\\BitácoraGrupos.txt", "c:\\MEIA\\Grupos.txt"));
         numeroDeIntegrantes = objGrupo.GetMiembros();
-        if(!(contador < numeroDeIntegrantes)) return false;
-        if (secuencialIndizado.BuscarAmigoEnGrupo(usuario.getUser(), grupoSeleccionado, amigoSeleccionado) != null) {
-            //busco el integrante y sino es null devuelve la línea del indice donde lo encontró
-            if (numeroDeIntegrantes > 0) {
-               
-                integrantes.add(++contador, amigoSeleccionado);
-                numeroDeIntegrantes--;
-            }
-            listIntegrantes.setModel(integrantes);
+        tfNumeroIntegrantes.setText(Integer.toString(objGrupo.GetMiembros()));
+        AmigosDelUsuario();
+        
+    }//GEN-LAST:event_cbGrupoActualMouseClicked
+
+    private void cbGrupoActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGrupoActualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbGrupoActualActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        AmigosDelUsuario();
+        this.tfNumeroIntegrantes.setText(Integer.toString(numeroDeIntegrantes));
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void AñadirIntegrante(){
+        grupoSeleccionado = cbGrupoActual.getSelectedItem().toString();
+        objGrupo = secuencial.LeerGrupo(secuencial.busqueda(false, usuario.getUser() + "|" + grupoSeleccionado, "c:\\MEIA\\BitácoraGrupos.txt", "c:\\MEIA\\Grupos.txt"));
+        numeroDeIntegrantes = objGrupo.GetMiembros();
+        amigoSeleccionado = listAmigos.getSelectedValue().toString();
+        if (numeroDeIntegrantes == 0) {
+            //ntegrantes.add(0, amigoSeleccionado);
+            integrantes.addElement(amigoSeleccionado);
+            numeroDeIntegrantes++;
+        }else{
+            //integrantes.add(numeroDeIntegrantes, HEIGHT);
+            integrantes.addElement(amigoSeleccionado);
+            numeroDeIntegrantes++;
+          
         }
-        return false;
+        
+        
+             //Actualizar el archivo de grupos
+             //secuencial.Actualizar(usuario.getUser(), "ajdjfasd");
+             
+        listIntegrantes.setModel(integrantes);
+        this.tfNumeroIntegrantes.setText(Integer.toString(numeroDeIntegrantes));
+
+       
     }
     private void MostrarGrupos(){
         for (int i = 0; i < grupos.getSize(); i++) {
@@ -286,14 +375,17 @@ public class GrupoAmigos extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> listAmigos;
     private javax.swing.JList<String> listIntegrantes;
+    private javax.swing.JTextField tfNumeroIntegrantes;
     private javax.swing.JTextField tfUsario;
     // End of variables declaration//GEN-END:variables
 }
