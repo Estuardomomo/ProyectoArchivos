@@ -44,6 +44,8 @@ public Secuencial(String bitácora)
 {
     Metodos.createFile(bitácora);
 }
+public Secuencial()
+{}
 //Insertar=================================================================================================================================
 public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo group)
 {

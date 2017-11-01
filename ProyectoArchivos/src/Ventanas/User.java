@@ -5,7 +5,10 @@
  */
 package Ventanas;
 
-import java.util.Date;
+import static java.awt.image.ImageObserver.WIDTH;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -153,5 +156,80 @@ public class User {
            registro+=relleno; 
         }
         registro+="|"; 
+    }
+        //Verificar el formato del correo - Usuario/Registro.
+    private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        //Booleano que verifica el formato del correo -Usuario/Registro
+    public boolean validateEmail(String email) {
+ 
+        // Compiles the given regular expression into a pattern.
+        Pattern pattern = Pattern.compile(PATTERN_EMAIL);
+ 
+        // Match the given input against this pattern
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+ 
+    }
+        //Método que estable la seguridad de la contraseña - Usuario
+    public Boolean contraseñaSegura(char[] caracteres)
+    {
+        //Atributos
+        int puntaje;
+        int Mayúsculas = 0;
+        int Letras = 0;
+        int Números = 0;
+        int Símbolos = 0;
+        //Analizar la cadena ingresada
+        for(int i = 0; i < caracteres.length; i++)
+        {
+            //Si es letra o número
+            if(Character.isLetterOrDigit(caracteres[i]))
+            {
+              //Si es una letra
+              if(Character.isLetter(caracteres[i]))
+               {
+                  //Si es mayúscula
+                  if(Character.isUpperCase(caracteres[i]))
+                   {
+                     Mayúsculas++;
+                   }
+               Letras++;
+               }
+              //Si es un número
+                else if(Character.isDigit(caracteres[i]))
+                {
+                Números++;
+                }   
+            }
+            //Si es un símbolo
+            else
+            {
+                Símbolos++;
+            }
+        }
+        //Determinar el puntaje
+        puntaje = 3 * caracteres.length;
+        puntaje += (2 * Mayúsculas);
+        puntaje += 1 + Letras;
+        puntaje += 2 + Números;
+        puntaje += (Símbolos * (caracteres.length + 4));
+        if(Números == 0 && Símbolos == 0)
+        {
+            puntaje = puntaje - 6;
+        }
+        else if(Letras == 0 && Símbolos == 0)
+        {
+            puntaje = puntaje - 3;
+        }
+        if(puntaje <= 35)  
+        {
+            JOptionPane.showMessageDialog(null, "La contraseña es insegura o poco segura", "Error", WIDTH);
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

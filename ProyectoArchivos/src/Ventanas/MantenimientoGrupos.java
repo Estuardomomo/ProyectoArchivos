@@ -7,10 +7,7 @@ package Ventanas;
 
 import java.awt.Color;
 import static java.awt.image.ImageObserver.WIDTH;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;

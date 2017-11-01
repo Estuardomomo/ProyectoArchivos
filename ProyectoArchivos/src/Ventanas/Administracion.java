@@ -6,22 +6,12 @@
 package Ventanas;
 
 
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+
 import static java.awt.image.ImageObserver.WIDTH;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
@@ -36,7 +26,7 @@ public class Administracion extends javax.swing.JFrame {
      * Creates new form Administracion
      */
     User cliente =new User();
-    String rutaUsuarios = "c:\\MEIA\\Usuarios.txt";
+    Secuencial objSecuencial = new Secuencial();
     String fotografía;
     String descripción = "Añade una breve descripción";
     User auxiliar =new User();
@@ -690,7 +680,7 @@ public class Administracion extends javax.swing.JFrame {
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
         // TODO add your handling code here:
         FileMethods metodos= new FileMethods();
-        String busqueda=metodos.busqueda(TfBusquedaNoAd.getText());
+        String busqueda = objSecuencial.busqueda(false, TfBusquedaNoAd.getText(), RutaBU, RutaU);
         String[]nume=busqueda.split(Pattern.quote("|")) ;
         String nulo="";
         Secuencial listaA =new Secuencial(RutaU);
@@ -737,22 +727,22 @@ public class Administracion extends javax.swing.JFrame {
         // TODO add your handling code here:
          FileMethods metodos= new FileMethods();
         try {
-            Secuencial objSecuencial = new Secuencial("");
-            String[] Data = objSecuencial.busqueda(true, cliente.getUser(), RutaBA, RutaA).split(Pattern.quote("|"));
+            Secuencial SecuencialSalida = new Secuencial();
+            String[] Data = SecuencialSalida.busqueda(true, cliente.getUser(), RutaBA, RutaA).split(Pattern.quote("|"));
             if(!Data[0].equals(""))
             {
                 for (int i = 0; i < Data.length; i++) {
                     String[] atributos = Data[i].split(Pattern.quote(","));
-                    objSecuencial.Eliminar(objSecuencial.busqueda(false, atributos[0]+"|"+atributos[1], RutaBA, RutaA));
+                    SecuencialSalida.Eliminar(SecuencialSalida.busqueda(false, atributos[0]+"|"+atributos[1], RutaBA, RutaA));
                 }
             }
             String emergencia = cliente.getUser();
-            objSecuencial.Eliminar(objSecuencial.busqueda(false, cliente.getUser(), RutaBU, RutaU));
+            SecuencialSalida.Eliminar(SecuencialSalida.busqueda(false, cliente.getUser(), RutaBU, RutaU));
             this.dispose();
-            objSecuencial.ActualizarDescriptor(DescriptorBU, emergencia);
-            objSecuencial.ActualizarDescriptor(DescriptorU, emergencia);
-            objSecuencial.ActualizarDescriptor(DescriptorBA, emergencia);
-            objSecuencial.ActualizarDescriptor(DescriptorA, emergencia);
+            SecuencialSalida.ActualizarDescriptor(DescriptorBU, emergencia);
+            SecuencialSalida.ActualizarDescriptor(DescriptorU, emergencia);
+            SecuencialSalida.ActualizarDescriptor(DescriptorBA, emergencia);
+            SecuencialSalida.ActualizarDescriptor(DescriptorA, emergencia);
              // Jackie-9/10/2017
 //        String busqueda=metodos.busqueda(cliente.getRegistro());
         } catch (IOException ex) {
@@ -781,8 +771,8 @@ public class Administracion extends javax.swing.JFrame {
         cliente.setDescription(TADescriptor.getText());
         FileMethods metodos= new FileMethods();
         try {
-            String busqueda=metodos.busqueda(cliente.getUser());
-            metodos.Actualizar(busqueda,cliente.getRegistro());
+            String busqueda = objSecuencial.busqueda(false,cliente.getUser(), RutaBU, RutaU);
+            objSecuencial.Actualizar(busqueda,cliente.getRegistro());
             JOptionPane.showMessageDialog(null,"Datos Modificado", "Modificacion", WIDTH);
 //        String busqueda=metodos.busqueda(cliente.getRegistro());
         } catch (IOException ex) {
@@ -795,7 +785,7 @@ public class Administracion extends javax.swing.JFrame {
     private void BtnBuscarAdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarAdActionPerformed
         // TODO add your handling code here:
         FileMethods metodos= new FileMethods();
-        String busqueda=metodos.busqueda(TfBusquedaAd.getText());
+        String busqueda = objSecuencial.busqueda(false, TfBusquedaAd.getText(), RutaBU, RutaU);
         String[]nume=busqueda.split(Pattern.quote("|")) ;
         String nulo="";
         if(nume[0].equals(nulo))
@@ -803,7 +793,7 @@ public class Administracion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"El usuario "+TfBusquedaAd.getText()+" si existe", "Modificacion", WIDTH);
         }
         else{
-        auxiliar=metodos.readUser(busqueda);
+        auxiliar = objSecuencial.readUser(busqueda);
         BtnGuardarAd.setVisible(true);
         BtnDarBajaAd.setVisible(true);
         String[] nacimiento=auxiliar.getDate().split(Pattern.quote("/"));
@@ -822,11 +812,11 @@ public class Administracion extends javax.swing.JFrame {
         // TODO add your handling code here:
         FileMethods metodos= new FileMethods();
         try {
-            String busqueda=metodos.busqueda(auxiliar.getUser());
-            metodos.Eliminar(busqueda);
-            archivos.ActualizarDescriptor(1, "");
+            String busqueda = objSecuencial.busqueda(false, auxiliar.getUser(), RutaBU, RutaU);
+            objSecuencial.Eliminar(busqueda);
+            objSecuencial.ActualizarDescriptor(DescriptorU, "");
             this.dispose();
-            metodos.ActualizarDescriptor(0, "");
+            objSecuencial.ActualizarDescriptor(DescriptorBU, "");
         } catch (IOException ex) {
             Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -840,8 +830,8 @@ public class Administracion extends javax.swing.JFrame {
         auxiliar.setDescription(TADescriptor1.getText());
         FileMethods metodos= new FileMethods();
         try {
-            String busqueda=metodos.busqueda(auxiliar.getUser());
-            metodos.Actualizar(busqueda,auxiliar.getRegistro());
+            String busqueda= objSecuencial.busqueda(false, auxiliar.getUser(), RutaBU, RutaU);
+            objSecuencial.Actualizar(busqueda, auxiliar.getRegistro());
             JOptionPane.showMessageDialog(null,"Datos Modificado", "Modificacion", WIDTH);
 //        String busqueda=metodos.busqueda(cliente.getRegistro());
         } catch (IOException ex) {
@@ -864,7 +854,7 @@ public class Administracion extends javax.swing.JFrame {
     private void BtnSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSolicitudActionPerformed
         // TODO add your handling code here:
         FileMethods metodos= new FileMethods();
-        String busqueda=metodos.busqueda(TfBusquedaNoAd.getText());
+        String busqueda=objSecuencial.busqueda(false, TfBusquedaNoAd.getText(), RutaBU, RutaU);
         String[]nume=busqueda.split(Pattern.quote("|")) ;
         String nulo="";
         Secuencial listaA =new Secuencial(RutaBA);
@@ -877,7 +867,7 @@ public class Administracion extends javax.swing.JFrame {
     private void BtnVerAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerAmigosActionPerformed
         // TODO add your handling code here:
         FileMethods metodos= new FileMethods();
-        String busqueda=metodos.busqueda(TfBusquedaNoAd.getText());
+        String busqueda=objSecuencial.busqueda(false, TfBusquedaNoAd.getText(), RutaBU, RutaU);
         String[]nume=busqueda.split(Pattern.quote("|")) ;
         String nulo="";
         Secuencial listaA =new Secuencial(RutaBA);
