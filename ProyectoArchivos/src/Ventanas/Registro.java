@@ -6,8 +6,7 @@
 package Ventanas;
 
 import java.awt.Color;
-import static java.awt.image.ImageObserver.WIDTH;
-import javax.swing.JOptionPane;
+import java.io.File;
 
 /**
  *
@@ -16,9 +15,9 @@ import javax.swing.JOptionPane;
 public class Registro extends javax.swing.JFrame {
 
     //ATRIBUTOS
+    Secuencial objSecuencial;
     User objUsuario = new User();
     FileMethods archivos = new FileMethods();
-    String rutaUsuarios = "c:\\MEIA\\Usuarios.txt";
     String fotografía;
     String descripción = "Añade una breve descripción";
     String contraseñaEncriptada;
@@ -32,6 +31,10 @@ public class Registro extends javax.swing.JFrame {
     Boolean correo;
     Boolean teléfono;
     Boolean Foto = false;
+    String RutaU = "c:\\MEIA\\Usuarios.txt";
+    String RutaBU = "c:\\MEIA\\BitácoraUsuarios.txt";
+    String DescriptorU = "c:\\MEIA\\DescriptorU.txt";
+    String DescriptorBU = "c:\\MEIA\\DescriptorBU.txt";
     /**
      * Creates new form Registro
      */
@@ -39,6 +42,7 @@ public class Registro extends javax.swing.JFrame {
         initComponents();
         archivos.createFolder("c:\\MEIA\\");
         archivos.createFolder("c:\\MEIA\\Fotografías");
+        objSecuencial = new Secuencial("c:\\MEIA\\BitácoraUsuarios.txt");
     }
 
     /**
@@ -214,78 +218,19 @@ public class Registro extends javax.swing.JFrame {
        
         fotografía = archivos.fotoPerfil(this);
         if (archivos.CopiarUnArchivo(fotografía + "\\", "C:\\MEIA\\Fotografías\\")) {
+            File archivoOriginal = new File(fotografía); 
+            fotografía = "C:\\MEIA\\Fotografías\\" + archivoOriginal.getName();
             Foto = true;
         }
                  
              
     }//GEN-LAST:event_btnImagenActionPerformed
 
-    //Método que estable la seguridad de la contraseña
-    public Boolean contraseñaSegura(char[] caracteres)
-    {
-        //Atributos
-        int puntaje;
-        int Mayúsculas = 0;
-        int Letras = 0;
-        int Números = 0;
-        int Símbolos = 0;
-        //Analizar la cadena ingresada
-        for(int i = 0; i < caracteres.length; i++)
-        {
-            //Si es letra o número
-            if(Character.isLetterOrDigit(caracteres[i]))
-            {
-              //Si es una letra
-              if(Character.isLetter(caracteres[i]))
-               {
-                  //Si es mayúscula
-                  if(Character.isUpperCase(caracteres[i]))
-                   {
-                     Mayúsculas++;
-                   }
-               Letras++;
-               }
-              //Si es un número
-                else if(Character.isDigit(caracteres[i]))
-                {
-                Números++;
-                }   
-            }
-            //Si es un símbolo
-            else
-            {
-                Símbolos++;
-            }
-        }
-        //Determinar el puntaje
-        puntaje = 3 * caracteres.length;
-        puntaje += (2 * Mayúsculas);
-        puntaje += 1 + Letras;
-        puntaje += 2 + Números;
-        puntaje += (Símbolos * (caracteres.length + 4));
-        if(Números == 0 && Símbolos == 0)
-        {
-            puntaje = puntaje - 6;
-        }
-        else if(Letras == 0 && Símbolos == 0)
-        {
-            puntaje = puntaje - 3;
-        }
-        if(puntaje <= 35)  
-        {
-            JOptionPane.showMessageDialog(null, "La contraseña es insegura o poco segura", "Error", WIDTH);
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
     //BOTÓN REGISTRO
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         //Verificar nuevo Usuario
         //archivos.busqueda(tfNUsurario.getText()!= "|0")
-        if(archivos.busqueda(tfNUsuario.getText()) != "|0" || tfNUsuario.getText() == "")
+        if(objSecuencial.busqueda(false, tfNUsuario.getText(), RutaBU, RutaU) != "|0" || tfNUsuario.getText() == "")
         {
             nuevoUsuario = false;
             tfNUsuario.setBackground(Color.pink);
@@ -318,7 +263,7 @@ public class Registro extends javax.swing.JFrame {
             tfNApellido.setBackground(Color.green);
         }
         //Verificar Contraseña
-        if(tfNContraseña.getPassword().length ==0 || !contraseñaSegura(tfNContraseña.getPassword()))
+        if(tfNContraseña.getPassword().length ==0 || !objUsuario.contraseñaSegura(tfNContraseña.getPassword()))
         {
             nuevaContraseña = false;
             tfNContraseña.setBackground(Color.pink);
@@ -345,7 +290,7 @@ public class Registro extends javax.swing.JFrame {
             cbAño.setBackground(Color.green);
         }
         //Verificar correo electónico
-        if(tfNCorreo.getText().equals("") || !archivos.validateEmail(tfNCorreo.getText()))
+        if(tfNCorreo.getText().equals("") || !objUsuario.validateEmail(tfNCorreo.getText()))
         {
             correo = false;
             tfNCorreo.setBackground(Color.pink);
@@ -380,39 +325,47 @@ public class Registro extends javax.swing.JFrame {
         if(nuevoUsuario && nombre && apellido && nuevaContraseña && fecha && correo && teléfono && Foto)
         {
             //Crear bitácora
-            archivos.createFile("c:\\MEIA\\Bitácora.txt");
-            archivos.ActualizarDescriptor(0, tfNUsuario.getText());
-                //Si es el primer registro, rol administrador
-                if(archivos.fileSizeNotZero("c:\\MEIA\\Bitácora.txt"))
-                {
-                    archivos.inscribirUsuario(tfNUsuario.getText(), tfNNombre.getText(),tfNApellido.getText(), contraseñaEncriptada, "0", cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem(),tfNCorreo.getText(), Integer.parseInt(tfNTeléfono.getText()), fotografía, descripción,1);
-                }
-                //Sino, rol de usuario común.
-                else
-                {
-                    archivos.inscribirUsuario(tfNUsuario.getText(), tfNNombre.getText(),tfNApellido.getText(), contraseñaEncriptada, "1", cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem(),tfNCorreo.getText(), Integer.parseInt(tfNTeléfono.getText()), fotografía, descripción,1);
-                }
-                //Devolver valores por defecto.
-                tfNUsuario.setBackground(Color.white);
-                tfNUsuario.setText("");
-                tfNNombre.setBackground(Color.white);
-                tfNNombre.setText("");
-                tfNApellido.setBackground(Color.white);
-                tfNApellido.setText("");
-                tfNContraseña.setBackground(Color.white);
-                tfNContraseña.setText("");
-                tfNCorreo.setBackground(Color.white);
-                tfNCorreo.setText("");
-                tfNTeléfono.setBackground(Color.white);
-                tfNTeléfono.setText("");
-                cbDía.setBackground(Color.white);
-                cbMes.setBackground(Color.white);
-                cbAño.setBackground(Color.white);
-                btnImagen.setBackground(Color.white);
-                fotografía = "";
-                Foto = false;
+            User NuevoUsuario = new User();
+            NuevoUsuario.setUser(tfNUsuario.getText());
+            NuevoUsuario.setName(tfNNombre.getText());
+            NuevoUsuario.setLastName(tfNApellido.getText());
+            NuevoUsuario.setPassword(contraseñaEncriptada);
+            if(archivos.fileSizeNotZero("c:\\MEIA\\BitácoraUsuarios.txt"))
+            {
+                NuevoUsuario.setRol("0");
             }
-        
+            else
+            {
+                NuevoUsuario.setRol("1");
+            }
+            NuevoUsuario.setDate(cbDía.getSelectedItem()+"/"+cbMes.getSelectedItem()+"/"+cbAño.getSelectedItem());
+            NuevoUsuario.setEmail(tfNCorreo.getText());
+            NuevoUsuario.setCelNumber(Integer.parseInt(tfNTeléfono.getText()));
+            NuevoUsuario.setPhotoPath(fotografía);
+            NuevoUsuario.setDescription(descripción);
+            NuevoUsuario.setStatus(1);
+            objSecuencial.ActualizarDescriptor("c:\\MEIA\\DescriptorBU.txt", tfNUsuario.getText() );
+            objSecuencial.Insertar("c:\\MEIA\\BitácoraUsuarios.txt", NuevoUsuario, new Solicitud(), new Grupo(), new Mensaje());
+            //Devolver valores por defecto.
+            tfNUsuario.setBackground(Color.white);
+            tfNUsuario.setText("");
+            tfNNombre.setBackground(Color.white);
+            tfNNombre.setText("");
+            tfNApellido.setBackground(Color.white);
+            tfNApellido.setText("");
+            tfNContraseña.setBackground(Color.white);
+            tfNContraseña.setText("");
+            tfNCorreo.setBackground(Color.white);
+            tfNCorreo.setText("");
+            tfNTeléfono.setBackground(Color.white);
+            tfNTeléfono.setText("");
+            cbDía.setBackground(Color.white);
+            cbMes.setBackground(Color.white);
+            cbAño.setBackground(Color.white);
+            btnImagen.setBackground(Color.white);
+            fotografía = "";
+            Foto = false;
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     public void OcultarCerrar(boolean var) {                                            
@@ -452,6 +405,7 @@ public class Registro extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Registro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
