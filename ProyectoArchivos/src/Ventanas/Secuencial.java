@@ -389,7 +389,7 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
                         if(acumulativa)
                         {
                             //Si es acumulativa concatenar todos los resultados posibles.
-                            if((cadena.equals(newUser.getUser()) || cadena.equals(newUser.getName()) || cadena.equals(newUser.getLastName())) & !(newUser.getStatus()==0))
+                            if((cadena.equals(newUser.getUser()) | cadena.equals(newUser.getName()) | cadena.equals(newUser.getLastName())) & !(newUser.getStatus()==0))
                             {
                                 Salida += newUser.getUser() + "," + newUser.getName() + "," + newUser.getLastName() + "|";
                             }

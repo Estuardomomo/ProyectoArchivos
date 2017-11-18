@@ -73,7 +73,7 @@ public class JButtonTableExample extends JFrame {
     Secuencial metodos= new Secuencial(RutaBA);
     Object[][] filas = null;
     if(tabla==1){
-        filas =new Object[nume.length-1][4];
+        filas =new Object[nume.length][4];
      for (int j = 0; j < nume.length; j++) {
          String[] para=nume[j].split(Pattern.quote(","));
 //         String busqueda=metodos.busqueda(nume[j]);
