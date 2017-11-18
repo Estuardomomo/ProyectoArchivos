@@ -15,6 +15,7 @@ import java.io.RandomAccessFile;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,13 +40,19 @@ String RutaG = "c:\\MEIA\\Grupos.txt";
 String RutaBG = "c:\\MEIA\\BitácoraGrupos.txt";
 String DescriptorG = "c:\\MEIA\\DescriptorG.txt";
 String DescriptorBG = "c:\\MEIA\\DescriptorBG.txt";
+String RutaM = "c:\\MEIA\\Mensajes.txt";
+String RutaBM =  "c:\\MEIA\\BitácoraMensajes.txt";
+String DescriptorM = "c:\\MEIA\\DescriptorM.txt";
+String DescriptorBM = "c:\\MEIA\\DescriptorBM.txt";
 //Constructor
-public Secuencial(String bitácora)
+Secuencial(String bitácora)
 {
     Metodos.createFile(bitácora);
 }
+Secuencial()
+{}
 //Insertar=================================================================================================================================
-public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo group)
+public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo group, Mensaje publicacion)
 {
     try
     {
@@ -120,6 +127,30 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
                 ActualizarDescriptor(DescriptorG, "");
             }
             ActualizarDescriptor(DescriptorBG, group.GetUsuario()); 
+        }
+        else // Mensajes
+        {
+            int límite = maxRegistros(DescriptorBM);
+            String[] Registros = conteoRegistros(RutaBM).split(Pattern.quote("|"));
+            int cantidadRegistros = Integer.parseInt(Registros[0]) + Integer.parseInt(Registros[1]);
+            if(cantidadRegistros < límite)
+            {
+                File archivo = new File(RutaBM);
+                FileWriter Escribir = new FileWriter(archivo, true);
+                Escribir.write(publicacion.getRegistro());
+                Escribir.close();
+            }
+            else
+            {
+                reorganizar(límite, RutaM, RutaBM);
+                Metodos.createFile(RutaBM);
+                File archivo = new File(RutaBM);
+                FileWriter Escribir = new FileWriter(archivo, true);
+                Escribir.write(publicacion.getRegistro());
+                Escribir.close();
+                ActualizarDescriptor(DescriptorM, "");
+            }
+            ActualizarDescriptor(DescriptorBM, publicacion.getEmisor()); 
         }
     }catch(IOException e){}
 }
@@ -209,6 +240,14 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
                 {
                     escritor.write("Archivo: C://MEIA/Grupos.txt\r\nDescripción: Grupos_del_sistema.\r\nTipo: archivo_de_datos\r\nOrganización: Secuencial\r\nAutor: "+cadena+"\r\nCreado: "+fecha+"\r\nModificado: "+fecha+"\r\nSeparador_campos: |\r\nLlave: Usuario\r\nOrden: Ascendente\r\nRegistros_activos: 1\r\nRegistros_inactivos: 0");
                 }
+                else if(direccion.equals(DescriptorBM))
+                {
+                    escritor.write("Archivo: c:\\MEIA\\BitácoraMensajes.txt\r\nDescripción: Bitácora_de_mensajes\r\nTipo: archivo_de_datos\r\nOrganización: Apilo\r\nAutor: "+cadena+ "\r\nCreado: "+ fecha+ "\r\nModificado: "+fecha+"\r\nSeparador_campos: |\r\nRegistros_activos: 1\r\nRegistros_inactivos: 0\r\nRegistros_máximo: 3");
+                }
+                else // dirección iguala Descriptor Mensajes
+                {
+                    escritor.write("Archivo: C://MEIA/Mensajes.txt\r\nDescripción: Mensajes_del_sistema.\r\nTipo: archivo_de_datos\r\nOrganización: Secuencial\r\nAutor: "+cadena+"\r\nCreado: "+fecha+"\r\nModificado: "+fecha+"\r\nSeparador_campos: |\r\nLlave: emisor_receptor_fecha\r\nOrden: Ascendente\r\nRegistros_activos: 1\r\nRegistros_inactivos: 0");
+                }
                 escritor.close();
             }
             else
@@ -255,6 +294,20 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
                     raf.writeBytes("Registros_inactivos: "+Registros[2]+"\r\n");
                     raf.close();
                 }
+                else if(direccion.equals(DescriptorBM))
+                {
+                    String[] Registros = conteoRegistros(RutaBM).split("|");
+                    Date Fecha = new Date();
+                    RandomAccessFile raf = new RandomAccessFile(descriptor,"rw");
+                    for (int j = 0; j < 6; j++) {
+                        raf.readLine();
+                    }
+                    raf.writeBytes("Modificado: "+Fecha+"\r\n");
+                    raf.readLine();
+                    raf.writeBytes("Registros_activos: "+Registros[0]+"\r\n");
+                    raf.writeBytes("Registros_inactivos: "+Registros[2]+"\r\n");
+                    raf.close();
+                }
                 else if(direccion.equals(DescriptorU))
                 {
                     String[] Registros = conteoRegistros(RutaU).split("|");
@@ -290,6 +343,22 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
                 else if(direccion.equals(DescriptorG))
                 {
                     String[] Registros = conteoRegistros(RutaG).split("|");
+                    Date Fecha = new Date();
+                    RandomAccessFile raf = new RandomAccessFile(descriptor,"rw");
+                    for (int j = 0; j < 6; j++) {
+                        raf.readLine();
+                    }
+                    raf.writeBytes("Modificado: "+Fecha+"\r\n");
+                    raf.readLine();
+                    raf.readLine();
+                    raf.readLine();
+                    raf.writeBytes("Registros_activos: "+Registros[0]+"\r\n");
+                    raf.writeBytes("Registros_inactivos: "+Registros[2]+"\r\n");
+                    raf.close();
+                }
+                else if(direccion.equals(DescriptorM))
+                {
+                    String[] Registros = conteoRegistros(RutaM).split("|");
                     Date Fecha = new Date();
                     RandomAccessFile raf = new RandomAccessFile(descriptor,"rw");
                     for (int j = 0; j < 6; j++) {
@@ -438,7 +507,6 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
                        Equipo.SetMiembros(Integer.parseInt(values[3]));
                        Equipo.SetFecha(values[4]);
                        Equipo.SetStatus(Integer.parseInt(values[5]));
-                       
                        if(acumulativa)
                        {
                            if(cadena.equals(Equipo.GetUsuario()) & !(Equipo.GetStatus() == 0))
@@ -454,6 +522,33 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
                                Salida = ruta+"|" + LeerArchivo.getFilePointer()+"|"+númLinea;
                            }
                        }
+                    }
+                    //Si es una busqueda de mensajes
+                    else if(ruta.equals(RutaM) || ruta.equals(RutaBM))
+                    {
+                        Mensaje Publicacion = new Mensaje();
+                        values = Linea.split(Pattern.quote("|"));
+                        Publicacion.setEmisor(values[0]);
+                        Publicacion.setReceptor(values[1]);
+                        Publicacion.setFecha(values[2]);
+                        Publicacion.setMensaje(values[3]);
+                        Publicacion.setTipo(Integer.parseInt(values[4]));
+                        Publicacion.setStatus(Integer.parseInt(values[5]));
+                        if(acumulativa)
+                        {
+                            if((cadena.equals(Publicacion.getEmisor())|| cadena.equals(Publicacion.getReceptor())) & !(Publicacion.getStatus() == 0))
+                            {
+                                Salida += Publicacion.getEmisor() + "," + Publicacion.getReceptor() + "," + Publicacion.getFecha() + "," + Publicacion.getTipo() + "," + Publicacion.getMensaje() +  "|";
+                            }
+                        }
+                        else
+                        {
+                            String[] Llave = cadena.split(Pattern.quote("|"));
+                            if(Llave[0].equals(Publicacion.getEmisor()) & Llave[1].equals(Publicacion.getReceptor()) & Llave[2].equals(Publicacion.getFecha()) & !(Publicacion.getStatus() == 0))
+                            {
+                                Salida = ruta+"|" + LeerArchivo.getFilePointer()+"|"+númLinea;
+                            }
+                        }
                     }
                 }
                 númLinea=(int)LeerArchivo.getFilePointer();
@@ -537,7 +632,7 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
                 lector.close();
                 leerArchivo.close();
                 raf.close();
-                Path ruta = FileSystems.getDefault().getPath(rutaMaestro);
+                Path ruta = Paths.get(rutaMaestro);
                 Files.delete(ruta);
                 reorganizar(max, rutaMaestro, rutaBitacora);
             }catch(IOException ex){}
@@ -559,11 +654,15 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
                 String[] Datos = linea.split(Pattern.quote("|"));
                 if("1".equals(Datos[Datos.length - 1]))
                 {
-                    if(rutaMaestro.equals(RutaU))
+                    if(rutaMaestro.equals(RutaU)) //una llave
                     {
                         Colección += Datos[0] + "|";
                     }
-                    else
+                    else if(rutaMaestro.equals(RutaM)) //tres llaves
+                    {
+                        Colección += Datos[0]+Datos[1] + Datos[2] + "|";
+                    }
+                    else // dos llaves
                     {
                         Colección += Datos[0]+Datos[1] + "|";
                     }
@@ -607,26 +706,38 @@ public void Insertar(String rutaBitacora, User usuario, Solicitud amistad, Grupo
                 {
                     ActualizarDescriptor(DescriptorA,Registros[i]);
                 }
-                else
+                else if(rutaMaestro.equals(RutaG))
                 {
                     ActualizarDescriptor(DescriptorG, Registros[i]);
+                }
+                else
+                {
+                    ActualizarDescriptor(DescriptorM, Registros[i]);
                 }
                 lector.close();
                 leerArchivo.close();
             }
             escribir.close();
-            Path ruta = FileSystems.getDefault().getPath(rutaBitacora);
-            Files.delete(ruta);
+            Path rutab = Paths.get(rutaBitacora);
+            Files.delete(rutab);
+            Path rutac;
             if(rutaBitacora.equals(RutaBU))
             {
-            ruta = FileSystems.getDefault().getPath(DescriptorBU);
-            Files.delete(ruta);                
+                rutac = Paths.get(DescriptorBU);            
             }
             else if(rutaBitacora.equals(RutaBA))
             {
-                ruta = FileSystems.getDefault().getPath(DescriptorBA);
-                Files.delete(ruta);
+                rutac = Paths.get(DescriptorBA);
             }
+            else if(rutaBitacora.equals(RutaBG))
+            {
+                rutac = Paths.get(DescriptorBG);
+            }
+            else
+            {
+                rutac = Paths.get(DescriptorBM);
+            }
+            Files.delete(rutac);
         }
         catch(IOException e){}
         }

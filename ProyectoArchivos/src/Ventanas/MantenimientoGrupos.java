@@ -7,10 +7,7 @@ package Ventanas;
 
 import java.awt.Color;
 import static java.awt.image.ImageObserver.WIDTH;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -288,7 +285,7 @@ public class MantenimientoGrupos extends javax.swing.JFrame {
             objGrupo.SetDescripcion(tfGDescripcion.getText());
             objGrupo.SetMiembros(Integer.parseInt(tfGMiembros.getText()));
             objGrupo.SetFecha((new Date()).toString());
-            objSecuencial.Insertar(RutaBG, new User(), new Solicitud(), objGrupo);
+            objSecuencial.Insertar(RutaBG, new User(), new Solicitud(), objGrupo, new Mensaje());
         }
         //Actualizar los combobox.
         ActualizarOpciones();

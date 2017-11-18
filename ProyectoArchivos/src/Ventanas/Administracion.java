@@ -6,22 +6,14 @@
 package Ventanas;
 
 
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+
 import static java.awt.image.ImageObserver.WIDTH;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
@@ -36,11 +28,12 @@ public class Administracion extends javax.swing.JFrame {
      * Creates new form Administracion
      */
     User cliente =new User();
-    String rutaUsuarios = "c:\\MEIA\\Usuarios.txt";
+    User auxiliar =new User();
+    Secuencial objSecuencial = new Secuencial();
+    FileMethods archivos = new FileMethods();
+    Mensaje Publicacion = new Mensaje();
     String fotografía;
     String descripción = "Añade una breve descripción";
-    User auxiliar =new User();
-    FileMethods archivos = new FileMethods();
     String RutaU = "c:\\MEIA\\Usuarios.txt";
     String RutaBU = "c:\\MEIA\\BitácoraUsuarios.txt";
     String DescriptorU = "c:\\MEIA\\DescriptorU.txt";
@@ -53,6 +46,10 @@ public class Administracion extends javax.swing.JFrame {
     String RutaBG = "c:\\MEIA\\BitácoraGrupos.txt";
     String DescriptorG = "c:\\MEIA\\DescriptorG.txt";
     String DescriptorBG = "c:\\MEIA\\DescriptorBG.txt";
+    String RutaM = "c:\\MEIA\\Mensajes.txt";
+    String RutaBM =  "c:\\MEIA\\BitácoraMensajes.txt";
+    String DescriptorM = "c:\\MEIA\\DescriptorM.txt";
+    String DescriptorBM = "c:\\MEIA\\DescriptorBM.txt";
     public Administracion() {
         initComponents();
         
@@ -106,7 +103,6 @@ public class Administracion extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         LfotoPerfil = new javax.swing.JLabel();
         TabOpciones = new javax.swing.JTabbedPane();
         PMantenimiento = new javax.swing.JPanel();
@@ -161,6 +157,31 @@ public class Administracion extends javax.swing.JFrame {
         FrameSolicitudes = new javax.swing.JInternalFrame();
         BtnSolicitud = new javax.swing.JButton();
         BtnVerAmigos = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        cbMAmigos2 = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnMActualizar = new javax.swing.JButton();
+        cbMAmigos = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tfNMensaje = new javax.swing.JTextArea();
+        cbTipo = new javax.swing.JComboBox<>();
+        btnEnviar = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tfPublico = new javax.swing.JTextArea();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tfPrivado = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        tfMEmisor = new javax.swing.JTextField();
+        tfMReceptor = new javax.swing.JTextField();
+        tfMFecha = new javax.swing.JTextField();
+        btnMEliminar = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         BtnDarBAja = new javax.swing.JButton();
         BrnCerrar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -252,10 +273,6 @@ public class Administracion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(TfBusquedaAd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnBuscarAd))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbNContraseña1)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -284,9 +301,14 @@ public class Administracion extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnDarBajaAd)
                             .addComponent(BtnGuardarAd))
-                        .addContainerGap(381, Short.MAX_VALUE))
+                        .addContainerGap(240, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(TfBusquedaAd, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtnBuscarAd))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -384,7 +406,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addComponent(btnImagen)
                 .addGap(105, 105, 105)
                 .addComponent(BtnGuardar)
-                .addGap(0, 504, Short.MAX_VALUE))
+                .addGap(0, 363, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -490,11 +512,11 @@ public class Administracion extends javax.swing.JFrame {
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 309, Short.MAX_VALUE)
+            .addGap(0, 303, Short.MAX_VALUE)
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 338, Short.MAX_VALUE)
+            .addGap(0, 1096, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout PBusquedaLayout = new javax.swing.GroupLayout(PBusqueda);
@@ -505,15 +527,14 @@ public class Administracion extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PBusquedaLayout.createSequentialGroup()
-                        .addComponent(TfBusquedaNoAd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnBuscar)
-                        .addGap(61, 61, 61))
+                        .addComponent(TfBusquedaNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnBuscar))
                     .addGroup(PBusquedaLayout.createSequentialGroup()
                         .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LBusqueNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LBusqueNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PBusquedaLayout.setVerticalGroup(
             PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -521,12 +542,16 @@ public class Administracion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnBuscar)
-                    .addComponent(TfBusquedaNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(TfBusquedaNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LBusqueNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(541, Short.MAX_VALUE))
+                    .addGroup(PBusquedaLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(LBusqueNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PBusquedaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))))
         );
 
         TabOpciones.addTab("Busqueda", PBusqueda);
@@ -543,11 +568,11 @@ public class Administracion extends javax.swing.JFrame {
         FrameSolicitudes.getContentPane().setLayout(FrameSolicitudesLayout);
         FrameSolicitudesLayout.setHorizontalGroup(
             FrameSolicitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 309, Short.MAX_VALUE)
+            .addGap(0, 310, Short.MAX_VALUE)
         );
         FrameSolicitudesLayout.setVerticalGroup(
             FrameSolicitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 338, Short.MAX_VALUE)
+            .addGap(0, 1138, Short.MAX_VALUE)
         );
 
         BtnSolicitud.setText("Solicitudes");
@@ -569,28 +594,203 @@ public class Administracion extends javax.swing.JFrame {
         SolocitudesLayout.setHorizontalGroup(
             SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SolocitudesLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(25, 25, 25)
                 .addComponent(FrameSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(37, 37, 37)
                 .addGroup(SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(BtnSolicitud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BtnVerAmigos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(377, Short.MAX_VALUE))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
         SolocitudesLayout.setVerticalGroup(
             SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SolocitudesLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
                 .addGroup(SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SolocitudesLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
                         .addComponent(BtnSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(BtnVerAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(FrameSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(551, Short.MAX_VALUE))
+                    .addGroup(SolocitudesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(FrameSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         TabOpciones.addTab("Solicitudes", Solocitudes);
+
+        jLabel5.setFont(new java.awt.Font("Broadway", 3, 14)); // NOI18N
+        jLabel5.setText("MENSAJES PUBLICOS:");
+
+        jLabel6.setFont(new java.awt.Font("Broadway", 3, 14)); // NOI18N
+        jLabel6.setText("MENSAJES PRIVADOS:");
+
+        jLabel7.setFont(new java.awt.Font("Broadway", 3, 14)); // NOI18N
+        jLabel7.setText("ESCRIBIR MENSAJE:");
+
+        jLabel2.setText("Para:");
+
+        btnMActualizar.setText("Actualizar Mensajes");
+        btnMActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMActualizarActionPerformed(evt);
+            }
+        });
+
+        tfNMensaje.setColumns(20);
+        tfNMensaje.setRows(5);
+        jScrollPane1.setViewportView(tfNMensaje);
+
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Público", "Privado" }));
+
+        btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
+
+        tfPublico.setColumns(20);
+        tfPublico.setRows(5);
+        jScrollPane5.setViewportView(tfPublico);
+
+        jLabel8.setFont(new java.awt.Font("Broadway", 3, 14)); // NOI18N
+        jLabel8.setText("ELIMINAR MENSAJE:");
+
+        tfPrivado.setColumns(20);
+        tfPrivado.setRows(5);
+        jScrollPane6.setViewportView(tfPrivado);
+
+        jLabel9.setText("Emisor:");
+
+        jLabel10.setText("Receptor:");
+
+        jLabel11.setText("Fecha & Hora");
+
+        btnMEliminar.setText("Eliminar");
+        btnMEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMEliminarActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Actualizar Amigos");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbMAmigos2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                            .addComponent(jScrollPane6))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel8)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnMActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbMAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEnviar)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9))
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfMEmisor, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                    .addComponent(tfMReceptor)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnMEliminar)
+                                    .addComponent(tfMFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cbMAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEnviar)
+                    .addComponent(jLabel9)
+                    .addComponent(tfMEmisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(tfMReceptor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(tfMFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMEliminar)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(btnMActualizar)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbMAmigos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+
+        TabOpciones.addTab("Mensajes", jPanel4);
 
         BtnDarBAja.setText("Dar de Baja");
         BtnDarBAja.addActionListener(new java.awt.event.ActionListener() {
@@ -634,41 +834,32 @@ public class Administracion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 20, Short.MAX_VALUE)
-                        .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)))
+                    .addComponent(jLabel1)
+                    .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BrnCerrar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGrupos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnDarBAja, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BrnCerrar)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnGrupos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BtnDarBAja, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LfotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addGap(16, 16, 16)
+                        .addComponent(LfotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2))
-                            .addComponent(LfotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(12, 12, 12)
+                        .addComponent(LfotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BtnDarBAja, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -678,10 +869,8 @@ public class Administracion extends javax.swing.JFrame {
                         .addComponent(btnGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(BrnCerrar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         pack();
@@ -690,7 +879,7 @@ public class Administracion extends javax.swing.JFrame {
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
         // TODO add your handling code here:
         FileMethods metodos= new FileMethods();
-        String busqueda=metodos.busqueda(TfBusquedaNoAd.getText());
+        String busqueda = objSecuencial.busqueda(false, TfBusquedaNoAd.getText(), RutaBU, RutaU);
         String[]nume=busqueda.split(Pattern.quote("|")) ;
         String nulo="";
         Secuencial listaA =new Secuencial(RutaU);
@@ -737,22 +926,22 @@ public class Administracion extends javax.swing.JFrame {
         // TODO add your handling code here:
          FileMethods metodos= new FileMethods();
         try {
-            Secuencial objSecuencial = new Secuencial("");
-            String[] Data = objSecuencial.busqueda(true, cliente.getUser(), RutaBA, RutaA).split(Pattern.quote("|"));
+            Secuencial SecuencialSalida = new Secuencial();
+            String[] Data = SecuencialSalida.busqueda(true, cliente.getUser(), RutaBA, RutaA).split(Pattern.quote("|"));
             if(!Data[0].equals(""))
             {
                 for (int i = 0; i < Data.length; i++) {
                     String[] atributos = Data[i].split(Pattern.quote(","));
-                    objSecuencial.Eliminar(objSecuencial.busqueda(false, atributos[0]+"|"+atributos[1], RutaBA, RutaA));
+                    SecuencialSalida.Eliminar(SecuencialSalida.busqueda(false, atributos[0]+"|"+atributos[1], RutaBA, RutaA));
                 }
             }
             String emergencia = cliente.getUser();
-            objSecuencial.Eliminar(objSecuencial.busqueda(false, cliente.getUser(), RutaBU, RutaU));
+            SecuencialSalida.Eliminar(SecuencialSalida.busqueda(false, cliente.getUser(), RutaBU, RutaU));
             this.dispose();
-            objSecuencial.ActualizarDescriptor(DescriptorBU, emergencia);
-            objSecuencial.ActualizarDescriptor(DescriptorU, emergencia);
-            objSecuencial.ActualizarDescriptor(DescriptorBA, emergencia);
-            objSecuencial.ActualizarDescriptor(DescriptorA, emergencia);
+            SecuencialSalida.ActualizarDescriptor(DescriptorBU, emergencia);
+            SecuencialSalida.ActualizarDescriptor(DescriptorU, emergencia);
+            SecuencialSalida.ActualizarDescriptor(DescriptorBA, emergencia);
+            SecuencialSalida.ActualizarDescriptor(DescriptorA, emergencia);
              // Jackie-9/10/2017
 //        String busqueda=metodos.busqueda(cliente.getRegistro());
         } catch (IOException ex) {
@@ -781,8 +970,8 @@ public class Administracion extends javax.swing.JFrame {
         cliente.setDescription(TADescriptor.getText());
         FileMethods metodos= new FileMethods();
         try {
-            String busqueda=metodos.busqueda(cliente.getUser());
-            metodos.Actualizar(busqueda,cliente.getRegistro());
+            String busqueda = objSecuencial.busqueda(false,cliente.getUser(), RutaBU, RutaU);
+            objSecuencial.Actualizar(busqueda,cliente.getRegistro());
             JOptionPane.showMessageDialog(null,"Datos Modificado", "Modificacion", WIDTH);
 //        String busqueda=metodos.busqueda(cliente.getRegistro());
         } catch (IOException ex) {
@@ -795,7 +984,7 @@ public class Administracion extends javax.swing.JFrame {
     private void BtnBuscarAdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarAdActionPerformed
         // TODO add your handling code here:
         FileMethods metodos= new FileMethods();
-        String busqueda=metodos.busqueda(TfBusquedaAd.getText());
+        String busqueda = objSecuencial.busqueda(false, TfBusquedaAd.getText(), RutaBU, RutaU);
         String[]nume=busqueda.split(Pattern.quote("|")) ;
         String nulo="";
         if(nume[0].equals(nulo))
@@ -803,7 +992,7 @@ public class Administracion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"El usuario "+TfBusquedaAd.getText()+" si existe", "Modificacion", WIDTH);
         }
         else{
-        auxiliar=metodos.readUser(busqueda);
+        auxiliar = objSecuencial.readUser(busqueda);
         BtnGuardarAd.setVisible(true);
         BtnDarBajaAd.setVisible(true);
         String[] nacimiento=auxiliar.getDate().split(Pattern.quote("/"));
@@ -822,11 +1011,11 @@ public class Administracion extends javax.swing.JFrame {
         // TODO add your handling code here:
         FileMethods metodos= new FileMethods();
         try {
-            String busqueda=metodos.busqueda(auxiliar.getUser());
-            metodos.Eliminar(busqueda);
-            archivos.ActualizarDescriptor(1, "");
+            String busqueda = objSecuencial.busqueda(false, auxiliar.getUser(), RutaBU, RutaU);
+            objSecuencial.Eliminar(busqueda);
+            objSecuencial.ActualizarDescriptor(DescriptorU, "");
             this.dispose();
-            metodos.ActualizarDescriptor(0, "");
+            objSecuencial.ActualizarDescriptor(DescriptorBU, "");
         } catch (IOException ex) {
             Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -840,8 +1029,8 @@ public class Administracion extends javax.swing.JFrame {
         auxiliar.setDescription(TADescriptor1.getText());
         FileMethods metodos= new FileMethods();
         try {
-            String busqueda=metodos.busqueda(auxiliar.getUser());
-            metodos.Actualizar(busqueda,auxiliar.getRegistro());
+            String busqueda= objSecuencial.busqueda(false, auxiliar.getUser(), RutaBU, RutaU);
+            objSecuencial.Actualizar(busqueda, auxiliar.getRegistro());
             JOptionPane.showMessageDialog(null,"Datos Modificado", "Modificacion", WIDTH);
 //        String busqueda=metodos.busqueda(cliente.getRegistro());
         } catch (IOException ex) {
@@ -864,7 +1053,7 @@ public class Administracion extends javax.swing.JFrame {
     private void BtnSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSolicitudActionPerformed
         // TODO add your handling code here:
         FileMethods metodos= new FileMethods();
-        String busqueda=metodos.busqueda(TfBusquedaNoAd.getText());
+        String busqueda=objSecuencial.busqueda(false, TfBusquedaNoAd.getText(), RutaBU, RutaU);
         String[]nume=busqueda.split(Pattern.quote("|")) ;
         String nulo="";
         Secuencial listaA =new Secuencial(RutaBA);
@@ -877,7 +1066,7 @@ public class Administracion extends javax.swing.JFrame {
     private void BtnVerAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerAmigosActionPerformed
         // TODO add your handling code here:
         FileMethods metodos= new FileMethods();
-        String busqueda=metodos.busqueda(TfBusquedaNoAd.getText());
+        String busqueda=objSecuencial.busqueda(false, TfBusquedaNoAd.getText(), RutaBU, RutaU);
         String[]nume=busqueda.split(Pattern.quote("|")) ;
         String nulo="";
         Secuencial listaA =new Secuencial(RutaBA);
@@ -896,14 +1085,125 @@ public class Administracion extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Secuencial objSecuencial = new Secuencial("");
-        objSecuencial.reorganizar(3, RutaU, RutaBU);
-        objSecuencial.reorganizar(3, RutaA, RutaBA);
-        objSecuencial.reorganizar(3, RutaG, RutaBG);
-        objSecuencial.ActualizarDescriptor(DescriptorU, "");
-        objSecuencial.ActualizarDescriptor(DescriptorA, "");
-        objSecuencial.ActualizarDescriptor(DescriptorG, "");
+        Secuencial objetoSecuencial = new Secuencial();
+        objetoSecuencial.reorganizar(3, RutaU, RutaBU);        
+        objetoSecuencial.ActualizarDescriptor(DescriptorU, "");
+        File A = new File(RutaBA);
+        if(A.exists())
+        {
+            objetoSecuencial.reorganizar(3, RutaA, RutaBA);
+            objetoSecuencial.ActualizarDescriptor(DescriptorA, "");
+            archivos.createFile(RutaBA);
+        }
+        File G = new File(RutaBG);
+        if(G.exists())
+        {
+            objetoSecuencial.reorganizar(3, RutaG, RutaBG);
+            objetoSecuencial.ActualizarDescriptor(DescriptorG, "");
+            archivos.createFile(RutaBG);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        // TODO add your handling code here:
+        if(!tfNMensaje.getText().equals(""))
+        {
+            Publicacion.setEmisor(cliente.getUser());
+            Publicacion.setReceptor(cbMAmigos.getSelectedItem().toString());
+            Publicacion.setFecha((new Date()).toString());
+            Publicacion.setMensaje(tfNMensaje.getText());
+            if(cbTipo.getSelectedItem() == "Público")
+            {
+                Publicacion.setTipo(0);
+            }
+            else
+            {
+                Publicacion.setTipo(1);
+            }
+            objSecuencial.Insertar(RutaBM, new User(), new Solicitud(), new Grupo(), Publicacion);
+        }
+        tfNMensaje.setText("");
+    }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void btnMActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMActualizarActionPerformed
+        //Limpiar los textarea (publico y privado)
+        tfPublico.setText("");
+        tfPrivado.setText("");
+        // Actualizar combobox de amigos y los mensajes públicos.
+        //Obtener la lista de amigos del usuario.
+        String concatenados = cliente.ObtenerAmigos();
+        if(!concatenados.equals("")) //Si tengo amigos
+        {
+            String[] Amigos = concatenados.split(Pattern.quote(","));
+            for (int i = 0; i < Amigos.length; i++) {
+                //Por cada amigo obtengo sus mensajes publicos y los escribo.
+                concatenados = objSecuencial.busqueda(true, Amigos[i], RutaBM, RutaM);
+                if(!concatenados.equals("|0"))
+                {
+                    String[] Mensajes = concatenados.split(Pattern.quote("|"));
+                    for (int j = 0; j < Mensajes.length; j++) {
+                        String[] DatosMensaje = Mensajes[j].split(Pattern.quote(","));
+                        if(DatosMensaje[3].equals("0")) // si es un mensaje publico
+                        {
+                            tfPublico.append(DatosMensaje[0]+"->"+DatosMensaje[1]+" "+DatosMensaje[2]+"\r\n"+DatosMensaje[4]+"\r\n");
+                        }
+                        //Escribir los mensajes privados del usuario seleccionado.
+                        if(Amigos[i].equals(cbMAmigos2.getSelectedItem()))
+                        {
+                            //(Si el emisor es el usuario o el amigo seleccionado) y (el receptor es el usuario o el amigo seleccionado) y el mensaje es privado
+                            if((DatosMensaje[0].equals(cliente.getUser()) || DatosMensaje[0].equals(Amigos[i])) & (DatosMensaje[1].equals(cliente.getUser()) || DatosMensaje[1].equals(Amigos[i])) & DatosMensaje[3].equals("1") )
+                            {
+                                tfPrivado.append(DatosMensaje[0]+"->"+DatosMensaje[1]+" "+DatosMensaje[2]+"\r\n"+DatosMensaje[4]+"\r\n");
+                            }
+                        }
+                    }
+                }
+            }
+        } 
+    }//GEN-LAST:event_btnMActualizarActionPerformed
+
+    private void btnMEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMEliminarActionPerformed
+        // Eliminar el mensaje especificado. 1. Filltros
+        if(!tfMEmisor.getText().equals("") & !tfMReceptor.getText().equals("") & !tfMFecha.getText().equals("") )
+        {
+            String busqueda = objSecuencial.busqueda(false, tfMEmisor.getText()+"|"+tfMReceptor.getText()+"|"+tfMFecha.getText(), RutaBM, RutaM);
+            if(!busqueda.equals("|0")) //2. Si se encuentra el mensaje eliminarlo
+            {
+                try {
+                    objSecuencial.Eliminar(busqueda);
+                } catch (IOException ex) {
+                    Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            //3. Devolver los textfield a sus valores por defecto.
+            tfMEmisor.setText("");
+            tfMReceptor.setText("");
+            tfMFecha.setText("");
+        }
+    }//GEN-LAST:event_btnMEliminarActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        //Obtener la lista de amigos del usuario.
+        String concatenados = cliente.ObtenerAmigos();
+        if(!concatenados.equals("")) //Si tengo amigos
+        {
+            String[] Amigos = concatenados.split(Pattern.quote(","));
+            //A partir de eso construir los combobox
+            try
+            {
+                if(cbMAmigos.getComponentCount() != 0)
+                {
+                    cbMAmigos.removeAllItems();
+                    cbMAmigos2.removeAllItems();
+                }
+            }catch(Exception e){}
+            for (int i = 0; i < Amigos.length; i++) {
+                cbMAmigos.addItem(Amigos[i]);
+                cbMAmigos2.addItem(Amigos[i]);
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -969,26 +1269,44 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JTabbedPane TabOpciones;
     private javax.swing.JTextField TfBusquedaAd;
     private javax.swing.JTextField TfBusquedaNoAd;
+    private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnGrupos;
     private javax.swing.JButton btnImagen;
+    private javax.swing.JButton btnMActualizar;
+    private javax.swing.JButton btnMEliminar;
     private javax.swing.JComboBox<String> cbAño;
     private javax.swing.JComboBox<String> cbAño1;
     private javax.swing.JComboBox<String> cbDía;
     private javax.swing.JComboBox<String> cbDía1;
+    private javax.swing.JComboBox<String> cbMAmigos;
+    private javax.swing.JComboBox<String> cbMAmigos2;
     private javax.swing.JComboBox<String> cbMes;
     private javax.swing.JComboBox<String> cbMes1;
+    private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLabel lbCorreo;
     private javax.swing.JLabel lbCorreo1;
     private javax.swing.JLabel lbCumpleaños;
@@ -999,13 +1317,19 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JLabel lbNContraseñaNueva1;
     private javax.swing.JLabel lbTeléfono;
     private javax.swing.JLabel lbTeléfono1;
+    private javax.swing.JTextField tfMEmisor;
+    private javax.swing.JTextField tfMFecha;
+    private javax.swing.JTextField tfMReceptor;
     private javax.swing.JPasswordField tfNContraseña;
     private javax.swing.JPasswordField tfNContraseña1;
     private javax.swing.JPasswordField tfNContraseñaNueva;
     private javax.swing.JPasswordField tfNContraseñaNueva1;
     private javax.swing.JTextField tfNCorreo;
     private javax.swing.JTextField tfNCorreo1;
+    private javax.swing.JTextArea tfNMensaje;
     private javax.swing.JTextField tfNTeléfono;
     private javax.swing.JTextField tfNTeléfono1;
+    private javax.swing.JTextArea tfPrivado;
+    private javax.swing.JTextArea tfPublico;
     // End of variables declaration//GEN-END:variables
 }

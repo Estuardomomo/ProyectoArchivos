@@ -9,14 +9,12 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.text.NumberFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.DefaultCellEditor;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -82,13 +80,14 @@ public class JButtonTableExample extends JFrame {
 //          User auxiliar=new User();
 //          auxiliar =metodos.readUser(busqueda);
          
-         if(aux.getUser().equals(para[1])==false)
+         if(aux.getUser().equals(para[0])==false)
          {
          filas[j][0]="Enviar solicitud";
          filas[j][1]=para[0];
          filas[j][2]=para[1];
          filas[j][3]=para[2];
          }
+         
          
      
       }
@@ -98,10 +97,10 @@ public class JButtonTableExample extends JFrame {
           filas =new Object[nume.length][2];
      for (int j = 0; j < nume.length; j++) {
          String[] para=nume[j].split(Pattern.quote(","));
-         if((para[2].equals("0")==true)&(para[3].equals("1")==true))
+         if((para[2].equals("0")==true)&(para[3].equals("1")==true)&(aux.getUser().equals(para[1])==true))
          {
          filas[j][0]="Procesar";
-         filas[j][1]=para[1];
+         filas[j][1]=para[0];
          
          }
       }
@@ -111,15 +110,30 @@ public class JButtonTableExample extends JFrame {
           filas =new Object[nume.length][4];
      for (int j = 0; j < nume.length; j++) {
          String[] para=nume[j].split(Pattern.quote(","));
-         String busqueda=metodos.busqueda(false,para[1],RutaBU,RutaU);
-         User auxiliar=new User();
-         auxiliar =metodos.readUser(busqueda);
+         
          if((para[2].equals("1")==true)&(para[3].equals("1")==true))
          {
-         filas[j][0]="Eliminar";
-         filas[j][1]=auxiliar.getUser();
-         filas[j][2]=auxiliar.getName(); 
-         filas[j][3]=auxiliar.getLastName(); 
+             if((aux.getUser().equals(para[0])==true))
+             {
+               String busqueda=metodos.busqueda(false,para[1],RutaBU,RutaU);
+               User auxiliar=new User();
+               auxiliar =metodos.readUser(busqueda);
+                filas[j][0]="Eliminar";
+                filas[j][1]=auxiliar.getUser();
+                filas[j][2]=auxiliar.getName(); 
+                filas[j][3]=auxiliar.getLastName(); 
+             }
+             else if(aux.getUser().equals(para[1])==true)
+             {
+                String busqueda=metodos.busqueda(false,para[0],RutaBU,RutaU);
+                User auxiliar=new User();
+                auxiliar =metodos.readUser(busqueda);
+                filas[j][0]="Eliminar";
+                filas[j][1]=auxiliar.getUser();
+                filas[j][2]=auxiliar.getName(); 
+                filas[j][3]=auxiliar.getLastName(); 
+             }
+          
          
          }
       }
@@ -223,7 +237,7 @@ class ButtonEditor extends DefaultCellEditor {
         s.SetFecha((new Date()).toString());
         s.SetUser(aux.getUser());  
         listaA.ActualizarDescriptor(DescriptorBA, aux.getUser());
-        listaA.Insertar(RutaBA, new User(), s,new Grupo());
+        listaA.Insertar(RutaBA, new User(), s,new Grupo(), new Mensaje());
         button.setText("Amigo");
         label="Solicitud enviada";
         }
@@ -232,8 +246,8 @@ class ButtonEditor extends DefaultCellEditor {
         Secuencial listaA=new Secuencial(RutaBA);
         Receptor = (String)table.getValueAt(filaseleccionada, 1);
         Solicitud s=new Solicitud();
-        s.SetEmisor(aux.getUser());
-        s.SetReceptor(Receptor);
+       s.SetEmisor(Receptor);
+        s.SetReceptor(aux.getUser());
         s.SetFecha((new Date()).toString());
         s.SetUser(aux.getUser()); 
         if (resp == 0){ 
@@ -241,7 +255,7 @@ class ButtonEditor extends DefaultCellEditor {
             label="Elimidado";
           
             try {
-                String busqueda=listaA.busqueda(false,aux.getUser()+"|"+Receptor,RutaBA,RutaA);
+                String busqueda=listaA.busqueda(false,Receptor+"|"+aux.getUser(),RutaBA,RutaA);
                 s.SetAceptado(0);
                 s.SetStatus(0);
                 listaA.Actualizar(busqueda,s.GetRegistro());
@@ -258,8 +272,8 @@ class ButtonEditor extends DefaultCellEditor {
         int resp = JOptionPane.showConfirmDialog(null, "Desea Aceptar la Solicitud de Amistad", "Solicitud De Amistad", JOptionPane.YES_NO_OPTION);
         Secuencial listaA=new Secuencial(RutaBA);
         Solicitud s=new Solicitud();
-        s.SetEmisor(aux.getUser());
-        s.SetReceptor(Receptor);
+        s.SetEmisor(Receptor);
+        s.SetReceptor(aux.getUser());
         s.SetFecha((new Date()).toString());
         s.SetUser(aux.getUser()); 
         if (resp == 0){ 
@@ -267,7 +281,7 @@ class ButtonEditor extends DefaultCellEditor {
             label="aceptado";
           
             try {
-                String busqueda=listaA.busqueda(false,aux.getUser()+"|"+Receptor,RutaBA,RutaA);
+                String busqueda=listaA.busqueda(false,Receptor+"|"+aux.getUser(),RutaBA,RutaA);
                 s.SetAceptado(1);
                 listaA.Actualizar(busqueda,s.GetRegistro());
             } catch (IOException ex) {
@@ -279,7 +293,7 @@ class ButtonEditor extends DefaultCellEditor {
              JOptionPane.showMessageDialog(button, "Rechazado");
              label="Rechazado";
              try {
-                String busqueda=listaA.busqueda(false,aux.getUser()+"|"+Receptor,RutaBA,RutaA);
+                String busqueda=listaA.busqueda(false,Receptor+"|"+aux.getUser(),RutaBA,RutaA);
                 s.SetAceptado(0);
                 s.SetStatus(0);
                 listaA.Actualizar(busqueda,s.GetRegistro());
