@@ -2,101 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84dc9a05-40f3-4c76-bc9e-77d85d27ee42" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/built-jar.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/.netbeans_automatic_build" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/.netbeans_update_resources" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Backup$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Backup$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Backup$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Backup$4.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Backup$5.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Backup$6.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Backup.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Backup.form" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/ButtonEditor$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/FileMethods.rs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Grupo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos.form" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JTableButtonRenderer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JTableModel$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JTableModel.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Log_In$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Log_In$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Log_In$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Log_In$4.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Log_In.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Log_In.form" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos.form" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Registro.form" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/SecuencialIndizado.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Solicitud.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Tabla$JButtonTableExample$ButtonEditor$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Tabla$JButtonTableExample$ButtonEditor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Tabla$JButtonTableExample$ButtonRenderer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Tabla$JButtonTableExample.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/dist/ProyectoArchivos.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/dist/README.TXT" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/nbproject/build-impl.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/nbproject/genfiles.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/nbproject/project.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$1.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$10.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$10.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$11.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$11.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$12.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$12.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$13.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$13.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$14.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$14.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$15.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$15.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$2.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$3.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$4.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$5.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$6.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$7.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$8.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$8.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$9.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/FileMethods.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/FileMethods.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$1.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$2.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$3.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$4.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$5.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$6.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$7.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$8.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos$8.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/GrupoAmigos.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JButtonTableExample$ButtonEditor$1.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JButtonTableExample$ButtonEditor$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JButtonTableExample$ButtonEditor.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JButtonTableExample$ButtonEditor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JButtonTableExample$ButtonRenderer.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JButtonTableExample$ButtonRenderer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JButtonTableExample$DataWithIcon.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JButtonTableExample$DataWithIcon.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JButtonTableExample$FractionCellRenderer.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JButtonTableExample$FractionCellRenderer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JButtonTableExample$TextWithIconCellRenderer.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JButtonTableExample$TextWithIconCellRenderer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JButtonTableExample.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/JButtonTableExample.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos$1.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos$2.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos$3.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos$4.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos$5.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos$6.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/MantenimientoGrupos.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/ProyectoArchivos.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/ProyectoArchivos.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Registro$1.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Registro$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Registro$2.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Registro$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Registro$3.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Registro$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Registro$4.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Registro$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Registro.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Registro.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Secuencial.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Secuencial.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/User.class" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion.form" afterPath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Ventanas/Administracion.form" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/nbproject/private/private.properties" afterPath="$PROJECT_DIR$/ProyectoArchivos/nbproject/private/private.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/nbproject/private/private.xml" afterPath="$PROJECT_DIR$/ProyectoArchivos/nbproject/private/private.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/nbproject/project.properties" afterPath="$PROJECT_DIR$/ProyectoArchivos/nbproject/project.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/src/Ventanas/Administracion.form" afterPath="$PROJECT_DIR$/ProyectoArchivos/src/Ventanas/Administracion.form" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/src/Ventanas/Administracion.java" afterPath="$PROJECT_DIR$/ProyectoArchivos/src/Ventanas/Administracion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/src/Ventanas/JButtonTableExample.java" afterPath="$PROJECT_DIR$/ProyectoArchivos/src/Ventanas/JButtonTableExample.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/src/Ventanas/Secuencial.java" afterPath="$PROJECT_DIR$/ProyectoArchivos/src/Ventanas/Secuencial.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProyectoArchivos/src/Ventanas/User.java" afterPath="$PROJECT_DIR$/ProyectoArchivos/src/Ventanas/User.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Conexion/Listener.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Conexion/Notificacion$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Conexion/Notificacion.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Conexion/Notificacion.form" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Conexion/Notifier.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/build/classes/Conexion/Singleton.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/src/Conexion/Listener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/src/Conexion/Notificacion.form" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/src/Conexion/Notificacion.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/src/Conexion/Notifier.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ProyectoArchivos/src/Conexion/Singleton.java" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -106,6 +22,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -136,7 +55,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -188,6 +106,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -310,33 +229,33 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -345,5 +264,15 @@
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/ProyectoArchivos/src/Conexion/Listener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
