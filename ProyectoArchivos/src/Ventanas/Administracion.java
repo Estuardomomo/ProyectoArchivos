@@ -8,9 +8,13 @@ package Ventanas;
 
 
 import static java.awt.image.ImageObserver.WIDTH;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+
+import java.io.IOException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -28,12 +32,17 @@ public class Administracion extends javax.swing.JFrame {
      * Creates new form Administracion
      */
     User cliente =new User();
-    User auxiliar =new User();
+
+
     Secuencial objSecuencial = new Secuencial();
-    FileMethods archivos = new FileMethods();
-    Mensaje Publicacion = new Mensaje();
     String fotografía;
     String descripción = "Añade una breve descripción";
+
+    User auxiliar =new User();
+  
+    FileMethods archivos = new FileMethods();
+    Mensaje Publicacion = new Mensaje();
+   
     String RutaU = "c:\\MEIA\\Usuarios.txt";
     String RutaBU = "c:\\MEIA\\BitácoraUsuarios.txt";
     String DescriptorU = "c:\\MEIA\\DescriptorU.txt";
@@ -516,7 +525,11 @@ public class Administracion extends javax.swing.JFrame {
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addGap(0, 1096, Short.MAX_VALUE)
+=======
+            .addGap(0, 438, Short.MAX_VALUE)
+>>>>>>> 762f07913d17d7d87a06b3b9c73dbacb168fdaed
         );
 
         javax.swing.GroupLayout PBusquedaLayout = new javax.swing.GroupLayout(PBusqueda);
@@ -532,7 +545,11 @@ public class Administracion extends javax.swing.JFrame {
                         .addComponent(BtnBuscar))
                     .addGroup(PBusquedaLayout.createSequentialGroup()
                         .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+=======
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+>>>>>>> 762f07913d17d7d87a06b3b9c73dbacb168fdaed
                         .addComponent(LBusqueNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -543,6 +560,10 @@ public class Administracion extends javax.swing.JFrame {
                 .addGroup(PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnBuscar)
                     .addComponent(TfBusquedaNoAd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+<<<<<<< HEAD
+=======
+                .addGap(18, 18, 18)
+>>>>>>> 762f07913d17d7d87a06b3b9c73dbacb168fdaed
                 .addGroup(PBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PBusquedaLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -572,7 +593,11 @@ public class Administracion extends javax.swing.JFrame {
         );
         FrameSolicitudesLayout.setVerticalGroup(
             FrameSolicitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addGap(0, 1138, Short.MAX_VALUE)
+=======
+            .addGap(0, 438, Short.MAX_VALUE)
+>>>>>>> 762f07913d17d7d87a06b3b9c73dbacb168fdaed
         );
 
         BtnSolicitud.setText("Solicitudes");
@@ -834,6 +859,7 @@ public class Administracion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
                     .addComponent(jLabel1)
                     .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
@@ -845,6 +871,25 @@ public class Administracion extends javax.swing.JFrame {
                         .addComponent(BtnDarBAja, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+=======
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 5, Short.MAX_VALUE)
+                        .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(97, 97, 97)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BrnCerrar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGrupos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnDarBAja, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+>>>>>>> 762f07913d17d7d87a06b3b9c73dbacb168fdaed
                         .addGap(16, 16, 16)
                         .addComponent(LfotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
@@ -860,6 +905,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BtnDarBAja, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -871,6 +917,32 @@ public class Administracion extends javax.swing.JFrame {
                         .addComponent(BrnCerrar))
                     .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(71, Short.MAX_VALUE))
+=======
+                        .addGap(46, 46, 46)
+                        .addComponent(TabOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(LfotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BtnDarBAja, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(BrnCerrar))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1092, 1092, 1092)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+>>>>>>> 762f07913d17d7d87a06b3b9c73dbacb168fdaed
         );
 
         pack();

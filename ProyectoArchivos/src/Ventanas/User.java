@@ -235,6 +235,7 @@ public class User {
             return true;
         }
     }
+
     public String ObtenerAmigos()
     {
         String Amigos = "";
@@ -258,4 +259,5 @@ public class User {
             }
         return Amigos;
     }
+
 }
