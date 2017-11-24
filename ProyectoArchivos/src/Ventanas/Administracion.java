@@ -153,10 +153,6 @@ public class Administracion extends javax.swing.JFrame {
         TfBusquedaNoAd = new javax.swing.JTextField();
         LBusqueNoAd = new javax.swing.JLabel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
-        Solocitudes = new javax.swing.JPanel();
-        FrameSolicitudes = new javax.swing.JInternalFrame();
-        BtnSolicitud = new javax.swing.JButton();
-        BtnVerAmigos = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -182,6 +178,13 @@ public class Administracion extends javax.swing.JFrame {
         tfMFecha = new javax.swing.JTextField();
         btnMEliminar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        Solocitudes = new javax.swing.JPanel();
+        FrameSolicitudes = new javax.swing.JInternalFrame();
+        BtnSolicitud = new javax.swing.JButton();
+        BtnVerAmigos = new javax.swing.JButton();
+        BtnVerAmigos1 = new javax.swing.JButton();
+        BtnVerAmigos2 = new javax.swing.JButton();
+        BtnVerAmigos3 = new javax.swing.JButton();
         BtnDarBAja = new javax.swing.JButton();
         BrnCerrar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -516,7 +519,7 @@ public class Administracion extends javax.swing.JFrame {
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1096, Short.MAX_VALUE)
+            .addGap(0, 1172, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout PBusquedaLayout = new javax.swing.GroupLayout(PBusqueda);
@@ -555,69 +558,6 @@ public class Administracion extends javax.swing.JFrame {
         );
 
         TabOpciones.addTab("Busqueda", PBusqueda);
-
-        Solocitudes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CLicpanel(evt);
-            }
-        });
-
-        FrameSolicitudes.setVisible(true);
-
-        javax.swing.GroupLayout FrameSolicitudesLayout = new javax.swing.GroupLayout(FrameSolicitudes.getContentPane());
-        FrameSolicitudes.getContentPane().setLayout(FrameSolicitudesLayout);
-        FrameSolicitudesLayout.setHorizontalGroup(
-            FrameSolicitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 310, Short.MAX_VALUE)
-        );
-        FrameSolicitudesLayout.setVerticalGroup(
-            FrameSolicitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1138, Short.MAX_VALUE)
-        );
-
-        BtnSolicitud.setText("Solicitudes");
-        BtnSolicitud.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSolicitudActionPerformed(evt);
-            }
-        });
-
-        BtnVerAmigos.setText("Amigos");
-        BtnVerAmigos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnVerAmigosActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout SolocitudesLayout = new javax.swing.GroupLayout(Solocitudes);
-        Solocitudes.setLayout(SolocitudesLayout);
-        SolocitudesLayout.setHorizontalGroup(
-            SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SolocitudesLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(FrameSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addGroup(SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BtnSolicitud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtnVerAmigos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(236, Short.MAX_VALUE))
-        );
-        SolocitudesLayout.setVerticalGroup(
-            SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SolocitudesLayout.createSequentialGroup()
-                .addGroup(SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SolocitudesLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(BtnSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(BtnVerAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(SolocitudesLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(FrameSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        TabOpciones.addTab("Solicitudes", Solocitudes);
 
         jLabel5.setFont(new java.awt.Font("Broadway", 3, 14)); // NOI18N
         jLabel5.setText("MENSAJES PUBLICOS:");
@@ -791,6 +731,101 @@ public class Administracion extends javax.swing.JFrame {
         );
 
         TabOpciones.addTab("Mensajes", jPanel4);
+
+        Solocitudes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CLicpanel(evt);
+            }
+        });
+
+        FrameSolicitudes.setVisible(true);
+
+        javax.swing.GroupLayout FrameSolicitudesLayout = new javax.swing.GroupLayout(FrameSolicitudes.getContentPane());
+        FrameSolicitudes.getContentPane().setLayout(FrameSolicitudesLayout);
+        FrameSolicitudesLayout.setHorizontalGroup(
+            FrameSolicitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 310, Short.MAX_VALUE)
+        );
+        FrameSolicitudesLayout.setVerticalGroup(
+            FrameSolicitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1214, Short.MAX_VALUE)
+        );
+
+        BtnSolicitud.setText("Solicitudes");
+        BtnSolicitud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSolicitudActionPerformed(evt);
+            }
+        });
+
+        BtnVerAmigos.setText("Amigos");
+        BtnVerAmigos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnVerAmigosActionPerformed(evt);
+            }
+        });
+
+        BtnVerAmigos1.setText("Imagen ");
+        BtnVerAmigos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnVerAmigos1ActionPerformed(evt);
+            }
+        });
+
+        BtnVerAmigos2.setText("Amigos");
+        BtnVerAmigos2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnVerAmigos2ActionPerformed(evt);
+            }
+        });
+
+        BtnVerAmigos3.setText("Amigos");
+        BtnVerAmigos3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnVerAmigos3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout SolocitudesLayout = new javax.swing.GroupLayout(Solocitudes);
+        Solocitudes.setLayout(SolocitudesLayout);
+        SolocitudesLayout.setHorizontalGroup(
+            SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SolocitudesLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(FrameSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addGroup(SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtnVerAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnSolicitud)
+                    .addGroup(SolocitudesLayout.createSequentialGroup()
+                        .addComponent(BtnVerAmigos1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(BtnVerAmigos2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnVerAmigos3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        SolocitudesLayout.setVerticalGroup(
+            SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SolocitudesLayout.createSequentialGroup()
+                .addGroup(SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SolocitudesLayout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(BtnSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(BtnVerAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(SolocitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BtnVerAmigos1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnVerAmigos2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnVerAmigos3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(SolocitudesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(FrameSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        TabOpciones.addTab("Solicitudes", Solocitudes);
 
         BtnDarBAja.setText("Dar de Baja");
         BtnDarBAja.addActionListener(new java.awt.event.ActionListener() {
@@ -1205,6 +1240,37 @@ public class Administracion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void BtnVerAmigos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerAmigos1ActionPerformed
+        // TODO add your handling code here:
+        fotografía = archivos.fotoPerfil(this);
+        if (archivos.CopiarUnArchivo(fotografía + "\\", "C:\\MEIA\\Fotografías\\")) {
+            File archivoOriginal = new File(fotografía); 
+            fotografía = "C:\\MEIA\\Fotografías\\" + archivoOriginal.getName();
+            
+        }
+    }//GEN-LAST:event_BtnVerAmigos1ActionPerformed
+
+    private void BtnVerAmigos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerAmigos2ActionPerformed
+        // TODO add your handling code here:
+        ArbolBB arbol=new ArbolBB();
+        try {
+            arbol.insertar(fotografía, arbol.raiz,cliente);
+        } catch (IOException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BtnVerAmigos2ActionPerformed
+
+    private void BtnVerAmigos3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerAmigos3ActionPerformed
+        // TODO add your handling code here:
+        ArbolBB arbol=new ArbolBB();
+        String prueba;
+        try {
+            prueba=arbol.busquedaInterna(cliente.getUser());
+        } catch (IOException ex) {
+            Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BtnVerAmigos3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1255,6 +1321,9 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JButton BtnGuardarAd;
     private javax.swing.JButton BtnSolicitud;
     private javax.swing.JButton BtnVerAmigos;
+    private javax.swing.JButton BtnVerAmigos1;
+    private javax.swing.JButton BtnVerAmigos2;
+    private javax.swing.JButton BtnVerAmigos3;
     private javax.swing.JDesktopPane Escritorio;
     private javax.swing.JInternalFrame FrameSolicitudes;
     private javax.swing.JLabel LBusqueNoAd;
